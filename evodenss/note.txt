@@ -1,0 +1,1 @@
+fatti uno schemino di tutte le funzioni che sono chiamate, in ordine da main
