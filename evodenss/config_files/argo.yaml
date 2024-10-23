@@ -1,8 +1,8 @@
-checkpoints_path: ../../results/experiment_supervised_100
+checkpoints_path: /../results/experiment_supervised_100
 
 evolutionary:
-  generations: 75
-  lambda: 6
+  generations: 10
+  lambda: 3
   max_epochs: 100000
   mutation:
     add_connection: 0.0
@@ -40,7 +40,7 @@ network:
         levels_back: 1
     extra_components:
       - learning
-  learning:
+  learning:connections
     data_splits:
       labelled:
         percentage: 100 # downstream_train + validation + evo_test = percentage

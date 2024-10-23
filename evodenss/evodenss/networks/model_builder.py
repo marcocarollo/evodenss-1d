@@ -453,7 +453,8 @@ class ModelBuilder():
         activation: ActivationType = ActivationType(layer.layer_parameters.pop("act"))
 
         assert layer.layer_parameters['padding'] in ['valid', 'same'] or \
-            isinstance(layer.layer_parameters['padding'], tuple)
+            isinstance(layer.layer_parameters['padding'], tuple) or \
+            isinstance(layer.layer_parameters['padding'], int)
 
         # If padding = same torch does not support strided convolutions.
         # Check https://pytorch.org/docs/stable/generated/torch.nn.Conv2d.html#torch.nn.Conv2d

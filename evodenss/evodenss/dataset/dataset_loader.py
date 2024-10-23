@@ -81,7 +81,7 @@ class MyDataset(torch.utils.data.Dataset):
             self.targets = self.df.iloc[:, -1].values
 
         elif path_tensor is not None:
-            self.df = torch.load(path_tensor)
+            self.df = torch.load(path_tensor, weights_only=True)
             self.data = self.df[:,:-1, :]
             self.targets = self.df[:,-1, :]
         else:
@@ -276,9 +276,9 @@ class DatasetProcessor:
         if dataset_class == MyDataset:
 
             unlabelled_data = None
-            train_labelled_data = dataset_class(path_tensor='/home/marco/Desktop/units/PPCon-evo/evodenss/data/ds/BBP700/train_data.pt')
-            evaluation_labelled_data = dataset_class(path_tensor='/home/marco/Desktop/units/PPCon-evo/evodenss/data/ds/BBP700/train_data.pt') #qui era val data ma casino
-            test_data = dataset_class(path_tensor='/home/marco/Desktop/units/PPCon-evo/evodenss/data/ds/BBP700/test_data.pt')
+            train_labelled_data = dataset_class(path_tensor='/u/dssc/mcarol00/evodenss-1d/evodenss/data/ds/BBP700/train_data.pt')
+            evaluation_labelled_data = dataset_class(path_tensor='/u/dssc/mcarol00/evodenss-1d/evodenss/data/ds/BBP700/train_data.pt') #qui era val data ma casino
+            test_data = dataset_class(path_tensor='/u/dssc/mcarol00/evodenss-1d/evodenss/data/ds/BBP700/test_data.pt')
         else:
             unlabelled_data = dataset_class(
                 root="data",

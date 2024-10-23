@@ -1,10 +1,11 @@
-<features> ::= <convolution1d>  
-<convolution1d> ::= layer:conv1d [out_channels,int,1,3,100] [kernel_size,int,1,2,5] [stride,int,1,1,2] <padding> <activation_function> <bias>
-<deconvolution1d> ::= layer:deconv1d [out_channels,int,1,200,200] [kernel_size,int,1,2,5] [stride,int,1,1,2] <padding> <activation_function> <bias>
+<features> ::= <deconvolution1d>
+<convolution1d> ::= layer:conv1d [out_channels,int,1,4,200] [kernel_size,int,1,2,5] [stride,int,1,1,2] (<padding> | <padding_deconv> ) <activation_function> <bias>
+<deconvolution1d> ::= layer:deconv1d [out_channels,int,1,200,200] [kernel_size,int,1,2,5] [stride,int,1,1,2] <padding_deconv> <activation_function> <bias>
 <batch_norm> ::= layer:batch_norm
 <pooling> ::= <pool_type> [kernel_size,int,1,2,5] [stride,int,1,1,3] <padding>
 <pool_type> ::= layer:pool_avg | layer:pool_max
 <padding> ::= padding:same | padding:valid
+<padding_deconv> ::= [padding_deconv,int,1,0,2]
 <dropout> ::= layer:dropout [rate,float,1,0,0.7]
 <classification> ::= <fully_connected> | <dropout>
 <fully_connected> ::= layer:fc <activation_function> [out_features,int,1,200,200] <bias>

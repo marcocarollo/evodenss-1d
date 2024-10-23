@@ -92,6 +92,5 @@ class MyCustomLoss(nn.Module):
             smoothness += batch_tens_smoothness
 
         smoothness = self.alpha_smooth_reg * smoothness 
-        print('\n\n\n\n\n\n YOU ARE USING MY CUSTOM LOSS FUNCTION \n\n\n\n\n\n')
         return mse + l2_reg + smoothness + peak_difference
 

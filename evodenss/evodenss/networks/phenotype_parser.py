@@ -23,6 +23,8 @@ class Layer:
             return key, float(value)
         elif key in ["out_channels", "out_features", "kernel_size", "stride"]:
             return key, int(value)
+        elif key == "padding_deconv":
+            return "padding", int(value)
         elif key in ["act", "padding"]:
             return key, value
         elif key == "input":

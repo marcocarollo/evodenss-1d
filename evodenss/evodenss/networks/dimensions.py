@@ -33,7 +33,12 @@ class Dimensions1d:
                 kernel_size = layer.layer_parameters['kernel_size']
                 length = floor((input_dimensions.length - kernel_size + padding * 2) / layer.layer_parameters['stride']) +1
             return cls(out_channels, length)
-        
+        elif layer.layer_type == LayerType.DECONV1D:
+            out_channels = layer.layer_parameters['out_channels']
+            padding = int(layer.layer_parameters['padding'])
+            kernel_size = layer.layer_parameters['kernel_size']
+            length = (input_dimensions.length - 1) * layer.layer_parameters['stride'] + kernel_size - 2 * padding
+            return cls(out_channels, length)
         #elif layer.layer_type in [LayerType.POOL1D_AVG, LayerType.POOL1D_MAX]:
         #    assert isinstance(layer.layer_parameters['padding'], str) is True
         #    out_channels = input_dimensions.channels

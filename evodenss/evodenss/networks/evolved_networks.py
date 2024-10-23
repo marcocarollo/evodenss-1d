@@ -57,7 +57,6 @@ class EvolvedNetwork(nn.Module):
                     input_tensor = self.cache[(i, layer_id)]
                 else:
                     input_tensor = self._process_forward_pass(x, LayerId(i), self.layers_connections[LayerId(i)])
-                    print(f'forward pass: {i} -> {layer_id}')
                     self.cache[(i, layer_id)] = input_tensor
                 #print("---------- processing layer: ", layer_id, "---", i, "---", input_tensor.shape)
                 #if layer_id==5:

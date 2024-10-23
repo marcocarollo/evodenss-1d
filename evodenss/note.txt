@@ -1,1 +1,10 @@
 fatti uno schemino di tutte le funzioni che sono chiamate, in ordine da main
+- batch normalization
+- vedere come aggiungere mlp all'inizio o dopo per vedere cosa cambia, riguardo questo, vedere
+
+bene reverse engineering sul checkpoint.pkl, fallo anche considerando gli init di ogni classe che viene chiamata,
+in modo da specificare solo gli attributi che servono. tipo per il fitness dell'individuo può darsi che non serva 
+nel caso in cui venga di sicuro sostituito nel prossimo, oppure nel caso che indipendentemente venga evaluated.
+
+guarda quali sono i weights che vengono salvati e come vengono retrieved, perché nell'individual è salvata solo
+l'architettura.
