@@ -1,4 +1,4 @@
-checkpoints_path: /../results/experiment_supervised_100
+checkpoints_path: ../results/debug_argo
 
 evolutionary:
   generations: 10
@@ -24,8 +24,8 @@ network:
     modules:
       - name: features
         network_structure_init:
-          min_expansions: 3
-          max_expansions: 6
+          min_expansions: 5
+          max_expansions: 8
         network_structure:
           min_expansions: 3
           max_expansions: 30
@@ -40,7 +40,7 @@ network:
         levels_back: 1
     extra_components:
       - learning
-  learning:connections
+  learning:
     data_splits:
       labelled:
         percentage: 100 # downstream_train + validation + evo_test = percentage

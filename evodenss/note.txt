@@ -8,3 +8,5 @@ nel caso in cui venga di sicuro sostituito nel prossimo, oppure nel caso che ind
 
 guarda quali sono i weights che vengono salvati e come vengono retrieved, perché nell'individual è salvata solo
 l'architettura.
+
+aggiungi 1d batch normalization

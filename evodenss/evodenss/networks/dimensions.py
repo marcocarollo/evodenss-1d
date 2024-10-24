@@ -51,7 +51,7 @@ class Dimensions1d:
         #        padding = paddings[0] + paddings[1]
         #    length = ceil((input_dimensions.length - kernel_size + 1) / layer.layer_parameters['stride']) + padding
         #    return cls(out_channels, length)
-        elif layer.layer_type in [LayerType.BATCH_NORM, LayerType.DROPOUT, LayerType.IDENTITY, LayerType.RELU_AGG]:
+        elif layer.layer_type in [LayerType.BATCH_NORM, LayerType.BATCH_NORM1D, LayerType.DROPOUT, LayerType.IDENTITY, LayerType.RELU_AGG]:
             return input_dimensions
         #elif layer.layer_type == LayerType.BATCH_NORM_PROJ1D:
             return cls(input_dimensions.flatten(), length=1)

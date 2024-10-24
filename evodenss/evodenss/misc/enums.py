@@ -38,6 +38,7 @@ class LayerType(ExtendedEnum):
     CONV1D = "conv1d"
     DECONV1D = "deconv1d"
     BATCH_NORM = "batch_norm"
+    BATCH_NORM1D = "batch_norm1d"
     BATCH_NORM_PROJ = "batch_norm_proj"
     POOL_AVG = "pool_avg"
     POOL_MAX = "pool_max"
@@ -66,6 +67,7 @@ class ActivationType(Enum):
     RELU = "relu"
     SIGMOID = "sigmoid"
     SOFTMAX = "softmax"
+    SELU = "selu"
 
 
 @unique

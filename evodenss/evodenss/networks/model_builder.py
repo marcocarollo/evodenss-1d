@@ -254,6 +254,8 @@ class ModelBuilder():
             return nn.Sigmoid()
         elif activation == ActivationType.SOFTMAX:
             return nn.Softmax()
+        elif activation == ActivationType.SELU:
+            return nn.SELU()
         else:
             raise ValueError(f"Unexpected activation function found: {activation}")
 
@@ -296,6 +298,8 @@ class ModelBuilder():
             layer_to_add = self._build_deconvolutional1d_layer(layer, expected_input_dimensions)
         elif layer.layer_type == LayerType.BATCH_NORM:
             layer_to_add = self._build_batch_norm_layer(layer, expected_input_dimensions)
+        elif layer.layer_type == LayerType.BATCH_NORM1D:
+            layer_to_add = self._build_batch_norm_layer_1d(layer, expected_input_dimensions)
         elif layer.layer_type == LayerType.BATCH_NORM_PROJ:
             layer_to_add = self._build_batch_norm_projector_layer(layer, layer_name, expected_input_dimensions)
         elif layer.layer_type == LayerType.POOL_AVG:
@@ -345,6 +349,12 @@ class ModelBuilder():
 
     def _build_batch_norm_layer(self, layer: Layer, input_dimensions: Dimensions) -> nn.Module:
         layer_to_add = nn.BatchNorm2d(**layer.layer_parameters,
+                                      num_features=input_dimensions.channels,
+                                      device=self.device.value)
+        return layer_to_add
+    
+    def _build_batch_norm_layer_1d(self, layer: Layer, input_dimensions: Dimensions1d) -> nn.Module:
+        layer_to_add = nn.BatchNorm1d(**layer.layer_parameters,
                                       num_features=input_dimensions.channels,
                                       device=self.device.value)
         return layer_to_add
@@ -428,7 +438,8 @@ class ModelBuilder():
         activation: ActivationType = ActivationType(layer.layer_parameters.pop("act"))
 
         assert layer.layer_parameters['padding'] in ['valid', 'same'] or \
-            isinstance(layer.layer_parameters['padding'], tuple)
+            isinstance(layer.layer_parameters['padding'], tuple) or \
+            isinstance(layer.layer_parameters['padding'], int)
 
         # If padding = same torch does not support strided convolutions.
         # Check https://pytorch.org/docs/stable/generated/torch.nn.Conv2d.html#torch.nn.Conv2d
