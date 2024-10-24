@@ -123,11 +123,11 @@ class Trainer:
                         loss = self.loss_function(outputs, labels)
                     
                     total_loss += loss/n_batches_train
-                    print(f"total_loss: {total_loss}")
+                    
                     loss.backward()
                     self.optimiser.step()
                 end = time.time() # noqa: F841
-                #logger.info(f"[{round(end-start, 2)}s] TRAIN epoch {epoch} -- loss: {total_loss}")
+                logger.info(f"[{round(end-start, 2)}s] TRAIN epoch {epoch} -- loss: {total_loss}")
                 self.loss_values["train_loss"].append(round(float(total_loss.data), 3))
                 logger.debug(f"Loss: {round(float(total_loss.data), 3)}")
                 logger.debug("=============================================================")
