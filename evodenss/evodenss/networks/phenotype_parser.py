@@ -33,6 +33,10 @@ class Layer:
             return "kernel_size", tuple(map(int, value[1:-1].split(',')))
         elif key == "padding_fix":
             return "padding", tuple(map(int, value[1:-1].split(',')))
+        elif key == "internal_dropout_p":
+            return key, float(value)
+        elif key == "internal_batch_norm":
+            return key, bool(value)
         else:
             raise ValueError(f"No conversion found for param: [{key}], with value [{value}]")
 

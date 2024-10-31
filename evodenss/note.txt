@@ -10,3 +10,9 @@ guarda quali sono i weights che vengono salvati e come vengono retrieved, perch�
 l'architettura.
 
 aggiungi 1d batch normalization
+
+vedo se quando ho un layer con insieme batch normalization activation e dropout, questo vale come 4 layer o 1
+
+aggiungere sia il dropout e il normalization all'interno del layer, quindi ci satà un non non terminal symbol
+in più nelle production rules di un conv1d o trasposedconv1cd
+inoltre vanno aggiunti singolarmente come espazioni iniziali dalla prima  regola

@@ -4,7 +4,7 @@ from collections import OrderedDict
 from dataclasses import dataclass
 from typing import Optional, TypeVar, TYPE_CHECKING
 
-from evodenss.config.pydantic import ArchitectureConfig
+from evodenss.config.pydantic import ArchitectureConfig, get_config
 from evodenss.networks.module import Module
 
 if TYPE_CHECKING:

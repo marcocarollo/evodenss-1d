@@ -324,7 +324,7 @@ class ModelBuilder():
 
         layer_to_add: nn.Module
         activation: ActivationType = ActivationType(layer.layer_parameters.pop("act"))
-
+        
         assert layer.layer_parameters['padding'] in ['valid', 'same'] or \
             isinstance(layer.layer_parameters['padding'], tuple)
 
@@ -345,6 +345,7 @@ class ModelBuilder():
                                                    device=self.device.value),
                                          self._create_activation_layer(activation))
             #layer_to_add.apply(init_weights)
+        
         return layer_to_add
 
     def _build_batch_norm_layer(self, layer: Layer, input_dimensions: Dimensions) -> nn.Module:
@@ -434,8 +435,14 @@ class ModelBuilder():
 
 
     def _build_convolutional1d_layer(self, layer: Layer, input_dimensions: Dimensions1d) -> nn.Module:
-
-        activation: ActivationType = ActivationType(layer.layer_parameters.pop("act"))
+        '''
+        building a convolutional layer for 1D data
+        This layer is composed at least by a Conv1d layer, but with the possibility of adding
+        batch normalization, activation and dropout layers.
+        '''
+        batch_norm: Optional[bool] = layer.layer_parameters.pop("internal_batch_norm", None)
+        activation: ActivationType = ActivationType(layer.layer_parameters.pop("act")) 
+        dropout: Optional[float] = layer.layer_parameters.pop("internal_dropout_p", None)
 
         assert layer.layer_parameters['padding'] in ['valid', 'same'] or \
             isinstance(layer.layer_parameters['padding'], tuple) or \
@@ -446,23 +453,28 @@ class ModelBuilder():
         if layer.layer_parameters['padding'] == "same":
             layer.layer_parameters['stride'] = 1
 
+        conv = nn.Conv1d(**layer.layer_parameters,
+                         in_channels=input_dimensions.channels,
+                         device=self.device.value)
+        output_dim_from_cnn = Dimensions1d.from_layer(layer, input_dimensions)
+        if batch_norm is not None:
+            conv = nn.Sequential(conv, nn.BatchNorm1d(output_dim_from_cnn.channels))
+    
         if activation == ActivationType.LINEAR:
-            layer_to_add = nn.Conv1d(**layer.layer_parameters,
-                                     in_channels=input_dimensions.channels,
-                                     device=self.device.value)
-
+            pass
         else:
-            layer_to_add = nn.Sequential(nn.Conv1d(**layer.layer_parameters,
-                                                   in_channels=input_dimensions.channels,
-                                                   device=self.device.value),
-                                         self._create_activation_layer(activation))
-        
-        return layer_to_add
+            conv = nn.Sequential(conv, self._create_activation_layer(activation))
+    
+        if dropout is not None:
+            conv = nn.Sequential(conv, nn.Dropout(p=dropout))
+
+        return conv
 
     def _build_deconvolutional1d_layer(self, layer: Layer, input_dimensions: Dimensions1d) -> nn.Module:
 
-        activation: ActivationType = ActivationType(layer.layer_parameters.pop("act"))
-
+        batch_norm: Optional[bool] = layer.layer_parameters.pop("internal_batch_norm", None)
+        activation: ActivationType = ActivationType(layer.layer_parameters.pop("act")) 
+        dropout: Optional[float] = layer.layer_parameters.pop("internal_dropout_p", None)
         assert layer.layer_parameters['padding'] in ['valid', 'same'] or \
             isinstance(layer.layer_parameters['padding'], tuple) or \
             isinstance(layer.layer_parameters['padding'], int)
@@ -471,17 +483,25 @@ class ModelBuilder():
         # Check https://pytorch.org/docs/stable/generated/torch.nn.Conv2d.html#torch.nn.Conv2d
         if layer.layer_parameters['padding'] == "same":
             layer.layer_parameters['stride'] = 1
+        
+        deconv = nn.ConvTranspose1d(**layer.layer_parameters,
+                                    in_channels=input_dimensions.channels,
+                                    device=self.device.value)
+        
+        output_dim_from_cnn = Dimensions1d.from_layer(layer, input_dimensions)
+
+        if batch_norm is not None:
+            deconv = nn.Sequential(deconv, nn.BatchNorm1d(output_dim_from_cnn.channels))
 
         if activation == ActivationType.LINEAR:
-            layer_to_add = nn.ConvTranspose1d(**layer.layer_parameters,
-                                     in_channels=input_dimensions.channels,
-                                     device=self.device.value)
-
+            pass
         else:
-            layer_to_add = nn.Sequential(nn.ConvTranspose1d(**layer.layer_parameters,
-                                                   in_channels=input_dimensions.channels,
-                                                   device=self.device.value),
-                                         self._create_activation_layer(activation))
+            deconv = nn.Sequential(deconv, self._create_activation_layer(activation))
+
+        if dropout is not None:
+            deconv = nn.Sequential(deconv, nn.Dropout(p=dropout))
+
+        return deconv
         
         return layer_to_add
 

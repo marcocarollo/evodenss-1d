@@ -30,11 +30,10 @@ class Individual:
                  grammar: Grammar,
                  network_architecture_config: ArchitectureConfig,
                  ind_id: int,
-                 track_mutations: bool) -> None:
+                 track_mutations: bool,
+                 individual_genotype = None) -> None:
 
         self.id: int = ind_id
-        self.individual_genotype: IndividualGenotype = \
-            IndividualGenotype(grammar, network_architecture_config, track_mutations)
         self.phenotype: Optional[str] = None
         self.phenotype_projector: Optional[str] = None
         self.fitness: Optional[Fitness] = None
@@ -43,7 +42,10 @@ class Individual:
         self.current_time: float = 0.0
         self.total_allocated_train_time: float = 0.0
         self.total_training_time_spent: float = 0.0
-
+        if individual_genotype is None:
+            self.individual_genotype: IndividualGenotype = IndividualGenotype(grammar, network_architecture_config, track_mutations)
+        else:
+            self.individual_genotype = individual_genotype
 
     def __eq__(self, other: object) -> bool:
         if isinstance(other, Individual):
@@ -55,7 +57,6 @@ class Individual:
         phenotype: str = ''
         static_projector_phenotype: str = ''
         module_offset: int
-
         for module_idx, module in enumerate(self.individual_genotype.modules_dict.values()):
             for layer_idx, layer_genotype in enumerate(module.layers):
                 phenotype_layer: str = f" {grammar.decode(module.module_name, layer_genotype)}"
