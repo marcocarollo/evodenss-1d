@@ -1,34 +1,42 @@
 checkpoints_path: ../results/debug_argo
 
 evolutionary:
-  generations: 10
-  lambda: 3
-  max_epochs: 100
+  generations: 1
+  lambda: 1
+  max_epochs: 1
   mutation:
     add_connection: 0.0
     remove_connection: 0.0
-    add_layer: 0.3
-    reuse_layer: 0.15
-    remove_layer: 0.3
-    dsge_topological: 0.15
-    dsge_non_topological: 0.3
-    train_longer: 0.03
+    add_layer: 0
+    reuse_layer: 0
+    remove_layer: 0
+    dsge_topological: 0
+    dsge_non_topological: 0
+    train_longer: 0
   fitness:
     metric_name: "argo"
     parameters: null
 
 network:
   architecture:
-    reuse_layer: 0.0
-    output: fully_connected
+    reuse_layer: 0
+    output: softmax
     modules:
       - name: features
         network_structure_init:
-          min_expansions: 5
-          max_expansions: 15
+          min_expansions: 1
+          max_expansions: 1
         network_structure:
-          min_expansions: 5
-          max_expansions: 15
+          min_expansions: 1
+          max_expansions: 1
+        levels_back: 1
+      - name: classification
+        network_structure_init:
+          min_expansions: 1
+          max_expansions: 1
+        network_structure:
+          min_expansions: 1
+          max_expansions: 1
         levels_back: 1
     extra_components:
       - learning
@@ -49,7 +57,7 @@ network:
           amount_to_use: 1.0
           replacement: false
     learning_type: "supervised"
-    default_train_time: 100
+    default_train_time: 60
     augmentation: #when using argo data, the augmentation is not used, hence there are no parameters
       downstream:
     loss:
