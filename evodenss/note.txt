@@ -16,3 +16,12 @@ vedo se quando ho un layer con insieme batch normalization activation e dropout,
 aggiungere sia il dropout e il normalization all'interno del layer, quindi ci satà un non non terminal symbol
 in più nelle production rules di un conv1d o trasposedconv1cd
 inoltre vanno aggiunti singolarmente come espazioni iniziali dalla prima  regola
+
+fixare la possibilità che ogni volta che viene inizializzato un individuo, viene automaticamente preso come argo
+ - mettere una flag 
+ - semplicemente crearsi il checkpoint e poi fare tutto a partire da quello
+
+fixare il fatto che non sono sicuro che l'output e la loss funzionino sul serio
+fixare il fatto che alla fine c'è un fc layer
+
+da dove arriva la batchsize?????
