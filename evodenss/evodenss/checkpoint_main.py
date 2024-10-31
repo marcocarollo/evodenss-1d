@@ -33,36 +33,37 @@ if TYPE_CHECKING:
 
 
 
-parent = Individual(grammar=Grammar(args.grammar_path, backup_path=get_config().checkpoints_path),
-                    network_architecture_config=get_config().network.architecture,
-                    
+#parent = Individual(grammar=Grammar(args.grammar_path, backup_path=get_config().checkpoints_path),
+#                    network_architecture_config=get_config().network.architecture, 
+#                    
+#
+#def get_loss_function():
+#    config = get_config()
+#    loss: str = config.network.learning.loss.type
+#    if loss == "cross_entropy":
+#        loss_function: nn.Module = torch.nn.CrossEntropyLoss()
+#    elif loss == "argo":
+#        loss_function: nn.Module = MyCustomLoss(config.network.learning.loss)
+#    return loss_function
+#
+#evaluator = BaseEvaluator.create_evaluator(dataset_name="argo",
+#                                            loss_function=get_loss_function(),
+#                                            is_gpu_run=True)
+#
+#checkpoint  = Checkpoint(run=5,
+#                         random_state=random.getstate(),
+#                         numpy_random_state=np.random.get_state(),
+#                         torch_random_state=torch.get_rng_state(),
+#                         last_processed_generation=START_FROM_SCRATCH,
+#                         total_epochs=0
+#                         best_fitness=None,
+#                         evaluator = evaluator,
+#                         best_gen_ind_test_accuracy=0.0,
+#                         population=None,
+#                         parent=parent)
 
-def get_loss_function():
-    config = get_config()
-    loss: str = config.network.learning.loss.type
-    if loss == "cross_entropy":
-        loss_function: nn.Module = torch.nn.CrossEntropyLoss()
-    elif loss == "argo":
-        loss_function: nn.Module = MyCustomLoss(config.network.learning.loss)
-    return loss_function
-
-evaluator = BaseEvaluator.create_evaluator(dataset_name="argo",
-                                            loss_function=get_loss_function(),
-                                            is_gpu_run=True)
-
-checkpoint  = Checkpoint(run=5,
-                         random_state=random.getstate(),
-                         numpy_random_state=np.random.get_state(),
-                         torch_random_state=torch.get_rng_state(),
-                         last_processed_generation=START_FROM_SCRATCH,
-                         total_epochs=0
-                         best_fitness=None,
-                         evaluator = evaluator,
-                         best_gen_ind_test_accuracy=0.0,
-                         population=None,
-                         parent=parent)
-
-
+with open('/home/marco/Desktop/units/evodenss-1d/results/debug_argo/run_100/checkpoint.pkl', 'rb') as f:
+    checkpoint = pkl.load(f)
 
 if __name__ == '__main__':
     parser: ArgumentParser = ArgumentParser(allow_abbrev=False)
