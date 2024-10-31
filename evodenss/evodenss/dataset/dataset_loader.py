@@ -276,9 +276,9 @@ class DatasetProcessor:
         if dataset_class == MyDataset:
 
             unlabelled_data = None
-            train_labelled_data = dataset_class(path_tensor='/home/marco/Desktop/units/evodenss-1d/evodenss/data/ds/BBP700/train_data.pt')
-            evaluation_labelled_data = dataset_class(path_tensor='/home/marco/Desktop/units/evodenss-1d/evodenss/data/ds/BBP700/train_data.pt') #qui era val data ma casino
-            test_data = dataset_class(path_tensor='/home/marco/Desktop/units/evodenss-1d/evodenss/data/ds/BBP700/test_data.pt')
+            train_labelled_data = dataset_class(path_tensor='/u/dssc/mcarol00/evodenss-1d/evodenss/data/ds/BBP700/train_data.pt')
+            evaluation_labelled_data = dataset_class(path_tensor='/u/dssc/mcarol00/evodenss-1d/evodenss/data/ds/BBP700/train_data.pt') #qui era val data ma casino
+            test_data = dataset_class(path_tensor='/u/dssc/mcarol00/evodenss-1d/evodenss/data/ds/BBP700/test_data.pt') #/home/marco/Desktop/units/evodenss-1d/evodenss/data/ds/BBP700/test_data.pt
         else:
             unlabelled_data = dataset_class(
                 root="data",
