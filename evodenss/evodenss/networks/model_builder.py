@@ -457,7 +457,7 @@ class ModelBuilder():
                          in_channels=input_dimensions.channels,
                          device=self.device.value)
         output_dim_from_cnn = Dimensions1d.from_layer(layer, input_dimensions)
-        if batch_norm is not None:
+        if batch_norm is True:
             conv = nn.Sequential(conv, nn.BatchNorm1d(output_dim_from_cnn.channels))
     
         if activation == ActivationType.LINEAR:
@@ -490,7 +490,7 @@ class ModelBuilder():
         
         output_dim_from_cnn = Dimensions1d.from_layer(layer, input_dimensions)
 
-        if batch_norm is not None:
+        if batch_norm is True:
             deconv = nn.Sequential(deconv, nn.BatchNorm1d(output_dim_from_cnn.channels))
 
         if activation == ActivationType.LINEAR:

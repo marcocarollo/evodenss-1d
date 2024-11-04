@@ -332,7 +332,6 @@ class DatasetProcessor:
                                          drop_last=is_drop_last,
                                          pin_memory=True,
                                          generator=g)
-            print(f"Dataset {p} has {len(dataset[p])} samples")
         return loaders_dict
 
 

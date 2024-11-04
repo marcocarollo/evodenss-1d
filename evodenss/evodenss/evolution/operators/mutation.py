@@ -129,12 +129,10 @@ def mutation_remove_layer(individual: Individual,
 def _mutation_dsge(layer: 'Genotype',
                    grammar: Grammar,
                    **attributes_to_override: list[int]|list[float]) -> None:
-
     nt_keys: list[NonTerminal] = sorted(list(layer.expansions.keys()))
     random_nt: NonTerminal = random.choice(nt_keys)
     nt_derivation_idx: int = random.randint(0, len(layer.expansions[random_nt])-1)
     nt_derivation: Derivation = layer.expansions[random_nt][nt_derivation_idx]
-
     sge_possibilities: list[list[Symbol]] = []
     node_type_possibilites: list[type[Symbol]] = []
     if len(grammar.grammar[random_nt]) > 1:
@@ -143,7 +141,6 @@ def _mutation_dsge(layer: 'Genotype',
         # exclude current derivation to avoid neutral mutation
         sge_possibilities = [list(d) for d in set(all_possibilities) - set([tuple(nt_derivation)])]
         node_type_possibilites.append(NonTerminal)
-
     # stride mutations happen separately
     terminal_symbols_with_attributes: list[Symbol] = \
         list(filter(lambda x: isinstance(x, Terminal) and x.attribute is not None and x.name != "stride",
@@ -160,13 +157,21 @@ def _mutation_dsge(layer: 'Genotype',
                 symbol_to_mutate.attribute is not None and \
                 symbol_to_mutate.attribute.values is not None
             is_neutral_mutation: bool = True
+
             while is_neutral_mutation is True:
                 current_values = tuple(symbol_to_mutate.attribute.values)
-                symbol_to_mutate.attribute.generate()
-                new_values = tuple(symbol_to_mutate.attribute.values)
-                if current_values != new_values:
-                    is_neutral_mutation = False
+                if symbol_to_mutate.attribute.min_value == symbol_to_mutate.attribute.max_value:
+                    is_neutral_mutation = None #none perché tecnicamente non è una neutral mutation, comunque behaves like False
+                else:     
+                    symbol_to_mutate.attribute.generate()
+                    new_values = tuple(symbol_to_mutate.attribute.values)
+
+                    if current_values != new_values:
+                        is_neutral_mutation = False
+            
+
         elif random_mt_type is NonTerminal:
+    
             # assignment with side-effect.
             # layer variable will also be affected
             new_derivation: Derivation = deepcopy(Derivation(random.choice(sge_possibilities)))

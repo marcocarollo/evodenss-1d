@@ -125,6 +125,7 @@ class ArgoFitnessMetric(FitnessMetric):
             # since we're not training, we don't need to calculate the gradients for our outputs
             total_loss = torch.zeros(size=(1,), device=device.value)
             loss_function = MyCustomLoss(get_config().network.learning.loss)
+            n_batches_train: int = len(loaders_dict[DatasetType.EVO_TEST])
             with torch.no_grad():
                 for data in loaders_dict[DatasetType.EVO_TEST]:
                     inputs, labels = data[0].to(device.value, non_blocking=True), \
@@ -133,6 +134,7 @@ class ArgoFitnessMetric(FitnessMetric):
                         inputs = self.representation_model(inputs)
                     outputs = model(inputs)
                     total_loss += loss_function(outputs, labels, model)
+            total_loss /= n_batches_train
             return total_loss
 
         @classmethod

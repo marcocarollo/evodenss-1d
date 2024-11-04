@@ -3,6 +3,9 @@ from typing import cast, TYPE_CHECKING
 
 from evodenss.config.pydantic import ModuleConfig, get_config
 from evodenss.misc.utils import InputLayerId, LayerId
+from evodenss.misc.enums import FitnessMetricName
+import logging
+logger = logging.getLogger(__name__)
 
 if TYPE_CHECKING:
     from evodenss.evolution.grammar import Genotype, Grammar
@@ -22,8 +25,9 @@ class Module:
                                              module_configuration.network_structure_init.max_expansions)
         self.layers: list[Genotype] = \
             self._initialise_layers(num_expansions, grammar, reuse_layer, **attributes_to_override) if layers is None else layers
+
         config = get_config()
-        if config.network.learning.loss.type == "argo" and self.module_name == "features":
+        if config.evolutionary.fitness.metric_name is FitnessMetricName.ARGO and self.module_name == "features" and config.evolutionary.used is False:
             self.connections: dict[LayerId, list[InputLayerId]] = {LayerId(0): [InputLayerId(-1)],
                                                                    LayerId(1): [InputLayerId(0)],
                                                                    LayerId(2): [InputLayerId(1)],
@@ -33,6 +37,7 @@ class Module:
                                                                    LayerId(6): [InputLayerId(5)],
                                                                    LayerId(7): [InputLayerId(6)],
                                                                    LayerId(8): [InputLayerId(7)]}
+            config.evolutionary.used = True
         else:
             self.connections: dict[LayerId, list[InputLayerId]] = self._initialise_connections(num_expansions)
 
@@ -44,13 +49,15 @@ class Module:
         layers: list[Genotype] = []
         #Initialise layers
         config = get_config()
-        print()
 
-        if config.network.learning.loss.type == "argo" and self.module_name == "features": #vedi note
+        if config.evolutionary.fitness.metric_name is FitnessMetricName.ARGO and self.module_name == "features" and config.evolutionary.used is False: #vedi note
             from evodenss.evolution.grammar import Grammar
             for grammar_single_module in [f"grammar{idx}" for idx in range(1, 10)]:
                 grammar = Grammar(f"grammars/argo.{grammar_single_module}")
                 layers.append(grammar.initialise(self.module_name, **attributes_to_override))
+            logger.info(f"Using ARGO grammar for features module")
+           
+            
         else:
             for idx in range(num_expansions):
                 if idx>0 and random.random() <= reuse:

@@ -109,6 +109,7 @@ class EvolutionaryConfig(BaseModel):
     max_epochs: PositiveInt
     mutation: MutationConfig
     fitness: FitnessConfig
+    used: bool
     model_config = ConfigDict(extra='forbid')
 
 

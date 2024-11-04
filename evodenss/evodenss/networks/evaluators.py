@@ -248,7 +248,7 @@ class LegacyEvaluator(BaseEvaluator):
                  representation_model_training_mode: Optional[DownstreamMode]) -> None:
         self.dataset_name: str = dataset_name
         self.loss_function: Optional[nn.Module] = loss_function
-        self.representation_model: Optional[nn.Module] = representation_model
+        self.representation_model: Optional[nn.Module] = representation_model #in argo è none
         self.representation_model_training_mode: Optional[DownstreamMode] = representation_model_training_mode
 
 
@@ -280,7 +280,7 @@ class LegacyEvaluator(BaseEvaluator):
 
         os.makedirs(model_saving_dir, exist_ok=True)
 
-        logger.info(phenotype)
+        logger.info("\n".join([f"layer{idx}: {layer}" for idx, layer in enumerate(phenotype.split("layer"))]))
         parsed_network, _, optimiser, _ = parse_phenotype(phenotype)
         dataset_input_size: Size = \
             Size(list(DATASETS_INFO[self.dataset_name]["expected_input_dimensions"]))

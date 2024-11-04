@@ -77,10 +77,10 @@ def evolve(run: int,
                              get_config().evolutionary.mutation,
                              get_config().network.learning.default_train_time)
              for ind in offspring_before_mutation]
-
+        
         assert checkpoint.parent is not None
         population = [deepcopy(checkpoint.parent)] + offspring
-
+        logger.info("mutation has been performed")
         # set elite variables to re-evaluation
         population[0].reset_keys('id', 'current_time', 'num_epochs', 'metrics')
 
@@ -99,7 +99,7 @@ def evolve(run: int,
                                                       checkpoint.parent.id)
                 )
             )
-        
+            logger.info(f"Individual {idx} fitness: {population_fits[-1]}")
 
     logger.info("Selecting the fittest individual")
     selection_method: str = 'fittest'
@@ -165,7 +165,7 @@ def evolve(run: int,
                 ),
                 **get_fitness_extra_params())
 
-        logger.info(f"Generation best test accuracy: {best_test_acc}")
+        logger.info(f"Generation best test fitness: {best_test_acc}")
 
     logger.info(f"Best fitness of generation {generation}: {max(population_fits)}")
     logger.info(f"Best overall fitness: {checkpoint.best_fitness}\n\n\n")
