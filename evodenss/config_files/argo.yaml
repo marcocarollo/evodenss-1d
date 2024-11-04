@@ -2,7 +2,7 @@ checkpoints_path: ../results/debug_argo
 
 evolutionary:
   generations: 10
-  lambda: 3
+  lambda: 2
   max_epochs: 100
   mutation:
     add_connection: 0.0
@@ -16,6 +16,7 @@ evolutionary:
   fitness:
     metric_name: "argo"
     parameters: null
+  used: False
 
 network:
   architecture:
@@ -24,10 +25,10 @@ network:
     modules:
       - name: features
         network_structure_init:
-          min_expansions: 5
-          max_expansions: 15
+          min_expansions: 2
+          max_expansions: 3
         network_structure:
-          min_expansions: 5
+          min_expansions: 2
           max_expansions: 15
         levels_back: 1
     extra_components:
@@ -49,7 +50,7 @@ network:
           amount_to_use: 1.0
           replacement: false
     learning_type: "supervised"
-    default_train_time: 100
+    default_train_time: 200
     augmentation: #when using argo data, the augmentation is not used, hence there are no parameters
       downstream:
     loss:
