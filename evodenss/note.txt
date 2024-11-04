@@ -1,6 +1,6 @@
 fatti uno schemino di tutte le funzioni che sono chiamate, in ordine da main
 - batch normalization
-- vedere come aggiungere mlp all'inizio o dopo per vedere cosa cambia, riguardo questo, vedere
+
 
 bene reverse engineering sul checkpoint.pkl, fallo anche considerando gli init di ogni classe che viene chiamata,
 in modo da specificare solo gli attributi che servono. tipo per il fitness dell'individuo può darsi che non serva 
@@ -24,4 +24,17 @@ fixare la possibilità che ogni volta che viene inizializzato un individuo, vien
 fixare il fatto che non sono sicuro che l'output e la loss funzionino sul serio
 fixare il fatto che alla fine c'è un fc layer
 
-da dove arriva la batchsize?????
+da dove arriva la batchsize????? (dalla grammar)
+
+fixare dsge topological (non funziona)
+cosa fa dsge non topological? (learning (?))
+
+perché non gliene frega nulla a nessuno di quanto tempo bisogna trainare? perché si utilizzano le max num epochs
+dal file config.yaml, inoltre il numero di epoche viene preso dalla grammatica. se hai 10 secondi e il training 
+si ferma dopo 70 è perché ha fatto solo 1 epoca, che dura 70 secondi.
+
+problemi nella rimozione, kv sballato => era la argo.grammar che aveva "  "
+
+vedere come aggiungere mlp all'inizio o dopo per vedere cosa cambia. si potrebbe provare a buttare dei layer fc
+che però sono connessi solo ad un certo punto, quindi anche se vengono rappresentati linearmente comunque è come se 
+arrivassero solo dopo un tot
