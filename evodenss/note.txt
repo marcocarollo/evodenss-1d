@@ -36,5 +36,18 @@ si ferma dopo 70 è perché ha fatto solo 1 epoca, che dura 70 secondi.
 problemi nella rimozione, kv sballato => era la argo.grammar che aveva "  "
 
 vedere come aggiungere mlp all'inizio o dopo per vedere cosa cambia. si potrebbe provare a buttare dei layer fc
-che però sono connessi solo ad un certo punto, quindi anche se vengono rappresentati linearmente comunque è come se 
-arrivassero solo dopo un tot
+che però sono connessi solo ad un certo punto, quindi anche se vengono rappresentati linearmente comunque è come
+se arrivassero solo dopo un tot sì comunque tu hai 4 mlp che buttano fuori 4 vettori da 200 punti. ciascuno di 
+questi diventa un canale in pasto al layer successivo. vedere se multiple connections sono trattate ocme diversi
+canali o come combinazione lineare di diversi output prima di entrare nel layer successivo.
+
+pulire le grammatiche che servono per inizializzare argo
+
+aggiungere la possibilità di cambiare connection:
+ - inserire un nuovo tipo di mutazione che cambia le connections ma solo se il layer è di tipo punctual
+   e in quel caso cambia le connections di tutti i layer punctual
+ - magari aggiungere un nuovo tipo di id per identificare questi layer
+ - servirebbe una cosa che separatamente tratta questi pezzi e li attacca al modellone, ma comunque li riesce
+   a integrare
+ - in teoria dovrebbe funzionare lo stesso il codice anche aggiungendo a caso questi modelli e connections,
+   perché aumenta semplicemente il numero di canali e quello viene dato in pasto al model builder
