@@ -46,6 +46,7 @@ class LayerType(ExtendedEnum):
     DROPOUT = "dropout"
     IDENTITY = "identity"
     RELU_AGG = "relu_agg"
+    PUNCTUAL_MLP = "punctual_mlp"
 
 
 @unique

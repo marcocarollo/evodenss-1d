@@ -314,6 +314,8 @@ class ModelBuilder():
             layer_to_add = nn.Identity()
         elif layer.layer_type == LayerType.RELU_AGG:
             layer_to_add = nn.ReLU()
+        elif layer.layer_type == LayerType.PUNCTUAL_MLP:
+            layer_to_add = self._build_punctual_data_processor()
         return layer_to_add
 
     def _build_convolutional_layer(self, layer: Layer, input_dimensions: Dimensions) -> nn.Module:
@@ -521,3 +523,14 @@ class ModelBuilder():
             torch_layers_to_add.append(self._create_activation_layer(activation))
 
         return nn.Sequential(*torch_layers_to_add)
+    
+    def _build_punctual_data_processor(self) -> nn.Module:
+        layer_to_add = nn.Sequential(
+            nn.Linear(1, 80),
+            nn.SELU(),
+            nn.Linear(80, 140),
+            nn.SELU(),
+            nn.Linear(140, 200),
+            nn.SELU()
+        )
+        return layer_to_add
