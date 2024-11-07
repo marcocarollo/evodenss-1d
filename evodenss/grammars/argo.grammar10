@@ -1,0 +1,2 @@
+<features> ::= <punctual_mlp> 
+<punctual_mlp> ::= layer:punctual_mlp 
