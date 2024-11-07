@@ -269,16 +269,16 @@ class DatasetProcessor:
             dataset_class = getattr(module_obj, dir(module_obj)[class_name_index])
         else:
             # If not found, fallback to custom dataset
-            dataset_class = MyDataset
+            dataset_class = FloatDataset
 
         dataset_class: type[ConcreteDataset] = dataset_class
 
-        if dataset_class == MyDataset:
+        if dataset_class == FloatDataset:
 
             unlabelled_data = None
-            train_labelled_data = dataset_class(path_tensor='/u/dssc/mcarol00/evodenss-1d/evodenss/data/ds/BBP700/train_data.pt')
-            evaluation_labelled_data = dataset_class(path_tensor='/u/dssc/mcarol00/evodenss-1d/evodenss/data/ds/BBP700/train_data.pt') #qui era val data ma casino
-            test_data = dataset_class(path_tensor='/u/dssc/mcarol00/evodenss-1d/evodenss/data/ds/BBP700/test_data.pt') #/home/marco/Desktop/units/evodenss-1d/evodenss/data/ds/BBP700/test_data.pt
+            train_labelled_data = dataset_class(path_df='/u/dssc/mcarol00/evodenss-1d/evodenss/data/ds/BBP700/float_ds_sf_train.csv')
+            evaluation_labelled_data = dataset_class(path_df='/u/dssc/mcarol00/evodenss-1d/evodenss/data/ds/BBP700/float_ds_sf_train.csv') #qui era val data ma casino
+            test_data = dataset_class(path_df='/u/dssc/mcarol00/evodenss-1d/evodenss/data/ds/BBP700/float_ds_sf_test.csv') #/home/marco/Desktop/units/evodenss-1d/evodenss/data/ds/BBP700/test_data.pt
         else:
             unlabelled_data = dataset_class(
                 root="data",
@@ -328,7 +328,7 @@ class DatasetProcessor:
             loaders_dict[p] = DataLoader(dataset[p],
                                          batch_size=batch_size,
                                          shuffle=False,
-                                         num_workers=4,
+                                         num_workers=16,
                                          drop_last=is_drop_last,
                                          pin_memory=True,
                                          generator=g)
