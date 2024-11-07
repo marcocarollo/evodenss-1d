@@ -51,3 +51,8 @@ aggiungere la possibilità di cambiare connection:
    a integrare
  - in teoria dovrebbe funzionare lo stesso il codice anche aggiungendo a caso questi modelli e connections,
    perché aumenta semplicemente il numero di canali e quello viene dato in pasto al model builder
+ - questi pezzi devono essere immuni a tutte le altre mutazioni, ma l'unica possibile deve essere di spostare 
+   le connessioni per farli attaccare ad un certo punto invece che ad un altro
+
+
+in main si chiama engine evolve, che prende come argomento dataset, che è il riusltato di load partitioned dataset
