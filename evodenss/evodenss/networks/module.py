@@ -2,7 +2,7 @@ import random
 from typing import cast, TYPE_CHECKING
 
 from evodenss.config.pydantic import ModuleConfig, get_config
-from evodenss.misc.utils import InputLayerId, LayerId
+from evodenss.misc.utils import InputLayerId, LayerId, PunctualLayerId, PunctualInputId
 from evodenss.misc.enums import FitnessMetricName
 import logging
 logger = logging.getLogger(__name__)
@@ -28,7 +28,7 @@ class Module:
 
         config = get_config()
         if config.evolutionary.fitness.metric_name is FitnessMetricName.ARGO and self.module_name == "features" and config.evolutionary.used is False:
-            self.connections: dict[LayerId, list[InputLayerId]] = {LayerId(0): [InputLayerId(-1)],
+            self.connections: dict[LayerId, list[InputLayerId]] = {LayerId(0): [InputLayerId(-1), PunctualLayerId(0), PunctualLayerId(1), PunctualLayerId(2)],
                                                                    LayerId(1): [InputLayerId(0)],
                                                                    LayerId(2): [InputLayerId(1)],
                                                                    LayerId(3): [InputLayerId(2)],
@@ -36,7 +36,11 @@ class Module:
                                                                    LayerId(5): [InputLayerId(4)],
                                                                    LayerId(6): [InputLayerId(5)],
                                                                    LayerId(7): [InputLayerId(6)],
-                                                                   LayerId(8): [InputLayerId(7)]}
+                                                                   LayerId(8): [InputLayerId(7)],
+                                                                   PunctualLayerId(0): PunctualInputId(-1),
+                                                                   PunctualLayerId(1): PunctualInputId(-1),
+                                                                   PunctualLayerId(2): PunctualInputId(-1),  
+                                                                   PunctualLayerId(3): PunctualInputId(-1)}
             config.evolutionary.used = True
         else:
             self.connections: dict[LayerId, list[InputLayerId]] = self._initialise_connections(num_expansions)
@@ -54,6 +58,9 @@ class Module:
             from evodenss.evolution.grammar import Grammar
             for grammar_single_module in [f"grammar{idx}" for idx in range(1, 10)]:
                 grammar = Grammar(f"grammars/argo.{grammar_single_module}")
+                layers.append(grammar.initialise(self.module_name, **attributes_to_override))
+            grammar = Grammar("grammars/argo.grammar10")
+            for i in range(3):
                 layers.append(grammar.initialise(self.module_name, **attributes_to_override))
             logger.info(f"Using ARGO grammar for features module")
            

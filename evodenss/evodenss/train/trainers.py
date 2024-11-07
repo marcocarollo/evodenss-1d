@@ -16,6 +16,7 @@ from evodenss.train.callbacks import Callback
 from evodenss.train.lars import LARS
 from evodenss.train.learning_parameters import LearningParams
 from evodenss.train.losses import MyCustomLoss
+from evodenss.config.pydantic import get_config
 
 
 if TYPE_CHECKING:
@@ -106,26 +107,48 @@ class Trainer:
                 self._call_on_epoch_begin_callbacks()
                 start = time.time() # noqa: F841
                 total_loss = torch.zeros(size=(1,), device=self.device.value)
-                for i, data in enumerate(self.train_data_loader, 0):
-                    inputs, labels = data[0].to(self.device.value, non_blocking=True), \
-                        data[1].to(self.device.value, non_blocking=True)
-                    if isinstance(self.optimiser, LARS):
-                        self.optimiser.adjust_learning_rate(n_batches_train, self.n_epochs, i)
-                    # zero the parameter gradients
-                    self.optimiser.zero_grad()
-                    if self.representation_model is not None:
-                        inputs = self.representation_model(inputs)
-                    
-                    outputs = self.model(inputs)
-                    if isinstance(self.loss_function, MyCustomLoss):
-                        loss = self.loss_function(outputs, labels, self.model)
-                    else:
-                        loss = self.loss_function(outputs, labels)
-                    
-                    total_loss += loss/n_batches_train
-                    
-                    loss.backward()
-                    self.optimiser.step()
+                if get_config().network.learning.loss.type == "argo":
+                    for i, (year, day_rad, lat, lon, temp, psal, doxy, target) in enumerate(self.train_data_loader, 0):
+                        year, day_rad, lat, lon, temp, psal, doxy, target = year.to(self.device.value, non_blocking=True), \
+                            day_rad.to(self.device.value, non_blocking=True), \
+                            lat.to(self.device.value, non_blocking=True), \
+                            lon.to(self.device.value, non_blocking=True), \
+                            temp.to(self.device.value, non_blocking=True), \
+                            psal.to(self.device.value, non_blocking=True), \
+                            doxy.to(self.device.value, non_blocking=True), \
+                            target.to(self.device.value, non_blocking=True)
+                        data_conv = torch.stack([temp, psal, doxy], dim=1)
+                        inputs = tuple([year, day_rad, lat, lon, data_conv])
+                        if isinstance(self.optimiser, LARS):
+                            self.optimiser.adjust_learning_rate(n_batches_train, self.n_epochs, i)
+                        self.optimiser.zero_grad()
+                        
+                        outputs = self.model(inputs)
+                        loss = self.loss_function(outputs, target)
+                        total_loss += loss/n_batches_train
+                        loss.backward()
+                        self.optimiser.step()
+                else:
+                    for i, data in enumerate(self.train_data_loader, 0):
+                        inputs, labels = data[0].to(self.device.value, non_blocking=True), \
+                            data[1].to(self.device.value, non_blocking=True)
+                        if isinstance(self.optimiser, LARS):
+                            self.optimiser.adjust_learning_rate(n_batches_train, self.n_epochs, i)
+                        # zero the parameter gradients
+                        self.optimiser.zero_grad()
+                        if self.representation_model is not None:
+                            inputs = self.representation_model(inputs)
+                        
+                        outputs = self.model(inputs)
+                        if isinstance(self.loss_function, MyCustomLoss):
+                            loss = self.loss_function(outputs, labels, self.model)
+                        else:
+                            loss = self.loss_function(outputs, labels)
+                        
+                        total_loss += loss/n_batches_train
+                        
+                        loss.backward()
+                        self.optimiser.step()
                 end = time.time() # noqa: F841
                 logger.info(f"[{round(end-start, 2)}s] TRAIN epoch {epoch} -- loss: {total_loss}")
                 self.loss_values["train_loss"].append(round(float(total_loss.data), 3))

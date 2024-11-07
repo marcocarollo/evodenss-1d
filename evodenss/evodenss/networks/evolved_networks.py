@@ -1,5 +1,5 @@
 import logging
-from typing import cast
+from typing import cast, Union
 
 import torch
 from torch import nn, Tensor
@@ -8,6 +8,8 @@ from evodenss.misc.constants import SEPARATOR_CHAR
 from evodenss.misc.enums import Device, LayerType
 from evodenss.misc.utils import InputLayerId, LayerId
 from evodenss.networks.dimensions import Dimensions
+from evodenss.config.pydantic import get_config
+
 
 
 logger = logging.getLogger(__name__)
@@ -37,9 +39,9 @@ class EvolvedNetwork(nn.Module):
 
 
     def _process_forward_pass(self,
-                              x: Tensor,
+                              x: Tensor | tuple,
                               layer_id: LayerId,
-                              input_ids: list[InputLayerId]) -> Tensor:
+                              input_ids: list[Union[InputLayerId, LayerId]]) -> Tensor:
 
         assert len(input_ids) > 0
         final_input_tensor: Tensor
@@ -50,7 +52,16 @@ class EvolvedNetwork(nn.Module):
         layer_inputs = []
         for i in input_ids:
             if i == -1:
-                input_tensor = x
+                if layer_name == "punctual_mlp-1":
+                    input_tensor = x[0]
+                elif layer_name == "punctual_mlp-2":
+                    input_tensor = x[1]
+                elif layer_name == "punctual_mlp-3":
+                    input_tensor = x[2]
+                elif layer_name == "punctual_mlp-4":
+                    input_tensor = x[3]
+                else:
+                    input_tensor = x[4]
                 #print("---------- (end) processing layer: ", layer_id, input_tensor.shape)
             else:
                 if (i, layer_id) in self.cache.keys():
@@ -69,10 +80,13 @@ class EvolvedNetwork(nn.Module):
         #print("length:", len(layer_inputs), input_ids, layer_id)
         #print([x.shape for x in layer_inputs])
         if len(layer_inputs) > 1:
-            # we are using channels first representation, so channels is index 1
-            # ADRIANO: another hack to cope with the relu in resnet scenario
-            final_input_tensor = torch.stack(layer_inputs, dim=0).sum(dim=0)
-            #old way: final_input_tensor = torch.cat(tuple(layer_inputs), dim=CHANNEL_INDEX)
+            if get_config().evolutionary.fitness.metric_name == "argo":
+                final_input_tensor = torch.stack(layer_inputs, dim=1)
+            else:
+                # we are using channels first representation, so channels is index 1
+                # ADRIANO: another hack to cope with the relu in resnet scenario
+                final_input_tensor = torch.stack(layer_inputs, dim=0).sum(dim=0)
+                #old way: final_input_tensor = torch.cat(tuple(layer_inputs), dim=CHANNEL_INDEX)
         else:
             final_input_tensor = layer_inputs[0]
         del layer_inputs

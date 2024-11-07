@@ -315,6 +315,7 @@ class LegacyEvaluator(BaseEvaluator):
                 dataset,
                 [DatasetType.DOWNSTREAM_TRAIN, DatasetType.VALIDATION, DatasetType.EVO_TEST, DatasetType.TEST],
                 learning_params.batch_size)
+            #####QUI VA AGGIUNTO UN DATA LOADER PER I PUNCTUAL DATA, CHE POI VA PASSATO A TRAINER
             metadata_info: MetadataInfo = \
                 MetadataInfo.new_instance(self.dataset_name, dataset, optimiser, learning_params, None)
             start_epoch: int = num_epochs if restart_train is False else 0

@@ -12,7 +12,7 @@ from torch import Size, nn, optim, Tensor
 from evodenss.misc.constants import SEPARATOR_CHAR
 from evodenss.misc.enums import ActivationType, Device, LayerType, OptimiserType
 from evodenss.networks.phenotype_parser import Layer
-from evodenss.misc.utils import InvalidNetwork, InputLayerId, LayerId
+from evodenss.misc.utils import InvalidNetwork, InputLayerId, LayerId, PunctualLayerId, PunctualInputId
 from evodenss.networks.dimensions import Dimensions, Dimensions1d
 from evodenss.networks.evolved_networks import BarlowTwinsNetwork, EvolvedNetwork, LegacyNetwork
 from evodenss.train.lars import LARS
