@@ -56,3 +56,20 @@ aggiungere la possibilità di cambiare connection:
 
 
 in main si chiama engine evolve, che prende come argomento dataset, che è il riusltato di load partitioned dataset
+
+controllare che dappertutto il count dei layer non consideri i punctual mlp, controllare che non vengano rimossi
+per sbaglio
+
+fixare quella roba delle dimensioni degli input dei dataset, messo 1,200 ma dovrebbe essere 7,200
+
+sistemare il fatto che gli mlp potrebbero entrare in ogni posizione. tipo in evolved network le cose sono 
+state calibrate solo in modo che funzioninon alla prima posizione
+
+fixare l'add layer con reuse, è in mutation
+
+fixare che gli dico popolazione di 3 e mi mette 4 individui (potrebbe essere che è già fissato essendo che in teoria
+tu fissi il lambda)
+
+fixare in mutation line 80 la logica degli if
+
+cambiare la training loss: metterla diversa dalla fitness function
