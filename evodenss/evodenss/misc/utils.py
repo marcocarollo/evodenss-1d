@@ -6,8 +6,8 @@ from argparse import ArgumentParser
 
 InputLayerId = NewType('InputLayerId', int)
 LayerId = NewType('LayerId', int)
-PunctualLayerId = NewType('PunctualLayerId', int)
-PunctualInputId = NewType('PunctualInputId', int)
+#PunctualLayerId = NewType('PunctualLayerId', int)
+#PunctualInputId = NewType('PunctualInputId', int)
 
 def is_valid_file(parser: ArgumentParser, arg: Any) -> object:
     if not os.path.isfile(arg):

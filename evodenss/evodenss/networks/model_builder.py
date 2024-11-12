@@ -12,7 +12,7 @@ from torch import Size, nn, optim, Tensor
 from evodenss.misc.constants import SEPARATOR_CHAR
 from evodenss.misc.enums import ActivationType, Device, LayerType, OptimiserType
 from evodenss.networks.phenotype_parser import Layer
-from evodenss.misc.utils import InvalidNetwork, InputLayerId, LayerId, PunctualLayerId, PunctualInputId
+from evodenss.misc.utils import InvalidNetwork, InputLayerId, LayerId #, PunctualLayerId, PunctualInputId
 from evodenss.networks.dimensions import Dimensions, Dimensions1d
 from evodenss.networks.evolved_networks import BarlowTwinsNetwork, EvolvedNetwork, LegacyNetwork
 from evodenss.train.lars import LARS
@@ -201,6 +201,10 @@ class ModelBuilder():
         layer_id: int = minimum_extra_id
         for input_id, input_shape in inputs_shapes.items():
             if input_shape != target_shape:
+                print(f"input_shape: {input_shape}")
+                print(f"target_shape: {target_shape}")
+                
+                
                 logging.warning("Shape mismatch found")
                 expected_padding_h = max(ceil((target_shape.height-input_shape.height) / 2), 0)
                 expected_padding_w = max(ceil((target_shape.width-input_shape.width) / 2), 0)
@@ -270,9 +274,12 @@ class ModelBuilder():
             inputs_shapes = {input_id: self.projector_layer_shapes[input_id]
                             for input_id in self.parsed_projector_network.layers_connections[layer.layer_id]}
         expected_input_dimensions: Optional[Union[Dimensions, Dimensions1d]]
-        #if len(set(inputs_shapes.values())) == 1:
-        first_input = list(inputs_shapes.values())[0]
-            #total_channels: int = sum([x.channels for x in list(inputs_shapes.values())])
+        if len(inputs_shapes.values()) == 1:
+            first_input = list(inputs_shapes.values())[0]
+        else:
+            
+            total_channels: int = sum([x.channels for x in list(inputs_shapes.values())]) + 2
+            first_input = Dimensions1d(total_channels, list(inputs_shapes.values())[0].length)  
             #expected_input_dimensions = Union[Dimensions, Dimensions1d](total_channels, first_input.height, first_input.width)
             #ADRIANO this is a test for the new shape mismatch resolution strategy
         if len(inputs_shapes) == 3:    

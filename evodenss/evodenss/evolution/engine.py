@@ -38,13 +38,19 @@ def evolve(run: int,
         logger.info("Creating the initial population")
 
         #create initial population
-        population = [
-            Individual(grammar,
-                       get_config().network.architecture,
-                       _id_,
-                       True)
-            for _id_ in range(lambda_)
-        ]
+        if get_config().evolutionary.fitness.metric_name == FitnessMetricName.ARGO:
+            population = [Individual(grammar,
+                                get_config().network.architecture,  
+                                0,
+                                True)]
+        else:
+            population = [
+                Individual(grammar,
+                           get_config().network.architecture,
+                           _id_,
+                           True)
+                for _id_ in range(lambda_)
+            ]
 
         #set initial population variables and evaluate population
         for idx, ind in enumerate(population):

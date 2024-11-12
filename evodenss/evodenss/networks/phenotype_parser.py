@@ -60,6 +60,7 @@ class ParsedNetwork:
     # It gets the layer id that corresponds to the final/output layer
     def get_output_layer_id(self) -> LayerId:
         keyset: Set[int] = set(self.layers_connections.keys())
+        
         values_set: Set[int] = set(
             list(reduce(lambda a, b: cast(list, a) + cast(list, b),
                         self.layers_connections.values()))

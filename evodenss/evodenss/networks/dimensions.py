@@ -57,6 +57,8 @@ class Dimensions1d:
             return cls(input_dimensions.flatten(), length=1)
         elif layer.layer_type == LayerType.FC:
             return cls(layer.layer_parameters['out_features'], length=1)
+        elif layer.layer_type == LayerType.PUNCTUAL_MLP:
+            return Dimensions1d(1,200)
         else:
             raise ValueError(f"Can't create Dimensions1d object for layer [{layer.layer_type}]")
     def flatten(self) -> int:
@@ -69,6 +71,25 @@ class Dimensions1d:
         padding_left: int = ceil(padding)
         padding_right: int = floor(padding)
         return (padding_left, padding_right)
+
+    
+    def __eq__(self, other: object) -> bool:
+        if isinstance(other, self.__class__):
+            return self.__dict__ == other.__dict__
+        else:
+            return False
+
+    def __hash__(self) -> int:
+        return hash((self.channels, self.length))
+
+    #let's overwrite the add method to add two dimensions1d objects so that i get a new object with the sum of the two lengths
+    #we need to assert that the two objects have the same length
+
+    def __add__(self, other: Dimensions1d) -> Dimensions1d:
+        assert self.length == other.length
+        return Dimensions1d(self.channels + other.channels, self.length)
+
+
     
 
 @dataclass

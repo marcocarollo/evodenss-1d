@@ -35,11 +35,13 @@ def from_string_to_tensor(string):
 
 class FloatDataset(Dataset):
 
-    def __init__(self, path_df=None, transform=None):
+    def __init__(self, path_df=None, targets_path=None, transform=None):
         super().__init__()
         if path_df is not None:
             self.path_df = path_df
             self.df = pd.read_csv(self.path_df)
+        if targets_path is not None:
+            self.targets = torch.load(targets_path, weights_only=True)
         else:
             raise Exception("Paths should be given as input to initialize the Float class.")
         self.transform = transform
@@ -64,12 +66,11 @@ class FloatDataset(Dataset):
         temp, label_temp = from_string_to_tensor(self.samples[4])
         psal, label_psal = from_string_to_tensor(self.samples[5])
         doxy, label_doxy = from_string_to_tensor(self.samples[6])
-        nitrate, label_nitrate = from_string_to_tensor(self.samples[7])
 
         label = label_doxy * label_psal * label_temp  # the label is equal to one only if I have data valid for all
         # depth
         
-        return year, day_rad, lat, lon, temp, psal, doxy, nitrate
+        return year, day_rad, lat, lon, temp, psal, doxy, self.targets[index]
 
 class MyDataset(torch.utils.data.Dataset):
     def __init__(self, path_df=None, path_tensor = None, transform=None):
@@ -276,9 +277,12 @@ class DatasetProcessor:
         if dataset_class == FloatDataset:
 
             unlabelled_data = None
-            train_labelled_data = dataset_class(path_df='/u/dssc/mcarol00/evodenss-1d/evodenss/data/ds/BBP700/float_ds_sf_train.csv')
-            evaluation_labelled_data = dataset_class(path_df='/u/dssc/mcarol00/evodenss-1d/evodenss/data/ds/BBP700/float_ds_sf_train.csv') #qui era val data ma casino
-            test_data = dataset_class(path_df='/u/dssc/mcarol00/evodenss-1d/evodenss/data/ds/BBP700/float_ds_sf_test.csv') #/home/marco/Desktop/units/evodenss-1d/evodenss/data/ds/BBP700/test_data.pt
+            train_labelled_data = dataset_class(path_df='/u/dssc/mcarol00/evodenss-1d/evodenss/data/ds/BBP700/float_ds_sf_train.csv',
+                                                targets_path='/u/dssc/mcarol00/evodenss-1d/evodenss/data/ds/BBP700/targets_train.pt')
+            evaluation_labelled_data = dataset_class(path_df='/u/dssc/mcarol00/evodenss-1d/evodenss/data/ds/BBP700/float_ds_sf_train.csv',
+                                                targets_path='/u/dssc/mcarol00/evodenss-1d/evodenss/data/ds/BBP700/targets_train.pt') #qui era val data ma casino
+            test_data = dataset_class(path_df='/u/dssc/mcarol00/evodenss-1d/evodenss/data/ds/BBP700/float_ds_sf_test.csv',
+                                      targets_path='/u/dssc/mcarol00/evodenss-1d/evodenss/data/ds/BBP700/targets_test.pt') #/home/marco/Desktop/units/evodenss-1d/evodenss/data/ds/BBP700/test_data.pt
         else:
             unlabelled_data = dataset_class(
                 root="data",

@@ -5,7 +5,7 @@ import torch
 from torch import nn, Tensor
 
 from evodenss.misc.constants import SEPARATOR_CHAR
-from evodenss.misc.enums import Device, LayerType
+from evodenss.misc.enums import Device, LayerType, FitnessMetricName
 from evodenss.misc.utils import InputLayerId, LayerId
 from evodenss.networks.dimensions import Dimensions
 from evodenss.config.pydantic import get_config
@@ -53,15 +53,16 @@ class EvolvedNetwork(nn.Module):
         for i in input_ids:
             if i == -1:
                 if layer_name == "punctual_mlp-1":
-                    input_tensor = x[0]
+                    input_tensor = x[0].unsqueeze(1)
                 elif layer_name == "punctual_mlp-2":
-                    input_tensor = x[1]
+                    input_tensor = x[1].unsqueeze(1)
                 elif layer_name == "punctual_mlp-3":
-                    input_tensor = x[2]
+                    input_tensor = x[2].unsqueeze(1)
                 elif layer_name == "punctual_mlp-4":
-                    input_tensor = x[3]
+                    input_tensor = x[3].unsqueeze(1)
                 else:
                     input_tensor = x[4]
+
                 #print("---------- (end) processing layer: ", layer_id, input_tensor.shape)
             else:
                 if (i, layer_id) in self.cache.keys():
@@ -69,19 +70,26 @@ class EvolvedNetwork(nn.Module):
                 else:
                     input_tensor = self._process_forward_pass(x, LayerId(i), self.layers_connections[LayerId(i)])
                     self.cache[(i, layer_id)] = input_tensor
-                #print("---------- processing layer: ", layer_id, "---", i, "---", input_tensor.shape)
-                #if layer_id==5:
-                #    print("here:", input_tensor.shape)
-                #    print("here:", self.__dict__['_modules'][layer_name])
+
             layer_inputs.append(input_tensor)
 
         del input_tensor
         self._clear_cache()
-        #print("length:", len(layer_inputs), input_ids, layer_id)
-        #print([x.shape for x in layer_inputs])
+        
         if len(layer_inputs) > 1:
-            if get_config().evolutionary.fitness.metric_name == "argo":
-                final_input_tensor = torch.stack(layer_inputs, dim=1)
+            if get_config().evolutionary.fitness.metric_name is FitnessMetricName.ARGO:
+                
+                #when working with ARGO, this happens only in the first layer, when it has 5 inputs:
+                #one from the data and 4 from punctual data mlp.
+                layer_inputs[1] = layer_inputs[1].unsqueeze(1)
+                layer_inputs[2] = layer_inputs[2].unsqueeze(1)
+                layer_inputs[3] = layer_inputs[3].unsqueeze(1)
+                layer_inputs[4] = layer_inputs[4].unsqueeze(1)
+
+                assert all(len(input.shape)==3 for input in layer_inputs), "All inputs should be (batch_size, n_channels, n_features)"
+
+                final_input_tensor = torch.cat(layer_inputs, dim=1)
+    
             else:
                 # we are using channels first representation, so channels is index 1
                 # ADRIANO: another hack to cope with the relu in resnet scenario
@@ -108,8 +116,14 @@ class EvolvedNetwork(nn.Module):
         return output_tensor
 
     def forward(self, x: Tensor) -> Tensor:
+        """
+        Forward pass of the network, it's a recursive function that traverses the network, layer by layer,
+        starting from the output layer and going backwards to the input layer. This way, you only compute
+        the necessary layers, avoiding unnecessary computations.
+        """
         input_layer_ids: list[InputLayerId]
         input_layer_ids = self.layers_connections[self.output_layer_id]
+        
         return self._process_forward_pass(x, self.output_layer_id, input_layer_ids)
 
 

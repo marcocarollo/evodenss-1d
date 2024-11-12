@@ -18,7 +18,7 @@ DATASETS_INFO: dict[str, dict[str, Any]] = {
         "classes": 100
     },
      "argo": {
-        "expected_input_dimensions": (3,200),
+        "expected_input_dimensions": (1,200),
     }
 
 }

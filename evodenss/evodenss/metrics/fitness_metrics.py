@@ -127,13 +127,23 @@ class ArgoFitnessMetric(FitnessMetric):
             loss_function = MyCustomLoss(get_config().network.learning.loss)
             n_batches_train: int = len(loaders_dict[DatasetType.EVO_TEST])
             with torch.no_grad():
-                for data in loaders_dict[DatasetType.EVO_TEST]:
-                    inputs, labels = data[0].to(device.value, non_blocking=True), \
-                        data[1].to(device.value, non_blocking=True)
+                for year, day_rad, lat, lon, temp, psal, doxy, target in loaders_dict[DatasetType.EVO_TEST]:
+                    year = year.to(device.value, non_blocking=True)
+                    day_rad = day_rad.to(device.value, non_blocking=True)
+                    lat = lat.to(device.value, non_blocking=True)
+                    lon = lon.to(device.value, non_blocking=True)
+                    temp = temp.to(device.value, non_blocking=True)
+                    psal = psal.to(device.value, non_blocking=True)
+                    doxy = doxy.to(device.value, non_blocking=True)
+                    target = target.to(device.value, non_blocking=True)
+
+                    data_conv = torch.stack([temp, psal, doxy], dim=1)
+                    inputs = tuple([year, day_rad, lat, lon, data_conv])
+                                
                     if self.representation_model is not None:
                         inputs = self.representation_model(inputs)
                     outputs = model(inputs)
-                    total_loss += loss_function(outputs, labels, model)
+                    total_loss += loss_function(outputs, target, model)
             total_loss /= n_batches_train
             return total_loss
 
@@ -177,7 +187,7 @@ class AccuracyMetric(FitnessMetric):
                 if self.representation_model is not None:
                     inputs = self.representation_model(inputs)
                 outputs = model(inputs)
-                print(f"outputs.shape: {outputs.shape}, labels.shape: {labels.shape}")
+            
                 _, predicted = torch.max(outputs.data, 1)
                 correct_guesses += (predicted == labels).float().sum().item()
                 size += len(labels)

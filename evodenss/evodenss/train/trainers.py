@@ -109,6 +109,7 @@ class Trainer:
                 total_loss = torch.zeros(size=(1,), device=self.device.value)
                 if get_config().network.learning.loss.type == "argo":
                     for i, (year, day_rad, lat, lon, temp, psal, doxy, target) in enumerate(self.train_data_loader, 0):
+
                         year, day_rad, lat, lon, temp, psal, doxy, target = year.to(self.device.value, non_blocking=True), \
                             day_rad.to(self.device.value, non_blocking=True), \
                             lat.to(self.device.value, non_blocking=True), \
@@ -124,7 +125,7 @@ class Trainer:
                         self.optimiser.zero_grad()
                         
                         outputs = self.model(inputs)
-                        loss = self.loss_function(outputs, target)
+                        loss = self.loss_function(outputs, target, self.model)
                         total_loss += loss/n_batches_train
                         loss.backward()
                         self.optimiser.step()
@@ -140,10 +141,7 @@ class Trainer:
                             inputs = self.representation_model(inputs)
                         
                         outputs = self.model(inputs)
-                        if isinstance(self.loss_function, MyCustomLoss):
-                            loss = self.loss_function(outputs, labels, self.model)
-                        else:
-                            loss = self.loss_function(outputs, labels)
+                        loss = self.loss_function(outputs, labels)
                         
                         total_loss += loss/n_batches_train
                         
@@ -159,20 +157,36 @@ class Trainer:
                     with torch.no_grad():
                         self.model.eval()
                         total_loss = torch.zeros(size=(1,), device=self.device.value)
-                        for i, data in enumerate(self.validation_data_loader, 0):
-                            inputs, labels = data[0].to(self.device.value, non_blocking=True), \
-                                data[1].to(self.device.value, non_blocking=True)
-                            if self.representation_model is not None:
-                                inputs = self.representation_model(inputs)
-                            outputs = self.model(inputs)
-                            if isinstance(self.loss_function, MyCustomLoss):
-                                loss = self.loss_function(outputs, labels, self.model)
-                            else:
+                        if get_config().network.learning.loss.type == "argo":
+                            for i, (year, day_rad, lat, lon, temp, psal, doxy, target) in enumerate(self.validation_data_loader, 0):
+                                
+                                year, day_rad, lat, lon, temp, psal, doxy, target = year.to(self.device.value, non_blocking=True), \
+                                    day_rad.to(self.device.value, non_blocking=True), \
+                                    lat.to(self.device.value, non_blocking=True), \
+                                    lon.to(self.device.value, non_blocking=True), \
+                                    temp.to(self.device.value, non_blocking=True), \
+                                    psal.to(self.device.value, non_blocking=True), \
+                                    doxy.to(self.device.value, non_blocking=True), \
+                                    target.to(self.device.value, non_blocking=True)
+                                data_conv = torch.stack([temp, psal, doxy], dim=1)
+                                inputs = tuple([year, day_rad, lat, lon, data_conv])
+                                outputs = self.model(inputs)
+                                loss = self.loss_function(outputs, target, self.model)
+                                total_loss += loss/n_batches_validation
+                            self.loss_values["val_loss"].append(round(float(total_loss.data), 3))
+                            self.validation_loss.append(float(total_loss.data))
+                        else:    
+                            for i, data in enumerate(self.validation_data_loader, 0):
+                                inputs, labels = data[0].to(self.device.value, non_blocking=True), \
+                                    data[1].to(self.device.value, non_blocking=True)
+                                if self.representation_model is not None:
+                                    inputs = self.representation_model(inputs)
+                                outputs = self.model(inputs)
                                 loss = self.loss_function(outputs, labels)
-                            total_loss += loss/n_batches_validation
-                            #total_loss += self.loss_function(outputs, labels)/n_batches_validation
-                        self.loss_values["val_loss"].append(round(float(total_loss.data), 3))
-                        self.validation_loss.append(float(total_loss.data)) # Used for early stopping criteria
+                                total_loss += loss/n_batches_validation
+                                #total_loss += self.loss_function(outputs, labels)/n_batches_validation
+                            self.loss_values["val_loss"].append(round(float(total_loss.data), 3))
+                            self.validation_loss.append(float(total_loss.data)) # Used for early stopping criteria
                     self.model.train()
                     end = time.time() # noqa: F841
                     #logger.info(f"[{round(end-start, 2)}s] VALIDATION epoch {epoch} -- loss: {total_loss}")

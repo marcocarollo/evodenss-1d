@@ -3,11 +3,11 @@ import logging
 import random
 from typing import cast, TYPE_CHECKING, Any, Optional
 
-from evodenss.config.pydantic import MutationConfig
+from evodenss.config.pydantic import MutationConfig, get_config 
 from evodenss.evolution.grammar import Derivation, Genotype, Grammar, NonTerminal, Terminal
 from evodenss.evolution.individual import Individual
 from evodenss.evolution.operators.mutation_tracker import enable_tracking
-from evodenss.misc.enums import MutationType
+from evodenss.misc.enums import MutationType,FitnessMetricName
 from evodenss.misc.utils import InputLayerId, LayerId
 from evodenss.networks.module import Module
 
@@ -36,11 +36,22 @@ def mutation_add_layer(individual: Individual,
     
     is_reused: bool = False
     if random.random() <= reuse_layer_prob and len(module.layers) > 0:
+        #togliere i layers mlp in modo che non possano essere riusati
+        
         new_layer = random.choice(module.layers)
+        while NonTerminal(name='punctual_mlp') in new_layer.expansions.keys():
+            
+            new_layer = random.choice(module.layers)
+        #riaggiungere i layer mlp in modo che ritornino nei layer
         is_reused = True
     else:
         new_layer = grammar.initialise(module.module_name, **attributes_to_override)
-    insert_pos: LayerId = LayerId(random.randint(0, len(module.layers)))
+    current_metric = get_config().evolutionary.fitness.metric_name 
+    if current_metric == FitnessMetricName.ARGO:
+        insert_pos = LayerId(4)#LayerId(random.randint(4, len(module.layers)))
+    else:
+        insert_pos = LayerId(random.randint(0, len(module.layers)))
+
 
     #fix connections (old)
     #for _key_ in sorted(module.connections, reverse=True):
@@ -54,13 +65,22 @@ def mutation_add_layer(individual: Individual,
     # fix connections
     for _key_ in sorted(module.connections, reverse=True):
         if _key_ >= insert_pos:
-            module.connections[LayerId(_key_)] = [InputLayerId(value + 1) for value in module.connections[_key_]]
-            module.connections[LayerId(_key_+1)] = module.connections.pop(_key_)
+            if _key_ == 4:
+                module.connections[LayerId(_key_+1)] = [InputLayerId(4)] #only this is necessary, then the rest is done by the if insert_pos == 4
+            else:
+                module.connections[LayerId(_key_)] = [InputLayerId(value + 1) for value in module.connections[_key_]]
+                module.connections[LayerId(_key_+1)] = module.connections.pop(_key_)
+            
     module.layers.insert(insert_pos, new_layer)
         
     #make connections of the new layer
+    if current_metric == FitnessMetricName.ARGO:
+        if insert_pos == 4:
+            module.connections[insert_pos] = [InputLayerId(-1), InputLayerId(0), InputLayerId(1), InputLayerId(2), InputLayerId(3)]
     if insert_pos == 0:
         module.connections[insert_pos] = [InputLayerId(-1)]
+    elif insert_pos == 4:
+        pass
     else:
         levels_back: int
         if module.module_configuration.levels_back is None:
@@ -95,7 +115,8 @@ def mutation_remove_layer(individual: Individual,
     if len(module.layers) <= module.module_configuration.network_structure.min_expansions:
         return None
     
-    remove_idx = LayerId(random.randint(0, len(module.layers)-1))
+    remove_idx = LayerId(random.randint(4, 4))#len(module.layers)-1))
+    
     track_mutation_data: dict[str, Any] = {
         "individual": individual,
         "generation": generation,
@@ -122,6 +143,8 @@ def mutation_remove_layer(individual: Individual,
                 module.connections[LayerId(_key_-1)] = list(set(module.connections.pop(_key_)))
         if remove_idx == 0:
             module.connections[LayerId(0)] = [InputLayerId(-1)]
+        elif remove_idx == 4:
+            module.connections[LayerId(4)] = [InputLayerId(-1), InputLayerId(0), InputLayerId(1), InputLayerId(2), InputLayerId(3)]
     
     return track_mutation_data
 
@@ -339,11 +362,12 @@ def mutate(individual: Individual,
             if should_mutate(mutation_rates.add_layer) is True:
                 mutation_add_layer(individual_copy, m_idx, grammar, mutation_rates.reuse_layer, generation)
         for layer_idx in range(len(module.layers)):
-            if should_mutate(mutation_rates.dsge_topological) is True:
+            forbidden_mutation = [0,1,2,3]
+            if should_mutate(mutation_rates.dsge_topological) is True and layer_idx not in forbidden_mutation:
                 mutation_dsge_topological(individual_copy, m_idx, LayerId(layer_idx), grammar, generation)
-            if should_mutate(mutation_rates.add_connection) is True:
+            if should_mutate(mutation_rates.add_connection) is True and layer_idx not in forbidden_mutation:
                 mutation_add_connection(individual_copy, m_idx, LayerId(layer_idx), generation)
-            if should_mutate(mutation_rates.remove_connection) is True:
+            if should_mutate(mutation_rates.remove_connection) is True and layer_idx not in forbidden_mutation:
                 mutation_remove_connection(individual_copy, m_idx, LayerId(layer_idx), generation)
 
     ind_genotype: IndividualGenotype = individual_copy.individual_genotype
