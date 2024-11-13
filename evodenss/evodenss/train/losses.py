@@ -84,13 +84,15 @@ class MyCustomLoss(nn.Module):
         l2_norm = sum(p.pow(2.0).sum() for p in model.parameters()) 
         l2_reg = self.lambda_l2_reg * l2_norm 
 
-        smoothness = 0
-        for index in range(input.shape[0]):
-            
-            batch_tens = input[index, 0, :]
-            batch_tens_smoothness = sum(torch.abs(batch_tens[i] - batch_tens[i - 1]) for i in range(1, batch_tens.shape[0]))
-            smoothness += batch_tens_smoothness
-
+        #smoothness = 0
+        #for index in range(input.shape[0]):
+        #    
+        #    batch_tens = input[index, 0, :]
+        #    batch_tens_smoothness = sum(torch.abs(batch_tens[i] - batch_tens[i - 1]) for i in range(1, batch_tens.shape[0]))
+        #    smoothness += batch_tens_smoothness
+        diffs = torch.abs(input[:, 0, 1:] - input[:, 0, :-1])
+        smoothness = diffs.sum()
+        
         smoothness = self.alpha_smooth_reg * smoothness 
         return mse + l2_reg + smoothness + peak_difference
 
