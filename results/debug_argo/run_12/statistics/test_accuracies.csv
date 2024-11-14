@@ -1,0 +1,13 @@
+generation	test_accuracy
+0	tensor([0.2374], device='cuda:0')
+1	tensor([0.2346], device='cuda:0')
+2	tensor([0.2463], device='cuda:0')
+3	tensor([0.2427], device='cuda:0')
+4	tensor([0.2663], device='cuda:0')
+5	tensor([0.2530], device='cuda:0')
+6	tensor([0.2846], device='cuda:0')
+7	tensor([0.3166], device='cuda:0')
+8	tensor([0.2565], device='cuda:0')
+9	tensor([0.2704], device='cuda:0')
+10	tensor([0.2709], device='cuda:0')
+11	tensor([0.4433], device='cuda:0')
