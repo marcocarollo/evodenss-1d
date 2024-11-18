@@ -1,17 +1,17 @@
-checkpoints_path: ../results/debug_argo
+checkpoints_path: ../results/actual_runs
 
 evolutionary:
-  generations: 10
-  lambda: 2
-  max_epochs: 100
+  generations: 20
+  lambda: 3
+  max_epochs: 10000
   mutation:
     add_connection: 0.0
     remove_connection: 0.0
-    add_layer: 0.3
+    add_layer: 0.5
     reuse_layer: 0.15
-    remove_layer: 0.3
-    dsge_topological: 0.15
-    dsge_non_topological: 0.3
+    remove_layer: 0.5
+    dsge_topological: 1
+    dsge_non_topological: 1
     train_longer: 0.03
   fitness:
     metric_name: "argo"
@@ -26,10 +26,10 @@ network:
       - name: features
         network_structure_init:
           min_expansions: 2
-          max_expansions: 3
+          max_expansions: 20
         network_structure:
           min_expansions: 2
-          max_expansions: 15
+          max_expansions: 20
         levels_back: 1
     extra_components:
       - learning
