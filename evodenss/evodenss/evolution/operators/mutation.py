@@ -48,7 +48,7 @@ def mutation_add_layer(individual: Individual,
         new_layer = grammar.initialise(module.module_name, **attributes_to_override)
     current_metric = get_config().evolutionary.fitness.metric_name 
     if current_metric == FitnessMetricName.ARGO:
-        insert_pos = LayerId(4)#LayerId(random.randint(4, len(module.layers)))
+        insert_pos = LayerId(random.randint(4, len(module.layers)))
     else:
         insert_pos = LayerId(random.randint(0, len(module.layers)))
 
@@ -115,7 +115,7 @@ def mutation_remove_layer(individual: Individual,
     if len(module.layers) <= module.module_configuration.network_structure.min_expansions:
         return None
     
-    remove_idx = LayerId(random.randint(4, 4))#len(module.layers)-1))
+    remove_idx = LayerId(random.randint(4, len(module.layers)-1))
     
     track_mutation_data: dict[str, Any] = {
         "individual": individual,

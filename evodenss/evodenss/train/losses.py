@@ -96,3 +96,19 @@ class MyCustomLoss(nn.Module):
         smoothness = self.alpha_smooth_reg * smoothness 
         return mse + l2_reg + smoothness + peak_difference
 
+class MyCustomMSE(nn.Module):
+    def __init__(self, hyperparameters_config):
+        super(MyCustomMSE, self).__init__()  # Initialize nn.Module properly
+        # You can define additional custom attributes here, if needed
+        self.attention_max = hyperparameters_config.attention_max
+        self.lambda_l2_reg = hyperparameters_config.lambda_l2_reg
+        self.alpha_smooth_reg = hyperparameters_config.alpha_smooth_reg
+        
+    def forward(self, input, target, model):
+        input = input.unsqueeze(1)
+        target = target.unsqueeze(1)
+
+        mse = mse_loss(input, target)
+
+        return mse 
+

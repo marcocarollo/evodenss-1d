@@ -6,6 +6,7 @@ import logging
 import random
 import time
 from typing import Any, Optional, TYPE_CHECKING
+from torch.multiprocessing import Process
 
 import numpy as np
 import torch
@@ -22,7 +23,7 @@ from evodenss.misc.persistence import RestoreCheckpoint, build_overall_best_path
 from evodenss.misc.utils import ConfigPairAction, is_valid_file, is_yaml_file
 from evodenss.dataset.dataset_loader import DatasetProcessor, create_dataset_processor
 from evodenss.networks.evaluators import BaseEvaluator
-from evodenss.train.losses import MyCustomLoss
+from evodenss.train.losses import MyCustomLoss, MyCustomMSE
 
 if TYPE_CHECKING:
     from evodenss.dataset.dataset_loader import DatasetType
@@ -51,7 +52,8 @@ def create_initial_checkpoint(dataset_name: str, run: int, is_gpu_run: bool) -> 
     if loss == "cross_entropy":
         loss_function: nn.Module = torch.nn.CrossEntropyLoss()
     elif loss == "argo":
-        loss_function: nn.Module = MyCustomLoss(config.network.learning.loss) 
+        #loss_function: nn.Module = MyCustomLoss(config.network.learning.loss) 
+        loss_function: nn.Module = MyCustomMSE(config.network.learning.loss)
 
     evaluator = BaseEvaluator.create_evaluator(dataset_name, loss_function, is_gpu_run)
 
@@ -123,6 +125,13 @@ def main(run: int,
     for partition, subset in dataset.items():
         logger.info(f"{partition} size -- {len(subset.indices)}")
     logger.info(f"Starting evolution for run {run}")
+
+    if torch.cuda.device_count() > 1 and is_gpu_run:
+        logger.info(f"Using {torch.cuda.device_count()} GPUs")
+        devices = [f"cuda:{i}" for i in range(torch.cuda.device_count())]
+        processes = []
+        
+        
     
     for gen in range(checkpoint.last_processed_generation + 1, total_generations):
         # check the total number of epochs (stop criteria)

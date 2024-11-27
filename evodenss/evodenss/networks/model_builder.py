@@ -92,6 +92,8 @@ class ModelBuilder():
                                    weight_decay_filter=True,
                                    lars_adaptation_filter=True,
                                    **optimiser.optimiser_parameters)
+        elif optimiser.optimiser_type == OptimiserType.ADADELTA:
+            torch_optimiser = optim.Adadelta(params=model_parameters, **optimiser.optimiser_parameters)
         else:
             raise ValueError(f"Invalid optimiser name found: {optimiser.optimiser_type}")
         return LearningParams(
@@ -137,7 +139,10 @@ class ModelBuilder():
                     layer_to_add = self._create_torch_layer(extra_layer, extra_layer_name)
                     collected_extra_torch_layers.append((extra_layer_name, layer_to_add))
                 layer_to_add = self._create_torch_layer(l, layer_name)
-                torch_layers.append((layer_name, layer_to_add))
+                if layer_to_add is None:
+                    continue
+                else:
+                    torch_layers.append((layer_name, layer_to_add))
             if evaluation_type is LegacyEvaluator:
                 assert self.parsed_projector_network is None
                 return LegacyNetwork(torch_layers + collected_extra_torch_layers,
@@ -289,6 +294,10 @@ class ModelBuilder():
         else:
             # in this case all inputs will have the same dimensions, just take the first one...
             expected_input_dimensions = first_input
+        
+        if expected_input_dimensions.length <= 0:
+            logging.warning(f"Bro be careful with your parameters, layer {layer_name} has an input with length <= 0")
+            return None
 
         if is_projector_network is False:
             self.layer_shapes[InputLayerId(layer.layer_id)] = \

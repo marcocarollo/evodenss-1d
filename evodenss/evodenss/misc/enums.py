@@ -55,6 +55,7 @@ class OptimiserType(str, Enum):
     GRADIENT_DESCENT = "gradient_descent"
     ADAM = "adam"
     LARS = "lars"
+    ADADELTA = "adadelta"
 
 
 @unique
