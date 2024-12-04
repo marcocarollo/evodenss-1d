@@ -2,6 +2,7 @@ from copy import deepcopy
 import logging
 import random
 from typing import TYPE_CHECKING
+import torch.multiprocessing as mp
 
 import numpy as np
 import torch
@@ -12,7 +13,7 @@ from evodenss.evolution.grammar import Grammar
 from evodenss.evolution.individual import Individual
 from evodenss.misc import persistence
 from evodenss.misc.checkpoint import Checkpoint
-from evodenss.misc.enums import DownstreamMode, FitnessMetricName, OptimiserType
+from evodenss.misc.enums import DownstreamMode, FitnessMetricName, OptimiserType, Device
 
 if TYPE_CHECKING:
     from evodenss.metrics.fitness_metrics import Fitness
@@ -89,23 +90,44 @@ def evolve(run: int,
         logger.info("mutation has been performed")
         # set elite variables to re-evaluation
         population[0].reset_keys('id', 'current_time', 'num_epochs', 'metrics')
-
-        # evaluate population
-        for idx, ind in enumerate(population):
-            population_fits.append(
-                ind.evaluate(
-                    grammar,
-                    dataset,
-                    checkpoint.evaluator,
-                    get_config().network.architecture.projector,
-                    persistence.build_individual_path(get_config().checkpoints_path, run, generation, idx),
-                    persistence.build_individual_path(get_config().checkpoints_path,
-                                                      run,
-                                                      generation-1,
-                                                      checkpoint.parent.id)
+        
+        #multiprocessing
+        num_gpus = torch.cuda.device_count()
+        if num_gpus == 0:
+            # evaluate population
+            for idx, ind in enumerate(population):
+                population_fits.append(
+                    ind.evaluate(
+                        grammar,
+                        dataset,
+                        checkpoint.evaluator,
+                        get_config().network.architecture.projector,
+                        persistence.build_individual_path(get_config().checkpoints_path, run, generation, idx),
+                        persistence.build_individual_path(get_config().checkpoints_path, run, generation-1, checkpoint.parent.id)
+                    )
                 )
-            )
-            logger.info(f"Individual {idx} fitness: {population_fits[-1]}")
+                logger.info(f"Individual {idx} fitness: {population_fits[-1]}")
+        else:
+#            mp.set_start_method("spawn")
+            task_queue = mp.Queue()
+            results_queue = mp.Queue()
+            for individual in population:
+                task_queue.put(individual)
+
+            processes = []
+            for gpu_id in range(num_gpus):
+                p = mp.Process(target=queue_handler, args= (task_queue,
+                                                            results_queue,
+                                                            grammar,
+                                                            dataset,
+                                                            checkpoint.evaluator,
+                                                            get_config().network.architecture.projector,
+                                                            persistence.build_individual_path(get_config().checkpoints_path, run, generation, idx),
+                                                            persistence.build_individual_path(get_config().checkpoints_path, run, generation-1, checkpoint.parent.id)))
+                processes.append(p)
+                p.start()
+
+        
 
     logger.info("Selecting the fittest individual")
     selection_method: str = 'fittest'
@@ -189,3 +211,26 @@ def evolve(run: int,
         parent=parent,
         best_gen_ind_test_accuracy=best_test_acc
     )
+
+
+def queue_handler(task_queue: mp.Queue, results_queue: mp.Queue, grammar: Grammar, dataset: dict['DatasetType', 'Subset'], evaluator, projector, individual_path, parent_path):
+    """
+    Handler for the multiprocessing queue
+    """
+    if torch.cuda.current_device() == 0:
+        device = Device.GPU
+    else:
+        device = Device.GPU1
+
+    while not task_queue.empty():
+        individual = task_queue.get()
+        individual.evaluate(
+            grammar,
+            dataset,
+            evaluator,
+            projector,
+            individual_path,
+            parent_path,
+            device
+        )
+        results_queue.put(individual)

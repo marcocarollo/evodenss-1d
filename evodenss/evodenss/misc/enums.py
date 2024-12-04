@@ -30,6 +30,7 @@ class Entity(ExtendedEnum):
 class Device(Enum):
     CPU = "cpu"
     GPU = "mps" if torch.backends.mps.is_available() else "cuda:0"
+    GPU1 = "cuda:1"
 
 
 @unique

@@ -7,6 +7,7 @@ import random
 import time
 from typing import Any, Optional, TYPE_CHECKING
 from torch.multiprocessing import Process
+import torch.multiprocessing as mp
 
 import numpy as np
 import torch
@@ -128,9 +129,6 @@ def main(run: int,
 
     if torch.cuda.device_count() > 1 and is_gpu_run:
         logger.info(f"Using {torch.cuda.device_count()} GPUs")
-        devices = [f"cuda:{i}" for i in range(torch.cuda.device_count())]
-        processes = []
-        
         
     
     for gen in range(checkpoint.last_processed_generation + 1, total_generations):
@@ -197,6 +195,7 @@ if __name__ == '__main__':
     parser.add_argument("--gpu-enabled", required=False, help="Runs the experiment in the GPU",
                         action='store_true')
     args: Any = parser.parse_args()
+    mp.set_start_method("spawn")
 
     start = time.time()
     torch.backends.cudnn.benchmark = True

@@ -81,8 +81,8 @@ class BaseEvaluator(ABC):
 
     @staticmethod
     def _adapt_model_to_device(torch_model: nn.Module, device: Device) -> None:
-        if device == Device.GPU and torch.cuda.device_count() > 1:
-            torch_model = nn.DataParallel(torch_model)
+        #if device == Device.GPU and torch.cuda.device_count() > 1:
+        #    torch_model = nn.DataParallel(torch_model)
             
         
         torch_model.to(device.value, non_blocking=True)
@@ -270,11 +270,13 @@ class LegacyEvaluator(BaseEvaluator):
                  parent_dir: Optional[str],
                  reuse_parent_weights: bool,
                  train_time: float,
-                 num_epochs: int) -> EvaluationMetrics:
+                 num_epochs: int,
+                 device: Optional[Device]=None) -> EvaluationMetrics:
         from evodenss.networks.model_builder import ModelBuilder
 
         optimiser: Optimiser
-        device: Device = self._decide_device()
+        if device is None:
+            device: Device = self._decide_device()
         fitness_value: Fitness
         start = time()
 

@@ -73,3 +73,21 @@ tu fissi il lambda)
 fixare in mutation line 80 la logica degli if
 
 cambiare la training loss: metterla diversa dalla fitness function
+
+vedere perché va avanti anche se supera il numero massimo di layer
+
+scoprire perché fa core dumped ogni tanto
+
+scoprire perché ogni tanto (oltre 22 layer) fa casino la fitness metric
+
+capire cosa c fa dsge mutation
+
+cosa scrivere di tesi
+come si fa con leonardo
+velocizzato *un botto* il training
+cosa aggiungere
+
+in engine evolve metti che per ogni individuo devi passargli il device, questo viene passato all'evaluator che a 
+sua volta lo passerà al trainer. unica cosa bisogna fare le non blocking chiamate di training degli individui, 
+queste vanno fatte sempre nell'engine evolve, in un ciclo for. poi bsognerà togliere anche quella roba di torch 
+che distribuisce i dati in parallelo.

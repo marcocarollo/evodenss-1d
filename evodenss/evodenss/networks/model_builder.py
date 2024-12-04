@@ -296,7 +296,7 @@ class ModelBuilder():
             expected_input_dimensions = first_input
         
         if expected_input_dimensions.length <= 0:
-            logging.warning(f"Bro be careful with your parameters, layer {layer_name} has an input with length <= 0")
+            logger.info(f"Bro be careful with your parameters, layer {layer_name} has an input with length <= 0")
             return None
 
         if is_projector_network is False:

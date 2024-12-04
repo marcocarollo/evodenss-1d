@@ -8,6 +8,7 @@ import numpy as np
 from evodenss.metrics.evaluation_metrics import EvaluationMetrics
 from evodenss.misc.utils import InputLayerId, LayerId
 from evodenss.evolution.genotype import IndividualGenotype
+from evodenss.misc.enums import Device
 
 
 if TYPE_CHECKING:
@@ -129,7 +130,8 @@ class Individual:
                  cnn_eval: BaseEvaluator,
                  static_projector_config: Optional[list[int]],
                  model_saving_dir: str,
-                 parent_dir: Optional[str]=None) -> Fitness: #pragma: no cover
+                 parent_dir: Optional[str]=None,
+                 device: Optional[Device]=None) -> Fitness: #pragma: no cover
 
         phenotype: str
         phenotype = self._decode(grammar, static_projector_config)
@@ -147,7 +149,8 @@ class Individual:
                                                                   parent_dir,
                                                                   reuse_parent_weights,
                                                                   allocated_train_time,
-                                                                  self.num_epochs)
+                                                                  self.num_epochs,
+                                                                  device)
         if self.metrics is None:
             self.metrics = evaluation_metrics
         else:

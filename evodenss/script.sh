@@ -12,7 +12,7 @@ python -m evodenss.main \
     -d "$dataset_name" \
     -c "$config_path" \
     -g "$grammar_path" \
-    -r 24 \
+    -r 16\
     --gpu-enabled
 
     
