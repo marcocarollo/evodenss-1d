@@ -127,8 +127,13 @@ class Trainer:
                         outputs = self.model(inputs)
                         loss = self.loss_function(outputs, target, self.model)
                         total_loss += loss/n_batches_train
+                       #S print(total_loss)
                         loss.backward()
                         self.optimiser.step()
+                        #logger.info(f"we are inside the trainer, and the loss being used is {self.loss_function}")
+                        #for name, param in self.model.named_parameters():
+                        #    print(f"{name}: requires_grad = {param.requires_grad}")
+
                 else:
                     for i, data in enumerate(self.train_data_loader, 0):
                         inputs, labels = data[0].to(self.device.value, non_blocking=True), \
@@ -148,7 +153,8 @@ class Trainer:
                         loss.backward()
                         self.optimiser.step()
                 end = time.time() # noqa: F841
-                logger.info(f"[{round(end-start, 2)}s] TRAIN epoch {epoch} -- loss: {total_loss}")
+                if (epoch+1) % 5 == 0:
+                    logger.info(f"[{round(end-start, 2)}s] TRAIN epoch {epoch} -- loss: {total_loss}")
                 self.loss_values["train_loss"].append(round(float(total_loss.data), 3))
                 logger.debug(f"Loss: {round(float(total_loss.data), 3)}")
                 logger.debug("=============================================================")

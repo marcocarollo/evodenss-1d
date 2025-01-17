@@ -74,7 +74,7 @@ class IndividualGenotype:
             module_config.name: Module(module_config, grammar, network_architecture_config.reuse_layer)
             for module_config in network_architecture_config.modules
         })
-        print(self.modules_dict.values())
+        #print(self.modules_dict.values())
         # Final layer
         self.output_layer_start_symbol_name: str = network_architecture_config.output
         self.output_layer: Genotype = grammar.initialise(self.output_layer_start_symbol_name)

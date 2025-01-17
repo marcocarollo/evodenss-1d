@@ -19,9 +19,12 @@ from evodenss.train.learning_parameters import LearningParams
 from evodenss.train.trainers import Trainer
 from evodenss.train.losses import MyCustomLoss
 from evodenss.config.pydantic import get_config
+import logging
 
 if TYPE_CHECKING:
     from torch.utils.data import DataLoader, Subset
+
+logger = logging.getLogger(__name__)
 
 
 class Fitness:
@@ -144,7 +147,9 @@ class ArgoFitnessMetric(FitnessMetric):
                         inputs = self.representation_model(inputs)
                     outputs = model(inputs)
                     total_loss += loss_function(outputs, target, model)
+                    
             total_loss /= n_batches_train
+            
             return total_loss
 
         @classmethod

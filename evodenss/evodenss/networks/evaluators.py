@@ -280,7 +280,7 @@ class LegacyEvaluator(BaseEvaluator):
 
         os.makedirs(model_saving_dir, exist_ok=True)
 
-        logger.info("\n".join([f"layer{idx}: {layer}" for idx, layer in enumerate(phenotype.split("layer"))]))
+        logger.info("\n".join([f"layer{idx-1}: {layer}" for idx, layer in enumerate(phenotype.split("layer"))]))
         parsed_network, _, optimiser, _ = parse_phenotype(phenotype)
         dataset_input_size: Size = \
             Size(list(DATASETS_INFO[self.dataset_name]["expected_input_dimensions"]))
@@ -319,6 +319,7 @@ class LegacyEvaluator(BaseEvaluator):
             metadata_info: MetadataInfo = \
                 MetadataInfo.new_instance(self.dataset_name, dataset, optimiser, learning_params, None)
             start_epoch: int = num_epochs if restart_train is False else 0
+            logger.info(f"this is the loss function: {self.loss_function}, that has been passed to the trainer")
             trainer = Trainer(model=torch_model,
                               optimiser=learning_params.torch_optimiser,
                               loss_function=self.loss_function,
@@ -333,7 +334,7 @@ class LegacyEvaluator(BaseEvaluator):
                                                               learning_params.early_stop),
                               representation_model=self.representation_model)
             trainer.train()
-            print(f"evolutionary fitness metric name: {get_config().evolutionary.fitness.metric_name}")
+            logger.info(f"evolutionary fitness metric name: {get_config().evolutionary.fitness.metric_name}")
             fitness_metric = FitnessMetric.create_fitness_metric(
                 get_config().evolutionary.fitness.metric_name,
                 dataset_name=self.dataset_name,

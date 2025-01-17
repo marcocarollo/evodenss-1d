@@ -28,7 +28,7 @@ class Module:
 
         config = get_config()
         if config.evolutionary.fitness.metric_name is FitnessMetricName.ARGO and self.module_name == "features" and config.evolutionary.used is False:
-            print("GIUSTO")
+            #print("GIUSTO")
             self.connections: dict[LayerId, list[InputLayerId]] = \
             {
 

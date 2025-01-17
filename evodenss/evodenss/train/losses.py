@@ -4,7 +4,10 @@ import torch.nn.functional as F
 from torch.optim import Adadelta
 from torch.nn.functional import mse_loss
 import numpy as np
+import logging
+import inspect
 
+logger = logging.getLogger(__name__)
 
 class BarlowTwinsLoss(nn.Module):
 
@@ -73,16 +76,22 @@ class MyCustomLoss(nn.Module):
         self.alpha_smooth_reg = hyperparameters_config.alpha_smooth_reg
         
     def forward(self, input, target, model):
+        #print(f"This function was called by: {inspect.stack()}")
         input = input.unsqueeze(1)
         target = target.unsqueeze(1)
 
-        mse = mse_loss(input, target)
+        #mse = mse_loss(input, target)
+        mae = nn.L1Loss(reduction='sum')
+        mse = mae(input, target)
+        #print(f"mae: {mse}")
+
         max_training_output = torch.max(input)
         max_output = torch.max(target)
         peak_difference = self.attention_max * torch.abs(max_training_output - max_output)
 
-        l2_norm = sum(p.pow(2.0).sum() for p in model.parameters()) 
+        l2_norm = sum(p.pow(2.0).sum() for p in model.parameters())
         l2_reg = self.lambda_l2_reg * l2_norm 
+
 
         #smoothness = 0
         #for index in range(input.shape[0]):
@@ -94,7 +103,16 @@ class MyCustomLoss(nn.Module):
         smoothness = diffs.sum()
         
         smoothness = self.alpha_smooth_reg * smoothness 
-        return mse + l2_reg + smoothness + peak_difference
+        total = mse + l2_reg + smoothness + peak_difference
+
+        #let's print the loss and the components, as percentages
+        logger.info(f"FITNESS LOSS: mse: {mse}")
+        logger.info(f"FITNESS LOSS: l2_reg: {l2_reg}")
+        logger.info(f"FITNESS LOSS: smoothness: {smoothness}")
+        logger.info(f"FITNESS LOSS: peak_difference: {peak_difference}")
+        logger.info(f"FITNESS LOSS: total: {total}")
+        logger.info(f"FITNESS LOSS: percentage mse: {mse/total}, percentage l2_reg: {l2_reg/total}, percentage smoothness: {smoothness/total}")
+        return total
 
 class MyCustomMSE(nn.Module):
     def __init__(self, hyperparameters_config):
@@ -107,8 +125,10 @@ class MyCustomMSE(nn.Module):
     def forward(self, input, target, model):
         input = input.unsqueeze(1)
         target = target.unsqueeze(1)
-
-        mse = mse_loss(input, target)
+        mae = nn.L1Loss(reduction='sum')
+        mse = mae(input, target)
+        
+        print(f"MSE LOSS: mse: {mse}")
 
         return mse 
 
