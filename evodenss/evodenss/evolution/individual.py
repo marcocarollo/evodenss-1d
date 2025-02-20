@@ -35,7 +35,7 @@ class Individual:
 
         self.id: int = ind_id
         self.phenotype: Optional[str] = None
-        self.phenotype_projector: Optional[str] = None
+        self.phenotype_ojector: Optional[str] = None
         self.fitness: Optional[Fitness] = None
         self.metrics: Optional[EvaluationMetrics] = None
         self.num_epochs: int = 0
@@ -156,7 +156,7 @@ class Individual:
         self.num_epochs += self.metrics.n_epochs
         self.current_time += allocated_train_time
         self.total_training_time_spent += self.metrics.training_time_spent
-        logger.info(f"Evaluation results for individual {self.id}: {self.metrics}\n")
+        #logger.info(f"Evaluation results for individual {self.id}: {self.metrics}\n")
 
         assert self.fitness is not None
         return self.fitness

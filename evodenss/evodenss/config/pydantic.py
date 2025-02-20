@@ -250,7 +250,7 @@ class LearningConfig(BaseModel):
     @field_validator('learning_type', mode='after')
     @classmethod
     def add_context(cls, v: LearningType, info: ValidationInfo) -> LearningType:
-        print("context ", info.context)
+        #print("context ", info.context)
         if info.context is not None:
             info.context.update({'learning_type': v})
         return v

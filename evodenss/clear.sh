@@ -1,1 +1,1 @@
-rm ../results/debug_argo/used_*
+rm ../results/mse_runs/used_*
