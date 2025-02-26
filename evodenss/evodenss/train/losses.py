@@ -103,15 +103,24 @@ class MyCustomLoss(nn.Module):
         smoothness = diffs.sum()
         
         smoothness = self.alpha_smooth_reg * smoothness 
-        total = mse + l2_reg + smoothness + peak_difference
+
+        baseline = 412049 #this is the number of parameters of the current ppcon model
+        num_params = sum(p.numel() for p in model.parameters())
+
+        lambda_penalty = 10
+        parameters_penalty = lambda_penalty * (num_params / baseline - 1)
+
+        total = mse + l2_reg + smoothness + peak_difference + parameters_penalty
 
         #let's print the loss and the components, as percentages
-        logger.info(f"FITNESS LOSS: mse: {mse}")
-        logger.info(f"FITNESS LOSS: l2_reg: {l2_reg}")
-        logger.info(f"FITNESS LOSS: smoothness: {smoothness}")
-        logger.info(f"FITNESS LOSS: peak_difference: {peak_difference}")
-        logger.info(f"FITNESS LOSS: total: {total}")
-        logger.info(f"FITNESS LOSS: percentage mse: {mse/total}, percentage l2_reg: {l2_reg/total}, percentage smoothness: {smoothness/total}")
+        #logger.info(f"FITNESS LOSS: mse: {mse}")
+        #logger.info(f"FITNESS LOSS: l2_reg: {l2_reg}")
+        #logger.info(f"FITNESS LOSS: smoothness: {smoothness}")
+        #logger.info(f"FITNESS LOSS: peak_difference: {peak_difference}")
+        #logger.info(f"FITNESS LOSS: parameters_penalty: {parameters_penalty}")
+        #logger.info(f"FITNESS LOSS: total: {total}")
+        #logger.info(f"FITNESS LOSS: percentage mse: {mse/total}, percentage l2_reg: {l2_reg/total}, percentage smoothness: {smoothness/total}, percentage peak_difference: {peak_difference/total}, percentage parameters_penalty: {parameters_penalty/total}")
+        
         return total
 
 class MyCustomMSE(nn.Module):
@@ -127,8 +136,6 @@ class MyCustomMSE(nn.Module):
         target = target.unsqueeze(1)
         mae = nn.L1Loss(reduction='sum')
         mse = mae(input, target)
-        
-        print(f"MSE LOSS: mse: {mse}")
 
         return mse 
 

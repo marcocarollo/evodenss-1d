@@ -18,10 +18,10 @@ from evodenss.evolution import engine
 from evodenss.evolution.grammar import Grammar
 from evodenss.misc.checkpoint import Checkpoint
 from evodenss.misc.constants import DATASETS_INFO, DEFAULT_SEED, STATS_FOLDER_NAME, START_FROM_SCRATCH
-from evodenss.misc.enums import DownstreamMode, FitnessMetricName, OptimiserType
+from evodenss.misc.enums import DownstreamMode, FitnessMetricName, OptimiserType, Device
 from evodenss.misc.persistence import RestoreCheckpoint, build_overall_best_path
-from evodenss.misc.utils import ConfigPairAction, is_valid_file, is_yaml_file
-from evodenss.dataset.dataset_loader import DatasetProcessor, create_dataset_processor
+from evodenss.misc.utils import ConfigPairAction, is_valid_file, is_yaml_file, plot_profiles
+from evodenss.dataset.dataset_loader import DatasetProcessor, create_dataset_processor, DatasetType
 from evodenss.networks.evaluators import BaseEvaluator
 from evodenss.train.losses import MyCustomLoss, MyCustomMSE
 
@@ -91,6 +91,7 @@ def main(run: int,
          grammar: Grammar,
          config: Config,
          is_gpu_run: bool,
+         printing: Optional[int] = None,
          possible_checkpoint: Optional[Checkpoint] = None) -> Checkpoint:
 
     if not logging.getLogger(__name__).hasHandlers():
@@ -109,11 +110,15 @@ def main(run: int,
         random.setstate(checkpoint.random_state)
         np.random.set_state(checkpoint.numpy_random_state)
         torch.set_rng_state(checkpoint.torch_random_state)
+    
 
     if dataset_name in DATASETS_INFO.keys():
         dataset_processor: DatasetProcessor = create_dataset_processor(config.network.learning.augmentation)
 
     total_generations: int = config.evolutionary.generations
+    if printing is None:
+        printing = total_generations-1
+
     max_epochs: int = config.evolutionary.max_epochs
     proportions: DataSplits = config.network.learning.data_splits
     if dataset_name in DATASETS_INFO.keys():
@@ -130,14 +135,30 @@ def main(run: int,
         logger.info(f"Using {torch.cuda.device_count()} GPUs")
         devices = [f"cuda:{i}" for i in range(torch.cuda.device_count())]
         processes = []
+    
+    #device = torch.device("cuda" if is_gpu_run else "cpu")
         
-        
+    dataloader_val = DatasetProcessor.get_data_loaders(dataset, [DatasetType.VALIDATION], 1)[DatasetType.VALIDATION]
+
+    if printing == 0:
+        logger.info("Printing straight ahead the best individual in the current run.\nEvolution will not continue.")
+        variable = "CHLA" #DA SISTEMARE COME VARIABILE PRESA IN INPUT
+        dir_best_individual = os.path.join(get_config().checkpoints_path, f"run_{run}")
+        plot_profiles(dataloader_val, dir_best_individual, variable, gen=0, device=Device.GPU)
+        return
+
     
     for gen in range(checkpoint.last_processed_generation + 1, total_generations):
         # check the total number of epochs (stop criteria)
         if checkpoint.total_epochs is not None and checkpoint.total_epochs >= max_epochs:
             break
         checkpoint = engine.evolve(run, gen, dataset, grammar, checkpoint)
+        if gen % printing == 0:
+            logger.info("Printing the best individual in the current run.\n")
+            variable = "CHLA"
+            dir_best_individual = os.path.join(get_config().checkpoints_path, f"run_{run}")
+            plot_profiles(dataloader_val, dir_best_individual, variable, gen=gen, device=Device.GPU)
+        
         
 
     # compute testing performance of the fittest network
@@ -196,8 +217,9 @@ if __name__ == '__main__':
                         action=ConfigPairAction, nargs=2, metavar=('config_key','value'), default=[])
     parser.add_argument("--gpu-enabled", required=False, help="Runs the experiment in the GPU",
                         action='store_true')
+    parser.add_argument("--printing", '-p', required=False, help="Prints the generation number", type=int)
     args: Any = parser.parse_args()
-
+   
     start = time.time()
     torch.backends.cudnn.benchmark = True
     # loads config. it is a singleton
@@ -211,7 +233,8 @@ if __name__ == '__main__':
          dataset_name=args.dataset_name,
          grammar=Grammar(args.grammar_path, backup_path=get_config().checkpoints_path),
          config=config,
-         is_gpu_run=args.gpu_enabled)
+         is_gpu_run=args.gpu_enabled, 
+         printing=args.printing)
 
     end = time.time()
     time_elapsed = int(end - start)

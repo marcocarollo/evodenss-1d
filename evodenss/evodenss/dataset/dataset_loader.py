@@ -277,12 +277,12 @@ class DatasetProcessor:
         if dataset_class == FloatDataset:
 
             unlabelled_data = None
-            train_labelled_data = dataset_class(path_df='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/CHLA/float_ds_sf_train.csv',
-                                                targets_path='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/CHLA/targets_train.pt')
-            evaluation_labelled_data = dataset_class(path_df='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/CHLA/float_ds_sf_train.csv',
-                                                targets_path='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/CHLA/targets_train.pt') #qui era val data ma casino
-            test_data = dataset_class(path_df='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/CHLA/float_ds_sf_test.csv',
-                                      targets_path='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/CHLA/targets_test.pt') #/home/marco/Desktop/units/evodenss-1d/evodenss/data/ds/BBP700/test_data.pt
+            train_labelled_data = dataset_class(path_df='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/TOTAL/total_train.csv',
+                                                targets_path='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/TOTAL/targets_train.pt')
+            evaluation_labelled_data = dataset_class(path_df='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/TOTAL/total_train.csv',
+                                                targets_path='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/TOTAL/targets_train.pt') #qui era val data ma casino
+            test_data = dataset_class(path_df='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/TOTAL/total_test.csv',
+                                      targets_path='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/TOTAL/targets_test.pt') #/home/marco/Desktop/units/evodenss-1d/evodenss/data/ds/BBP700/test_data.pt
         else:
             unlabelled_data = dataset_class(
                 root="data",

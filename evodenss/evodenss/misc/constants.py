@@ -35,3 +35,11 @@ METADATA_FILENAME = "metadata"
 SEPARATOR_CHAR = "-"
 START_FROM_SCRATCH = -1  #-1 perché poi quando iteriamo su tutte le generations facciamo +1, quindi parte da 0 fino al tot numero di generations
 DEFAULT_SEED = 0
+
+MAX_PRESSURES = {"NITRATE": 1000,
+                     "CHLA": 200,
+                     "BBP700": 200}
+
+INTERVALS = {"NITRATE": 5,
+                 "CHLA": 1,
+                 "BBP700": 1}

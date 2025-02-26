@@ -32,12 +32,14 @@ class RestoreCheckpoint:
                  dataset_name: str,
                  grammar: Grammar,
                  config: Config,
-                 is_gpu_run: bool) -> None:
+                 is_gpu_run: bool, 
+                 printing: int) -> None:
         self.f(run,
                dataset_name,
                grammar,
                config,
                is_gpu_run,
+               printing,
                possible_checkpoint=self.restore_checkpoint(config.checkpoints_path, run))
 
     def restore_checkpoint(self, save_path: str, run: int) -> Optional[Checkpoint]:

@@ -319,7 +319,7 @@ class LegacyEvaluator(BaseEvaluator):
             metadata_info: MetadataInfo = \
                 MetadataInfo.new_instance(self.dataset_name, dataset, optimiser, learning_params, None)
             start_epoch: int = num_epochs if restart_train is False else 0
-            logger.info(f"this is the loss function: {self.loss_function}, that has been passed to the trainer")
+            #logger.info(f"this is the loss function: {self.loss_function}, that has been passed to the trainer")
             trainer = Trainer(model=torch_model,
                               optimiser=learning_params.torch_optimiser,
                               loss_function=self.loss_function,
@@ -334,7 +334,7 @@ class LegacyEvaluator(BaseEvaluator):
                                                               learning_params.early_stop),
                               representation_model=self.representation_model)
             trainer.train()
-            logger.info(f"evolutionary fitness metric name: {get_config().evolutionary.fitness.metric_name}")
+            #logger.info(f"evolutionary fitness metric name: {get_config().evolutionary.fitness.metric_name}")
             fitness_metric = FitnessMetric.create_fitness_metric(
                 get_config().evolutionary.fitness.metric_name,
                 dataset_name=self.dataset_name,

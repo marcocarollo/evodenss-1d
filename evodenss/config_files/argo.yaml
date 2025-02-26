@@ -50,11 +50,11 @@ network:
           amount_to_use: 1.0
           replacement: false
     learning_type: "supervised"
-    default_train_time: 50
+    default_train_time: 1000
     augmentation: #when using argo data, the augmentation is not used, hence there are no parameters
       downstream:
     loss:
       type: "argo"
       attention_max: 0.0
-      lambda_l2_reg: 0.0001
-      alpha_smooth_reg: 0.0001
+      lambda_l2_reg: 0.00001
+      alpha_smooth_reg: 0.1
