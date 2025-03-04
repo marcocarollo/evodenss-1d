@@ -106,20 +106,21 @@ class MyCustomLoss(nn.Module):
 
         baseline = 412049 #this is the number of parameters of the current ppcon model
         num_params = sum(p.numel() for p in model.parameters())
+        #jprint(num_params)
 
-        lambda_penalty = 10
+        lambda_penalty = 0.1
         parameters_penalty = lambda_penalty * (num_params / baseline - 1)
 
         total = mse + l2_reg + smoothness + peak_difference + parameters_penalty
 
         #let's print the loss and the components, as percentages
-        #logger.info(f"FITNESS LOSS: mse: {mse}")
-        #logger.info(f"FITNESS LOSS: l2_reg: {l2_reg}")
-        #logger.info(f"FITNESS LOSS: smoothness: {smoothness}")
-        #logger.info(f"FITNESS LOSS: peak_difference: {peak_difference}")
-        #logger.info(f"FITNESS LOSS: parameters_penalty: {parameters_penalty}")
-        #logger.info(f"FITNESS LOSS: total: {total}")
-        #logger.info(f"FITNESS LOSS: percentage mse: {mse/total}, percentage l2_reg: {l2_reg/total}, percentage smoothness: {smoothness/total}, percentage peak_difference: {peak_difference/total}, percentage parameters_penalty: {parameters_penalty/total}")
+        logger.info(f"FITNESS LOSS: mse: {mse}")
+        logger.info(f"FITNESS LOSS: l2_reg: {l2_reg}")
+        logger.info(f"FITNESS LOSS: smoothness: {smoothness}")
+        logger.info(f"FITNESS LOSS: peak_difference: {peak_difference}")
+        logger.info(f"FITNESS LOSS: parameters_penalty: {parameters_penalty}")
+        logger.info(f"FITNESS LOSS: total: {total}")
+        logger.info(f"FITNESS LOSS: percentage mse: {mse/total}, percentage l2_reg: {l2_reg/total}, percentage smoothness: {smoothness/total}, percentage peak_difference: {peak_difference/total}, percentage parameters_penalty: {parameters_penalty/total}")
         
         return total
 
@@ -132,10 +133,21 @@ class MyCustomMSE(nn.Module):
         self.alpha_smooth_reg = hyperparameters_config.alpha_smooth_reg
         
     def forward(self, input, target, model):
+        #It's actually a MAE, was kept this way for code coherency
         input = input.unsqueeze(1)
         target = target.unsqueeze(1)
         mae = nn.L1Loss(reduction='sum')
         mse = mae(input, target)
+        #mse = mse_loss(input, target)
 
-        return mse 
+        #diffs = torch.abs(input[:, 0, 1:] - input[:, 0, :-1])
+        #smoothness = diffs.sum()
+
+        
+        #smoothness = self.alpha_smooth_reg * smoothness 
+        #print('mse',mse)
+        #print('smoothness', smoothness)
+
+
+        return mse# + smoothness
 

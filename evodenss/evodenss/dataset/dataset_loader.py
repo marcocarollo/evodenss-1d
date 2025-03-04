@@ -35,11 +35,16 @@ def from_string_to_tensor(string):
 
 class FloatDataset(Dataset):
 
-    def __init__(self, path_df=None, targets_path=None, transform=None):
+    def __init__(self, path_df=None, tensor_df = None, targets_path=None, transform=None):
         super().__init__()
+        self.path_df = path_df
         if path_df is not None:
-            self.path_df = path_df
+            
             self.df = pd.read_csv(self.path_df)
+        else:
+            raise Exception("Paths should be given as input to initialize the Float class.")
+        if tensor_df is not None:
+            self.dft = torch.load(tensor_df, weights_only=True)
         if targets_path is not None:
             self.targets = torch.load(targets_path, weights_only=True)
         else:
@@ -48,29 +53,37 @@ class FloatDataset(Dataset):
 
     def __len__(self):
         """Denotes the total number of samples"""
-        return len(self.df.iloc[0, :])
+        if self.path_df is not None:
+            return len(self.df.iloc[0, :])
+        else:
+            return self.df.shape[0]
 
     def __getitem__(self, index):
         """Generates one sample of data"""
-        try:
-            self.samples = self.df.iloc[:, index + 1].tolist()  # Select sample
-        except Exception as error:
-            pass
+        if self.path_df is not None:
+            try:
+                self.samples = self.df.iloc[:, index + 1].tolist()  # Select sample
+            except Exception as error:
+                print("c'è qualcosa che non quadra")
+        if self.dft is not None:
+            self.samplest = self.dft[index, :, :]
 
         # self.samples = self.df.iloc[:, index + 1].tolist()  # Select sample
+        if self.path_df is not None:
+            year = torch.tensor(float(self.samples[0]))
+            day_rad = torch.tensor(float(self.samples[1]))
+            lat = torch.tensor(float(self.samples[2]))
+            lon = torch.tensor(float(self.samples[3]))
+            temp = self.samplest[0, :]
+            psal = self.samplest[1, :]
+            doxy = self.samplest[2, :]
+            target = self.samplest[3, :]
+            
 
-        year = torch.tensor(float(self.samples[0]))
-        day_rad = torch.tensor(float(self.samples[1]))
-        lat = torch.tensor(float(self.samples[2]))
-        lon = torch.tensor(float(self.samples[3]))
-        temp, label_temp = from_string_to_tensor(self.samples[4])
-        psal, label_psal = from_string_to_tensor(self.samples[5])
-        doxy, label_doxy = from_string_to_tensor(self.samples[6])
-
-        label = label_doxy * label_psal * label_temp  # the label is equal to one only if I have data valid for all
+          # the label is equal to one only if I have data valid for all
         # depth
-        
-        return year, day_rad, lat, lon, temp, psal, doxy, self.targets[index]
+        if self.path_df is not None:
+            return year, day_rad, lat, lon, temp, psal, doxy, target
 
 class MyDataset(torch.utils.data.Dataset):
     def __init__(self, path_df=None, path_tensor = None, transform=None):
@@ -233,6 +246,7 @@ class DatasetProcessor:
                 subsets_dict[dataset_type] = Subset(dataset_to_use, [])
                 continue
 
+
             sample_size = settings_to_use[dataset_type.value].amount_to_use
             sample_size = int(sample_size * len(idxs)) if isinstance(sample_size, float) else sample_size
             # if `replacement` is true then we vary the seed via function parameter
@@ -277,12 +291,19 @@ class DatasetProcessor:
         if dataset_class == FloatDataset:
 
             unlabelled_data = None
-            train_labelled_data = dataset_class(path_df='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/TOTAL/total_train.csv',
-                                                targets_path='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/TOTAL/targets_train.pt')
-            evaluation_labelled_data = dataset_class(path_df='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/TOTAL/total_train.csv',
-                                                targets_path='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/TOTAL/targets_train.pt') #qui era val data ma casino
-            test_data = dataset_class(path_df='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/TOTAL/total_test.csv',
-                                      targets_path='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/TOTAL/targets_test.pt') #/home/marco/Desktop/units/evodenss-1d/evodenss/data/ds/BBP700/test_data.pt
+            train_labelled_data = dataset_class(path_df='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/' + dataset_name + '/float_ds_sf_train.csv',
+                                                tensor_df='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/' + dataset_name + '/n_train_data.pt',
+                                                targets_path='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/' + dataset_name + '/n_train_data.pt')
+            #print(f"length of train_labelled_data: {len(train_labelled_data)}")
+            evaluation_labelled_data = dataset_class(path_df='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/' + dataset_name + '/float_ds_sf_train.csv',
+                                                    tensor_df='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/' + dataset_name + '/n_train_data.pt',    
+                                                targets_path='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/' + dataset_name + '/n_train_data.pt') #qui era val data ma casino
+            #print(f"length of evaluation_labelled_data: {len(evaluation_labelled_data)}")
+            test_data = dataset_class(path_df='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/' + dataset_name + '/float_ds_sf_test.csv',
+                                    tensor_df='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/' + dataset_name + '/n_test_data.pt',     
+                                      targets_path='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/' + dataset_name + '/n_test_data.pt') #/home/marco/Desktop/units/evodenss-1d/evodenss/data/ds/BBP700/test_data.pt
+            #print(f"length of test_data: {len(test_data)}")
+            #exit()
         else:
             unlabelled_data = dataset_class(
                 root="data",

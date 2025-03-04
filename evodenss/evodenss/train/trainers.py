@@ -126,7 +126,7 @@ class Trainer:
                         
                         outputs = self.model(inputs)
                         loss = self.loss_function(outputs, target, self.model)
-                        total_loss += loss/n_batches_train
+                        total_loss += loss #/n_batches_train
                        #S print(total_loss)
                         loss.backward()
                         self.optimiser.step()

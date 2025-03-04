@@ -17,9 +17,15 @@ DATASETS_INFO: dict[str, dict[str, Any]] = {
         "expected_input_dimensions": (3, 32, 32),
         "classes": 100
     },
-     "argo": {
+    "BBP700": {
         "expected_input_dimensions": (1,200),
-    }
+    },
+    "NITRATE": {
+        "expected_input_dimensions": (1,200),
+    },
+    "CHLA": {
+        "expected_input_dimensions": (1,200),
+    },
 
 }
 #, "svhn", "cifar10",

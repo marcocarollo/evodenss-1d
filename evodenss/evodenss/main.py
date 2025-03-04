@@ -124,7 +124,7 @@ def main(run: int,
     if dataset_name in DATASETS_INFO.keys():
         dataset: dict[DatasetType, Subset] = \
             dataset_processor.load_partitioned_dataset(dataset_name, proportions, DEFAULT_SEED)
-#   elif dataset_name == "argo":
+
 
     logger.info("Dataset partition sizes:")
     for partition, subset in dataset.items():
@@ -139,10 +139,22 @@ def main(run: int,
     #device = torch.device("cuda" if is_gpu_run else "cpu")
         
     dataloader_val = DatasetProcessor.get_data_loaders(dataset, [DatasetType.VALIDATION], 1)[DatasetType.VALIDATION]
-
+    dataloader_train = DatasetProcessor.get_data_loaders(dataset, [DatasetType.DOWNSTREAM_TRAIN], 1)[DatasetType.DOWNSTREAM_TRAIN]
+    dataloader_test = DatasetProcessor.get_data_loaders(dataset, [DatasetType.EVO_TEST], 1)[DatasetType.EVO_TEST]
+    dataloader_TEST = DatasetProcessor.get_data_loaders(dataset, [DatasetType.TEST], 1)[DatasetType.TEST]
+    #dataloader_PRETEXT_TRAIN = DatasetProcessor.get_data_loaders(dataset, [DatasetType.PRETEXT_TRAIN], 1)[DatasetType.PRETEXT_TRAIN]
+    print("DATALOADERs size")
+    print(len(dataloader_val))
+    print(len(dataloader_train))
+    print(len(dataloader_test))
+    print(len(dataloader_TEST))
+    #print(len(dataloader_PRETEXT_TRAIN))
+    variable = dataset_name
+    logger.info(f"PERFORMING PREDICTION FOR THE VARIABLE: {variable}")
+    
+    #exit()
     if printing == 0:
         logger.info("Printing straight ahead the best individual in the current run.\nEvolution will not continue.")
-        variable = "CHLA" #DA SISTEMARE COME VARIABILE PRESA IN INPUT
         dir_best_individual = os.path.join(get_config().checkpoints_path, f"run_{run}")
         plot_profiles(dataloader_val, dir_best_individual, variable, gen=0, device=Device.GPU)
         return
@@ -155,9 +167,9 @@ def main(run: int,
         checkpoint = engine.evolve(run, gen, dataset, grammar, checkpoint)
         if gen % printing == 0:
             logger.info("Printing the best individual in the current run.\n")
-            variable = "CHLA"
             dir_best_individual = os.path.join(get_config().checkpoints_path, f"run_{run}")
             plot_profiles(dataloader_val, dir_best_individual, variable, gen=gen, device=Device.GPU)
+        exit(0)
         
         
 
@@ -218,7 +230,9 @@ if __name__ == '__main__':
     parser.add_argument("--gpu-enabled", required=False, help="Runs the experiment in the GPU",
                         action='store_true')
     parser.add_argument("--printing", '-p', required=False, help="Prints the generation number", type=int)
+
     args: Any = parser.parse_args()
+    
    
     start = time.time()
     torch.backends.cudnn.benchmark = True

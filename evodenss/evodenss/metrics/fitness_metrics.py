@@ -148,7 +148,7 @@ class ArgoFitnessMetric(FitnessMetric):
                     outputs = model(inputs)
                     total_loss += loss_function(outputs, target, model)
                     
-            total_loss /= n_batches_train
+#            total_loss /= n_batches_train
             
             return total_loss
 

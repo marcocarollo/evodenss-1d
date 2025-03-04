@@ -1,6 +1,6 @@
 <features> ::= <deconvolution1d> 
 <convolution1d> ::= layer:conv1d [out_channels,int,1,64,64] [kernel_size,int,1,2,2] [stride,int,1,2,2] <padding_deconv> <bias> <activation_function> [internal_dropout_p,float,1,0.2,0.2] <internal_batch_norm>
-<deconvolution1d> ::= layer:deconv1d [out_channels,int,1,128,128] [kernel_size,int,1,2,2] [stride,int,1,2,2] <padding_deconv> [internal_dropout_p,float,1,0.2,0.2] <activation_function> <internal_batch_norm> <bias>
+<deconvolution1d> ::= layer:deconv1d [out_channels,int,1,64,64] [kernel_size,int,1,2,2] [stride,int,1,2,2] <padding_deconv> [internal_dropout_p,float,1,0.2,0.2] <activation_function> <internal_batch_norm> <bias>
 <batch_norm> ::= layer:batch_norm
 <internal_batch_norm> ::= internal_batch_norm:True
 <pooling> ::= <pool_type> [kernel_size,int,1,2,5] [stride,int,1,1,3] <padding>
