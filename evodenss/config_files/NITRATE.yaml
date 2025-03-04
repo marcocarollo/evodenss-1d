@@ -1,0 +1,60 @@
+checkpoints_path: ../results/NITRATE
+
+evolutionary:
+  generations: 200
+  lambda: 3
+  max_epochs: 100000
+  mutation:
+    add_connection: 0.0
+    remove_connection: 0.0
+    add_layer: 0.5
+    reuse_layer: 0.15
+    remove_layer: 0.5
+    dsge_topological: 0.5
+    dsge_non_topological: 1
+    train_longer: 0.1
+  fitness:
+    metric_name: "argo"
+    parameters: null
+  used: False
+
+network:
+  architecture:
+    reuse_layer: 0.0
+    output: fully_connected
+    modules:
+      - name: features
+        network_structure_init:
+          min_expansions: 6
+          max_expansions: 25
+        network_structure:
+          min_expansions: 6
+          max_expansions: 25
+        levels_back: 1
+    extra_components:
+      - learning
+  learning:
+    data_splits:
+      labelled:
+        percentage: 100 # downstream_train + validation + evo_test = percentage
+        downstream_train:
+          partition_ratio: 0.9
+          amount_to_use: 1.0
+          replacement: false
+        validation:
+          partition_ratio: 0.05
+          amount_to_use: 1.0
+          replacement: false
+        evo_test:
+          partition_ratio: 0.05
+          amount_to_use: 1.0
+          replacement: false
+    learning_type: "supervised"
+    default_train_time: 1000
+    augmentation: #when using argo data, the augmentation is not used, hence there are no parameters
+      downstream:
+    loss:
+      type: "argo"
+      attention_max: 0.0
+      lambda_l2_reg: 0.000001
+      alpha_smooth_reg: 0.0001

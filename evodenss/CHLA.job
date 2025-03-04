@@ -1,0 +1,36 @@
+#!/bin/bash
+#SBATCH --job-name=CHLA_mse                   # Job name
+#SBATCH --output=./logs/CHLA_profile_%j.log        # Standard output and error log
+#SBATCH --ntasks=1                         # Number of tasks (1 process)
+##SBATCH --cpus-per-task=24 # 
+#SBATCH --mem=0                        # Memory per node
+#SBATCH --time=01:00:00                    # Time limit (hh:mm:ss)
+#SBATCH --partition=GPU                    # Partition name 
+#SBATCH --gpus=2            # Number of GPUs --gres=gpu:1  --gpus=1
+#SBATCH --exclusive
+
+# Set the environment variables
+dataset_name="CHLA"
+config_path="config_files/CHLA.yaml"
+grammar_path="grammars/argo.grammar"
+
+# Run the Python script with the specified arguments
+./clear.sh
+
+python -m evodenss.main \
+    -d "$dataset_name" \
+    -c "$config_path" \
+    -g "$grammar_path" \
+    -r 1040\
+    --gpu-enabled \
+    --printing 1
+
+#per cambiare da gpu a thin bisogna cambiare
+# - partition
+# - gpus
+# -r  
+# --gpu-enabled
+# - checkpoint path nell'argo.yaml
+# - cancellare gli used
+
+# fare in modo che il nome dell'output e dello sbatch siano quelli di -r
