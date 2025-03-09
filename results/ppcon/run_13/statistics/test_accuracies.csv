@@ -1,0 +1,2 @@
+generation	test_accuracy
+0	tensor([65090.1797], device='cuda:0')

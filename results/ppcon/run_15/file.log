@@ -1,0 +1,726 @@
+2025-03-08 11:36:05,025 :: INFO :: __main__ :: [15] -- Starting fresh run
+2025-03-08 11:36:06,826 :: INFO :: __main__ :: [15] -- Dataset partition sizes:
+2025-03-08 11:36:06,826 :: INFO :: __main__ :: [15] -- DatasetType.EVO_TEST size -- 378
+2025-03-08 11:36:06,826 :: INFO :: __main__ :: [15] -- DatasetType.VALIDATION size -- 378
+2025-03-08 11:36:06,826 :: INFO :: __main__ :: [15] -- DatasetType.DOWNSTREAM_TRAIN size -- 3018
+2025-03-08 11:36:06,827 :: INFO :: __main__ :: [15] -- DatasetType.TEST size -- 945
+2025-03-08 11:36:06,827 :: INFO :: __main__ :: [15] -- Starting evolution for run 15
+2025-03-08 11:36:06,827 :: INFO :: __main__ :: [15] -- PERFORMING PREDICTION FOR THE VARIABLE: CHLA
+2025-03-08 11:36:06,827 :: INFO :: evodenss.evolution.engine :: [15] -- Performing generation: 0
+2025-03-08 11:36:06,827 :: INFO :: evodenss.evolution.engine :: [15] -- Creating the initial population
+2025-03-08 11:36:06,846 :: INFO :: evodenss.networks.module :: [15] -- Using ARGO grammar for features module
+2025-03-08 11:36:06,855 :: INFO :: evodenss.evolution.individual :: [15] -- -----> Starting evaluation for individual 0 for 1000 secs
+2025-03-08 11:36:06,900 :: INFO :: evodenss.networks.evaluators :: [15] -- layer-1: 
+layer0: :punctual_mlp input:-1 
+layer1: :punctual_mlp input:-1 
+layer2: :punctual_mlp input:-1 
+layer3: :punctual_mlp input:-1 
+layer4: :conv1d out_channels:64 kernel_size:2 stride:1 padding_deconv:2 bias:True act:selu internal_dropout_p:0.2 internal_batch_norm:True input:-1,0,1,2,3 
+layer5: :conv1d out_channels:128 kernel_size:2 stride:2 padding_deconv:1 bias:True act:selu internal_dropout_p:0.2 internal_batch_norm:True input:4 
+layer6: :conv1d out_channels:128 kernel_size:4 stride:1 padding_deconv:1 bias:True act:selu internal_dropout_p:0.2 internal_batch_norm:True input:5 
+layer7: :conv1d out_channels:128 kernel_size:4 stride:1 padding_deconv:2 bias:True act:selu internal_dropout_p:0.2 internal_batch_norm:True input:6 
+layer8: :deconv1d out_channels:128 kernel_size:2 stride:2 padding_deconv:2 internal_dropout_p:0.2 act:selu internal_batch_norm:True bias:True input:7 
+layer9: :conv1d out_channels:128 kernel_size:3 stride:1 padding_deconv:1 bias:True act:selu internal_dropout_p:0.2 internal_batch_norm:True input:8 
+layer10: :deconv1d out_channels:64 kernel_size:2 stride:2 padding_deconv:1 internal_dropout_p:0.2 act:selu internal_batch_norm:True bias:True input:9 
+layer11: :conv1d out_channels:32 kernel_size:2 stride:2 padding_deconv:1 bias:True act:selu internal_dropout_p:0.2 internal_batch_norm:True input:10 
+layer12: :conv1d out_channels:1 kernel_size:3 stride:1 padding_deconv:1 bias:True act:linear internal_batch_norm:False input:11 
+layer13: :fc act:selu out_features:200 bias:True input:12 learning:adadelta batch_size:32 epochs:100
+2025-03-08 11:36:08,025 :: DEBUG :: evodenss.train.trainers :: [15] -- Initiating supervised training
+2025-03-08 11:36:08,026 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 0
+2025-03-08 11:36:10,963 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 424405.906
+2025-03-08 11:36:10,963 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:36:11,446 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 1
+2025-03-08 11:36:13,186 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 350723.312
+2025-03-08 11:36:13,187 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:36:13,563 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 2
+2025-03-08 11:36:15,316 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 323878.625
+2025-03-08 11:36:15,316 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:36:15,700 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 3
+2025-03-08 11:36:17,454 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 304128.562
+2025-03-08 11:36:17,454 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:36:17,846 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 4
+2025-03-08 11:36:19,670 :: INFO :: evodenss.train.trainers :: [15] -- [1.74s] TRAIN epoch 4 -- loss: tensor([294926.8125], device='cuda:0', grad_fn=<AddBackward0>)
+2025-03-08 11:36:19,671 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 294926.812
+2025-03-08 11:36:19,671 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:36:20,110 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 5
+2025-03-08 11:36:21,893 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 289027.25
+2025-03-08 11:36:21,893 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:36:22,296 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 6
+2025-03-08 11:36:24,049 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 284578.562
+2025-03-08 11:36:24,049 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:36:24,456 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 7
+2025-03-08 11:36:26,175 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 266175.812
+2025-03-08 11:36:26,175 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:36:26,586 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 8
+2025-03-08 11:36:28,350 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 252861.281
+2025-03-08 11:36:28,350 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:36:28,761 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 9
+2025-03-08 11:36:30,535 :: INFO :: evodenss.train.trainers :: [15] -- [1.77s] TRAIN epoch 9 -- loss: tensor([246133.7500], device='cuda:0', grad_fn=<AddBackward0>)
+2025-03-08 11:36:30,535 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 246133.75
+2025-03-08 11:36:30,536 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:36:30,959 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 10
+2025-03-08 11:36:32,723 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 241279.625
+2025-03-08 11:36:32,723 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:36:33,141 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 11
+2025-03-08 11:36:34,925 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 237725.844
+2025-03-08 11:36:34,925 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:36:35,336 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 12
+2025-03-08 11:36:37,070 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 235817.219
+2025-03-08 11:36:37,070 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:36:37,474 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 13
+2025-03-08 11:36:39,255 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 233045.25
+2025-03-08 11:36:39,255 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:36:39,664 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 14
+2025-03-08 11:36:41,436 :: INFO :: evodenss.train.trainers :: [15] -- [1.77s] TRAIN epoch 14 -- loss: tensor([231355.5000], device='cuda:0', grad_fn=<AddBackward0>)
+2025-03-08 11:36:41,436 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 231355.5
+2025-03-08 11:36:41,436 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:36:41,852 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 15
+2025-03-08 11:36:43,612 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 229212.109
+2025-03-08 11:36:43,612 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:36:44,024 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 16
+2025-03-08 11:36:45,786 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 228292.734
+2025-03-08 11:36:45,786 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:36:46,196 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 17
+2025-03-08 11:36:47,968 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 226967.984
+2025-03-08 11:36:47,968 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:36:48,376 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 18
+2025-03-08 11:36:50,132 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 225497.922
+2025-03-08 11:36:50,133 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:36:50,540 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 19
+2025-03-08 11:36:52,295 :: INFO :: evodenss.train.trainers :: [15] -- [1.75s] TRAIN epoch 19 -- loss: tensor([224494.1250], device='cuda:0', grad_fn=<AddBackward0>)
+2025-03-08 11:36:52,295 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 224494.125
+2025-03-08 11:36:52,295 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:36:52,710 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 20
+2025-03-08 11:36:54,478 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 224418.906
+2025-03-08 11:36:54,478 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:36:54,890 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 21
+2025-03-08 11:36:56,655 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 223622.625
+2025-03-08 11:36:56,656 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:36:57,063 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 22
+2025-03-08 11:36:58,833 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 221743.547
+2025-03-08 11:36:58,833 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:36:59,242 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 23
+2025-03-08 11:37:01,011 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 221014.406
+2025-03-08 11:37:01,012 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:37:01,417 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 24
+2025-03-08 11:37:03,183 :: INFO :: evodenss.train.trainers :: [15] -- [1.76s] TRAIN epoch 24 -- loss: tensor([221160.1562], device='cuda:0', grad_fn=<AddBackward0>)
+2025-03-08 11:37:03,183 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 221160.156
+2025-03-08 11:37:03,183 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:37:03,602 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 25
+2025-03-08 11:37:05,373 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 219362.797
+2025-03-08 11:37:05,374 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:37:05,791 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 26
+2025-03-08 11:37:07,544 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 219503.984
+2025-03-08 11:37:07,544 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:37:07,953 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 27
+2025-03-08 11:37:09,708 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 219360.062
+2025-03-08 11:37:09,708 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:37:10,124 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 28
+2025-03-08 11:37:11,882 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 219144.969
+2025-03-08 11:37:11,883 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:37:12,295 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 29
+2025-03-08 11:37:14,072 :: INFO :: evodenss.train.trainers :: [15] -- [1.78s] TRAIN epoch 29 -- loss: tensor([216779.2031], device='cuda:0', grad_fn=<AddBackward0>)
+2025-03-08 11:37:14,073 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 216779.203
+2025-03-08 11:37:14,073 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:37:14,488 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 30
+2025-03-08 11:37:16,273 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 217151.922
+2025-03-08 11:37:16,273 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:37:16,682 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 31
+2025-03-08 11:37:18,488 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 216715.375
+2025-03-08 11:37:18,489 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:37:18,906 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 32
+2025-03-08 11:37:20,684 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 216557.516
+2025-03-08 11:37:20,684 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:37:21,093 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 33
+2025-03-08 11:37:22,870 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 215493.328
+2025-03-08 11:37:22,870 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:37:23,291 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 34
+2025-03-08 11:37:25,063 :: INFO :: evodenss.train.trainers :: [15] -- [1.77s] TRAIN epoch 34 -- loss: tensor([215466.0938], device='cuda:0', grad_fn=<AddBackward0>)
+2025-03-08 11:37:25,064 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 215466.094
+2025-03-08 11:37:25,064 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:37:25,474 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 35
+2025-03-08 11:37:27,228 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 214372.156
+2025-03-08 11:37:27,228 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:37:27,641 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 36
+2025-03-08 11:37:29,388 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 214154.906
+2025-03-08 11:37:29,388 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:37:29,793 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 37
+2025-03-08 11:37:31,561 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 213560.094
+2025-03-08 11:37:31,561 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:37:31,991 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 38
+2025-03-08 11:37:33,738 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 213459.625
+2025-03-08 11:37:33,739 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:37:34,154 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 39
+2025-03-08 11:37:35,909 :: INFO :: evodenss.train.trainers :: [15] -- [1.75s] TRAIN epoch 39 -- loss: tensor([212654.8438], device='cuda:0', grad_fn=<AddBackward0>)
+2025-03-08 11:37:35,910 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 212654.844
+2025-03-08 11:37:35,910 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:37:36,327 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 40
+2025-03-08 11:37:38,089 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 212109.266
+2025-03-08 11:37:38,089 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:37:38,514 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 41
+2025-03-08 11:37:40,269 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 212098.297
+2025-03-08 11:37:40,269 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:37:40,683 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 42
+2025-03-08 11:37:42,448 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 211690.328
+2025-03-08 11:37:42,448 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:37:42,857 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 43
+2025-03-08 11:37:44,627 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 211651.953
+2025-03-08 11:37:44,627 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:37:45,042 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 44
+2025-03-08 11:37:46,803 :: INFO :: evodenss.train.trainers :: [15] -- [1.76s] TRAIN epoch 44 -- loss: tensor([210601.1719], device='cuda:0', grad_fn=<AddBackward0>)
+2025-03-08 11:37:46,803 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 210601.172
+2025-03-08 11:37:46,803 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:37:47,219 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 45
+2025-03-08 11:37:49,029 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 211112.453
+2025-03-08 11:37:49,029 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:37:49,461 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 46
+2025-03-08 11:37:51,219 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 210689.969
+2025-03-08 11:37:51,219 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:37:51,647 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 47
+2025-03-08 11:37:53,408 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 209942.859
+2025-03-08 11:37:53,408 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:37:53,820 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 48
+2025-03-08 11:37:55,553 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 209526.766
+2025-03-08 11:37:55,554 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:37:55,970 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 49
+2025-03-08 11:37:57,739 :: INFO :: evodenss.train.trainers :: [15] -- [1.77s] TRAIN epoch 49 -- loss: tensor([209851.8281], device='cuda:0', grad_fn=<AddBackward0>)
+2025-03-08 11:37:57,739 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 209851.828
+2025-03-08 11:37:57,739 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:37:58,180 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 50
+2025-03-08 11:37:59,951 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 208682.812
+2025-03-08 11:37:59,952 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:38:00,356 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 51
+2025-03-08 11:38:02,111 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 208796.719
+2025-03-08 11:38:02,111 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:38:02,523 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 52
+2025-03-08 11:38:04,268 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 208304.422
+2025-03-08 11:38:04,268 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:38:04,680 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 53
+2025-03-08 11:38:06,440 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 208596.156
+2025-03-08 11:38:06,440 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:38:06,870 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 54
+2025-03-08 11:38:08,622 :: INFO :: evodenss.train.trainers :: [15] -- [1.75s] TRAIN epoch 54 -- loss: tensor([207904.6562], device='cuda:0', grad_fn=<AddBackward0>)
+2025-03-08 11:38:08,622 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 207904.656
+2025-03-08 11:38:08,622 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:38:09,041 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 55
+2025-03-08 11:38:10,813 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 207273.391
+2025-03-08 11:38:10,813 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:38:11,219 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 56
+2025-03-08 11:38:12,978 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 207943.203
+2025-03-08 11:38:12,979 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:38:13,409 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 57
+2025-03-08 11:38:15,164 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 206878.578
+2025-03-08 11:38:15,164 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:38:15,596 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 58
+2025-03-08 11:38:17,558 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 207683.047
+2025-03-08 11:38:17,559 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:38:17,987 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 59
+2025-03-08 11:38:19,752 :: INFO :: evodenss.train.trainers :: [15] -- [1.76s] TRAIN epoch 59 -- loss: tensor([205966.9375], device='cuda:0', grad_fn=<AddBackward0>)
+2025-03-08 11:38:19,752 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 205966.938
+2025-03-08 11:38:19,752 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:38:20,159 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 60
+2025-03-08 11:38:21,923 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 206692.516
+2025-03-08 11:38:21,923 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:38:22,342 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 61
+2025-03-08 11:38:24,101 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 206459.969
+2025-03-08 11:38:24,101 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:38:24,528 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 62
+2025-03-08 11:38:26,271 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 206096.625
+2025-03-08 11:38:26,272 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:38:26,682 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 63
+2025-03-08 11:38:28,452 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 205023.828
+2025-03-08 11:38:28,453 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:38:28,881 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 64
+2025-03-08 11:38:30,647 :: INFO :: evodenss.train.trainers :: [15] -- [1.76s] TRAIN epoch 64 -- loss: tensor([205654.3281], device='cuda:0', grad_fn=<AddBackward0>)
+2025-03-08 11:38:30,648 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 205654.328
+2025-03-08 11:38:30,648 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:38:31,055 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 65
+2025-03-08 11:38:32,821 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 205116.828
+2025-03-08 11:38:32,821 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:38:33,230 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 66
+2025-03-08 11:38:34,982 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 204966.281
+2025-03-08 11:38:34,983 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:38:35,379 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 67
+2025-03-08 11:38:37,129 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 204565.469
+2025-03-08 11:38:37,129 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:38:37,550 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 68
+2025-03-08 11:38:39,290 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 204705.469
+2025-03-08 11:38:39,290 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:38:39,702 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 69
+2025-03-08 11:38:41,471 :: INFO :: evodenss.train.trainers :: [15] -- [1.77s] TRAIN epoch 69 -- loss: tensor([204157.1719], device='cuda:0', grad_fn=<AddBackward0>)
+2025-03-08 11:38:41,471 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 204157.172
+2025-03-08 11:38:41,471 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:38:41,881 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 70
+2025-03-08 11:38:43,638 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 203544.578
+2025-03-08 11:38:43,638 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:38:44,057 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 71
+2025-03-08 11:38:45,830 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 204501.469
+2025-03-08 11:38:45,830 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:38:46,242 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 72
+2025-03-08 11:38:48,015 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 203821.562
+2025-03-08 11:38:48,015 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:38:48,424 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 73
+2025-03-08 11:38:50,215 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 203138.438
+2025-03-08 11:38:50,215 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:38:50,621 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 74
+2025-03-08 11:38:52,362 :: INFO :: evodenss.train.trainers :: [15] -- [1.74s] TRAIN epoch 74 -- loss: tensor([203772.2656], device='cuda:0', grad_fn=<AddBackward0>)
+2025-03-08 11:38:52,362 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 203772.266
+2025-03-08 11:38:52,362 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:38:52,771 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 75
+2025-03-08 11:38:54,549 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 202215.609
+2025-03-08 11:38:54,550 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:38:54,952 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 76
+2025-03-08 11:38:56,712 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 202952.266
+2025-03-08 11:38:56,713 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:38:57,122 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 77
+2025-03-08 11:38:58,874 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 202296.469
+2025-03-08 11:38:58,874 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:38:59,280 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 78
+2025-03-08 11:39:01,064 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 201823.109
+2025-03-08 11:39:01,065 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:39:01,477 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 79
+2025-03-08 11:39:03,251 :: INFO :: evodenss.train.trainers :: [15] -- [1.77s] TRAIN epoch 79 -- loss: tensor([202007.7969], device='cuda:0', grad_fn=<AddBackward0>)
+2025-03-08 11:39:03,251 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 202007.797
+2025-03-08 11:39:03,251 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:39:03,675 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 80
+2025-03-08 11:39:05,434 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 201773.672
+2025-03-08 11:39:05,434 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:39:05,841 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 81
+2025-03-08 11:39:07,598 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 201137.25
+2025-03-08 11:39:07,599 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:39:08,010 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 82
+2025-03-08 11:39:09,782 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 201579.859
+2025-03-08 11:39:09,782 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:39:10,192 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 83
+2025-03-08 11:39:11,950 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 201324.453
+2025-03-08 11:39:11,951 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:39:12,360 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 84
+2025-03-08 11:39:14,126 :: INFO :: evodenss.train.trainers :: [15] -- [1.76s] TRAIN epoch 84 -- loss: tensor([201252.0469], device='cuda:0', grad_fn=<AddBackward0>)
+2025-03-08 11:39:14,126 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 201252.047
+2025-03-08 11:39:14,126 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:39:14,534 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 85
+2025-03-08 11:39:16,283 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 200828.312
+2025-03-08 11:39:16,283 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:39:16,684 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 86
+2025-03-08 11:39:18,487 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 200706.688
+2025-03-08 11:39:18,488 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:39:18,898 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 87
+2025-03-08 11:39:20,644 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 200510.875
+2025-03-08 11:39:20,644 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:39:21,050 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 88
+2025-03-08 11:39:22,800 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 200283.062
+2025-03-08 11:39:22,800 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:39:23,209 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 89
+2025-03-08 11:39:24,972 :: INFO :: evodenss.train.trainers :: [15] -- [1.76s] TRAIN epoch 89 -- loss: tensor([199664.0312], device='cuda:0', grad_fn=<AddBackward0>)
+2025-03-08 11:39:24,973 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 199664.031
+2025-03-08 11:39:24,973 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:39:25,386 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 90
+2025-03-08 11:39:27,187 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 200036.797
+2025-03-08 11:39:27,187 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:39:27,594 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 91
+2025-03-08 11:39:29,360 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 199724.078
+2025-03-08 11:39:29,360 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:39:29,761 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 92
+2025-03-08 11:39:31,519 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 199768.453
+2025-03-08 11:39:31,519 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:39:31,922 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 93
+2025-03-08 11:39:33,683 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 198873.188
+2025-03-08 11:39:33,684 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:39:34,113 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 94
+2025-03-08 11:39:35,889 :: INFO :: evodenss.train.trainers :: [15] -- [1.77s] TRAIN epoch 94 -- loss: tensor([199701.0156], device='cuda:0', grad_fn=<AddBackward0>)
+2025-03-08 11:39:35,889 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 199701.016
+2025-03-08 11:39:35,889 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:39:36,296 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 95
+2025-03-08 11:39:38,062 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 198374.969
+2025-03-08 11:39:38,062 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:39:38,467 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 96
+2025-03-08 11:39:40,229 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 198365.812
+2025-03-08 11:39:40,229 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:39:40,649 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 97
+2025-03-08 11:39:42,411 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 197147.953
+2025-03-08 11:39:42,411 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:39:42,820 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 98
+2025-03-08 11:39:44,576 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 197682.719
+2025-03-08 11:39:44,577 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:39:44,985 :: DEBUG :: evodenss.train.trainers :: [15] -- Starting Downstream Epoch 99
+2025-03-08 11:39:46,752 :: INFO :: evodenss.train.trainers :: [15] -- [1.77s] TRAIN epoch 99 -- loss: tensor([198313.3594], device='cuda:0', grad_fn=<AddBackward0>)
+2025-03-08 11:39:46,752 :: DEBUG :: evodenss.train.trainers :: [15] -- Loss: 198313.359
+2025-03-08 11:39:46,752 :: DEBUG :: evodenss.train.trainers :: [15] -- =============================================================
+2025-03-08 11:39:47,598 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 2578.7705078125
+2025-03-08 11:39:47,598 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:39:47,598 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 1.7335033416748047
+2025-03-08 11:39:47,598 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:39:47,598 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:39:47,598 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 2580.54541015625
+2025-03-08 11:39:47,599 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9993122220039368, percentage l2_reg: 1.229011013492709e-05, percentage smoothness: 0.0006717584910802543, percentage peak_difference: 0.0, percentage parameters_penalty: 3.7808313209097832e-06
+2025-03-08 11:39:47,609 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 1885.59375
+2025-03-08 11:39:47,610 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:39:47,610 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 1.7591304779052734
+2025-03-08 11:39:47,610 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:39:47,610 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:39:47,610 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 1887.3944091796875
+2025-03-08 11:39:47,610 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9990459680557251, percentage l2_reg: 1.680368950474076e-05, percentage smoothness: 0.0009320417884737253, percentage peak_difference: 0.0, percentage parameters_penalty: 5.169352789380355e-06
+2025-03-08 11:39:47,620 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 2552.8154296875
+2025-03-08 11:39:47,620 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:39:47,620 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 1.7614680528640747
+2025-03-08 11:39:47,620 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:39:47,620 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:39:47,620 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 2554.618408203125
+2025-03-08 11:39:47,621 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9992942214012146, percentage l2_reg: 1.241484369529644e-05, percentage smoothness: 0.0006895229453220963, percentage peak_difference: 0.0, percentage parameters_penalty: 3.819203357124934e-06
+2025-03-08 11:39:47,630 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 1673.6090087890625
+2025-03-08 11:39:47,631 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:39:47,631 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 1.6369386911392212
+2025-03-08 11:39:47,631 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:39:47,631 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:39:47,631 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 1675.2874755859375
+2025-03-08 11:39:47,631 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9989981055259705, percentage l2_reg: 1.8931192244053818e-05, percentage smoothness: 0.0009771091863512993, percentage peak_difference: 0.0, percentage parameters_penalty: 5.823840183438733e-06
+2025-03-08 11:39:47,641 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 2080.224609375
+2025-03-08 11:39:47,641 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:39:47,641 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 1.510923981666565
+2025-03-08 11:39:47,641 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:39:47,641 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:39:47,641 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 2081.777099609375
+2025-03-08 11:39:47,642 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9992542266845703, percentage l2_reg: 1.5234670172503684e-05, percentage smoothness: 0.0007257856777869165, percentage peak_difference: 0.0, percentage parameters_penalty: 4.68667258246569e-06
+2025-03-08 11:39:47,651 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 1934.457275390625
+2025-03-08 11:39:47,651 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:39:47,651 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 1.59749174118042
+2025-03-08 11:39:47,652 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:39:47,652 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:39:47,652 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 1936.0963134765625
+2025-03-08 11:39:47,652 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9991534352302551, percentage l2_reg: 1.638099638512358e-05, percentage smoothness: 0.0008251096587628126, percentage peak_difference: 0.0, percentage parameters_penalty: 5.039319148636423e-06
+2025-03-08 11:39:47,662 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 2226.21728515625
+2025-03-08 11:39:47,662 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:39:47,662 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 1.7507352828979492
+2025-03-08 11:39:47,662 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:39:47,662 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:39:47,662 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 2228.009521484375
+2025-03-08 11:39:47,662 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9991955757141113, percentage l2_reg: 1.423476351192221e-05, percentage smoothness: 0.0007857844466343522, percentage peak_difference: 0.0, percentage parameters_penalty: 4.3790687414002605e-06
+2025-03-08 11:39:47,672 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 2012.254150390625
+2025-03-08 11:39:47,672 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:39:47,672 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 1.8036463260650635
+2025-03-08 11:39:47,672 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:39:47,672 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:39:47,673 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 2014.0992431640625
+2025-03-08 11:39:47,673 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.999083936214447, percentage l2_reg: 1.5746587450848892e-05, percentage smoothness: 0.000895510136615485, percentage peak_difference: 0.0, percentage parameters_penalty: 4.8441543185617775e-06
+2025-03-08 11:39:47,682 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 2211.1298828125
+2025-03-08 11:39:47,683 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:39:47,683 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 1.4827494621276855
+2025-03-08 11:39:47,683 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:39:47,683 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:39:47,683 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 2212.654052734375
+2025-03-08 11:39:47,683 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9993111491203308, percentage l2_reg: 1.433355009794468e-05, percentage smoothness: 0.0006701225647702813, percentage peak_difference: 0.0, percentage parameters_penalty: 4.409459052112652e-06
+2025-03-08 11:39:47,693 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 2251.47998046875
+2025-03-08 11:39:47,693 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:39:47,693 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 1.7546354532241821
+2025-03-08 11:39:47,693 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:39:47,693 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:39:47,693 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 2253.276123046875
+2025-03-08 11:39:47,694 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9992028474807739, percentage l2_reg: 1.4075145372771658e-05, percentage smoothness: 0.0007787041249684989, percentage peak_difference: 0.0, percentage parameters_penalty: 4.32996512245154e-06
+2025-03-08 11:39:47,703 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 2502.15771484375
+2025-03-08 11:39:47,703 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:39:47,703 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 1.7414982318878174
+2025-03-08 11:39:47,704 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:39:47,704 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:39:47,704 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 2503.940673828125
+2025-03-08 11:39:47,704 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9992879629135132, percentage l2_reg: 1.2666109796555247e-05, percentage smoothness: 0.0006955029675737023, percentage peak_difference: 0.0, percentage parameters_penalty: 3.896500857081264e-06
+2025-03-08 11:39:47,714 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 1907.90673828125
+2025-03-08 11:39:47,714 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:39:47,714 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 1.3145405054092407
+2025-03-08 11:39:47,714 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:39:47,714 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:39:47,714 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 1909.2628173828125
+2025-03-08 11:39:47,714 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9992897510528564, percentage l2_reg: 1.6611222235951573e-05, percentage smoothness: 0.00068850681418553, percentage peak_difference: 0.0, percentage parameters_penalty: 5.110143774800235e-06
+2025-03-08 11:39:47,756 :: INFO :: evodenss.evolution.engine :: [15] -- Selecting the fittest individual
+2025-03-08 11:39:47,756 :: INFO :: evodenss.evolution.operators.selection :: [15] -- Parent: idx: 0, id: 0
+2025-03-08 11:39:47,756 :: INFO :: evodenss.evolution.operators.selection :: [15] -- Training times: [1000]
+2025-03-08 11:39:47,756 :: INFO :: evodenss.evolution.operators.selection :: [15] -- ids: [0]
+2025-03-08 11:39:47,763 :: INFO :: evodenss.evolution.engine :: [15] -- Fitnesses: [25836.96289]
+2025-03-08 11:39:48,078 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 4162.71240234375
+2025-03-08 11:39:48,078 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:39:48,078 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 3.3468525409698486
+2025-03-08 11:39:48,078 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:39:48,078 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:39:48,078 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 4166.1005859375
+2025-03-08 11:39:48,079 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9991867542266846, percentage l2_reg: 7.612679382873466e-06, percentage smoothness: 0.0008033537305891514, percentage peak_difference: 0.0, percentage parameters_penalty: 2.3419038370775525e-06
+2025-03-08 11:39:48,107 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 4160.4326171875
+2025-03-08 11:39:48,107 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:39:48,107 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 3.4366209506988525
+2025-03-08 11:39:48,107 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:39:48,107 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:39:48,107 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 4163.91064453125
+2025-03-08 11:39:48,107 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9991647005081177, percentage l2_reg: 7.616682978550671e-06, percentage smoothness: 0.0008253349224105477, percentage peak_difference: 0.0, percentage parameters_penalty: 2.3431355202774284e-06
+2025-03-08 11:39:48,129 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 4770.45849609375
+2025-03-08 11:39:48,130 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:39:48,130 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 3.5067849159240723
+2025-03-08 11:39:48,130 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:39:48,130 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:39:48,130 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 4774.0068359375
+2025-03-08 11:39:48,130 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9992567300796509, percentage l2_reg: 6.643305823672563e-06, percentage smoothness: 0.0007345579797402024, percentage peak_difference: 0.0, percentage parameters_penalty: 2.0436934846657095e-06
+2025-03-08 11:39:48,152 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 4923.6796875
+2025-03-08 11:39:48,152 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:39:48,152 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 3.1337475776672363
+2025-03-08 11:39:48,152 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:39:48,152 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:39:48,153 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 4926.85498046875
+2025-03-08 11:39:48,153 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9993554949760437, percentage l2_reg: 6.437207503040554e-06, percentage smoothness: 0.0006360543775372207, percentage peak_difference: 0.0, percentage parameters_penalty: 1.9802910173893906e-06
+2025-03-08 11:39:48,175 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 4503.60400390625
+2025-03-08 11:39:48,175 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:39:48,175 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 3.4791271686553955
+2025-03-08 11:39:48,175 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:39:48,175 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:39:48,175 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 4507.12451171875
+2025-03-08 11:39:48,175 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9992188811302185, percentage l2_reg: 7.036679107841337e-06, percentage smoothness: 0.0007719172281213105, percentage peak_difference: 0.0, percentage parameters_penalty: 2.164707666452159e-06
+2025-03-08 11:39:48,197 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 4785.46435546875
+2025-03-08 11:39:48,197 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:39:48,197 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 3.394934892654419
+2025-03-08 11:39:48,197 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:39:48,197 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:39:48,198 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 4788.90087890625
+2025-03-08 11:39:48,198 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9992824196815491, percentage l2_reg: 6.622644377785036e-06, percentage smoothness: 0.0007089173304848373, percentage peak_difference: 0.0, percentage parameters_penalty: 2.0373374809423694e-06
+2025-03-08 11:39:48,220 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 3808.692626953125
+2025-03-08 11:39:48,220 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:39:48,220 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 3.2044711112976074
+2025-03-08 11:39:48,220 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:39:48,220 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:39:48,220 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 3811.938720703125
+2025-03-08 11:39:48,220 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.999148428440094, percentage l2_reg: 8.319962944369763e-06, percentage smoothness: 0.0008406408014707267, percentage peak_difference: 0.0, percentage parameters_penalty: 2.559486802056199e-06
+2025-03-08 11:39:48,242 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 4074.00244140625
+2025-03-08 11:39:48,242 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:39:48,242 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 3.442547559738159
+2025-03-08 11:39:48,242 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:39:48,242 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:39:48,242 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 4077.486572265625
+2025-03-08 11:39:48,243 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9991455078125, percentage l2_reg: 7.778122380841523e-06, percentage smoothness: 0.000844281748868525, percentage peak_difference: 0.0, percentage parameters_penalty: 2.392799387962441e-06
+2025-03-08 11:39:48,264 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 3798.849609375
+2025-03-08 11:39:48,264 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:39:48,264 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 3.28359317779541
+2025-03-08 11:39:48,264 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:39:48,264 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:39:48,265 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 3802.1748046875
+2025-03-08 11:39:48,265 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9991254210472107, percentage l2_reg: 8.341327884409111e-06, percentage smoothness: 0.0008636091952212155, percentage peak_difference: 0.0, percentage parameters_penalty: 2.5660594928922364e-06
+2025-03-08 11:39:48,286 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 4270.2353515625
+2025-03-08 11:39:48,287 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:39:48,287 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 3.331355094909668
+2025-03-08 11:39:48,287 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:39:48,287 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:39:48,287 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 4273.6083984375
+2025-03-08 11:39:48,287 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9992107152938843, percentage l2_reg: 7.421172995236702e-06, percentage smoothness: 0.0007795181008987129, percentage peak_difference: 0.0, percentage parameters_penalty: 2.2829904082755093e-06
+2025-03-08 11:39:48,309 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 4888.431640625
+2025-03-08 11:39:48,309 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:39:48,309 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 3.2307121753692627
+2025-03-08 11:39:48,309 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:39:48,309 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:39:48,309 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 4891.70361328125
+2025-03-08 11:39:48,309 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9993311166763306, percentage l2_reg: 6.483464858320076e-06, percentage smoothness: 0.0006604472291655838, percentage peak_difference: 0.0, percentage parameters_penalty: 1.9945214262406807e-06
+2025-03-08 11:39:48,331 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 4756.50390625
+2025-03-08 11:39:48,331 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:39:48,331 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 3.429626703262329
+2025-03-08 11:39:48,331 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:39:48,331 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:39:48,332 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 4759.97509765625
+2025-03-08 11:39:48,332 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9992707371711731, percentage l2_reg: 6.662889518338488e-06, percentage smoothness: 0.0007205135771073401, percentage peak_difference: 0.0, percentage parameters_penalty: 2.0497179775702534e-06
+2025-03-08 11:39:48,353 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 4792.60302734375
+2025-03-08 11:39:48,353 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:39:48,353 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 3.3248836994171143
+2025-03-08 11:39:48,354 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:39:48,354 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:39:48,354 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 4795.96923828125
+2025-03-08 11:39:48,354 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.999298095703125, percentage l2_reg: 6.61288413539296e-06, percentage smoothness: 0.0006932662799954414, percentage peak_difference: 0.0, percentage parameters_penalty: 2.034334784184466e-06
+2025-03-08 11:39:48,376 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 3965.85693359375
+2025-03-08 11:39:48,376 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:39:48,376 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 3.3515782356262207
+2025-03-08 11:39:48,376 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:39:48,376 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:39:48,376 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 3969.25
+2025-03-08 11:39:48,377 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9991451501846313, percentage l2_reg: 7.990222002263181e-06, percentage smoothness: 0.0008443857659585774, percentage peak_difference: 0.0, percentage parameters_penalty: 2.4580479021096835e-06
+2025-03-08 11:39:48,488 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 3337.4873046875
+2025-03-08 11:39:48,488 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:39:48,488 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 2.373656749725342
+2025-03-08 11:39:48,488 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:39:48,488 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:39:48,488 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 3339.90234375
+2025-03-08 11:39:48,489 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9992769360542297, percentage l2_reg: 9.495843187323771e-06, percentage smoothness: 0.0007106964476406574, percentage peak_difference: 0.0, percentage parameters_penalty: 2.921225359386881e-06
+2025-03-08 11:39:48,490 :: INFO :: evodenss.evolution.engine :: [15] -- Generation best test fitness: tensor([65048.9102], device='cuda:0')
+2025-03-08 11:39:48,491 :: INFO :: evodenss.evolution.engine :: [15] -- Best fitness of generation 0: 25836.96289
+2025-03-08 11:39:48,491 :: INFO :: evodenss.evolution.engine :: [15] -- Best overall fitness: 25836.96289
+
+
+
+2025-03-08 11:39:48,555 :: INFO :: __main__ :: [15] -- Printing the best individual in the current run.
+
+2025-03-08 11:39:49,043 :: DEBUG :: matplotlib.pyplot :: [15] -- Loaded backend agg version v2.2.
+2025-03-08 11:39:49,051 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: Matching sans\-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0.
+2025-03-08 11:39:49,052 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/cmb10.ttf', name='cmb10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-03-08 11:39:49,052 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSansMono-BoldOblique.ttf', name='DejaVu Sans Mono', style='oblique', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2025-03-08 11:39:49,052 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/STIXNonUniIta.ttf', name='STIXNonUnicode', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2025-03-08 11:39:49,053 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSansMono-Bold.ttf', name='DejaVu Sans Mono', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-03-08 11:39:49,053 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf', name='DejaVu Sans', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 0.05
+2025-03-08 11:39:49,053 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSansMono-Oblique.ttf', name='DejaVu Sans Mono', style='oblique', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2025-03-08 11:39:49,053 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/cmr10.ttf', name='cmr10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-03-08 11:39:49,053 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/STIXGeneralBolIta.ttf', name='STIXGeneral', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2025-03-08 11:39:49,053 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/cmex10.ttf', name='cmex10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-03-08 11:39:49,053 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizFiveSymReg.ttf', name='STIXSizeFiveSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-03-08 11:39:49,053 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizFourSymReg.ttf', name='STIXSizeFourSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-03-08 11:39:49,053 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizOneSymBol.ttf', name='STIXSizeOneSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-03-08 11:39:49,053 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/cmtt10.ttf', name='cmtt10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-03-08 11:39:49,053 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSansDisplay.ttf', name='DejaVu Sans Display', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-03-08 11:39:49,053 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/STIXGeneralItalic.ttf', name='STIXGeneral', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2025-03-08 11:39:49,053 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/STIXNonUniBolIta.ttf', name='STIXNonUnicode', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2025-03-08 11:39:49,054 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizThreeSymBol.ttf', name='STIXSizeThreeSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-03-08 11:39:49,054 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSerif-Bold.ttf', name='DejaVu Serif', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-03-08 11:39:49,054 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/cmsy10.ttf', name='cmsy10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-03-08 11:39:49,054 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-Bold.ttf', name='DejaVu Sans', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 0.33499999999999996
+2025-03-08 11:39:49,054 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSerifDisplay.ttf', name='DejaVu Serif Display', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-03-08 11:39:49,054 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-Oblique.ttf', name='DejaVu Sans', style='oblique', variant='normal', weight=400, stretch='normal', size='scalable')) = 1.05
+2025-03-08 11:39:49,054 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizThreeSymReg.ttf', name='STIXSizeThreeSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-03-08 11:39:49,054 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSerif-Italic.ttf', name='DejaVu Serif', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2025-03-08 11:39:49,054 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizTwoSymReg.ttf', name='STIXSizeTwoSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-03-08 11:39:49,054 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/STIXNonUniBol.ttf', name='STIXNonUnicode', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-03-08 11:39:49,054 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/STIXNonUni.ttf', name='STIXNonUnicode', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-03-08 11:39:49,054 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizOneSymReg.ttf', name='STIXSizeOneSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-03-08 11:39:49,054 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/STIXGeneral.ttf', name='STIXGeneral', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-03-08 11:39:49,055 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSerif-BoldItalic.ttf', name='DejaVu Serif', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2025-03-08 11:39:49,055 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizTwoSymBol.ttf', name='STIXSizeTwoSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-03-08 11:39:49,055 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/STIXGeneralBol.ttf', name='STIXGeneral', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-03-08 11:39:49,055 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/STIXSizFourSymBol.ttf', name='STIXSizeFourSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-03-08 11:39:49,055 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSansMono.ttf', name='DejaVu Sans Mono', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-03-08 11:39:49,055 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSerif.ttf', name='DejaVu Serif', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-03-08 11:39:49,055 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/cmmi10.ttf', name='cmmi10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-03-08 11:39:49,055 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/cmss10.ttf', name='cmss10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-03-08 11:39:49,055 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans-BoldOblique.ttf', name='DejaVu Sans', style='oblique', variant='normal', weight=700, stretch='normal', size='scalable')) = 1.335
+2025-03-08 11:39:49,055 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/usr/share/fonts/dejavu-sans-fonts/DejaVuSansCondensed.ttf', name='DejaVu Sans', style='normal', variant='normal', weight=400, stretch='condensed', size='scalable')) = 0.25
+2025-03-08 11:39:49,055 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/usr/share/fonts/dejavu-sans-fonts/DejaVuSans-Bold.ttf', name='DejaVu Sans', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 0.33499999999999996
+2025-03-08 11:39:49,055 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/usr/share/fonts/dejavu-sans-fonts/DejaVuSans.ttf', name='DejaVu Sans', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 0.05
+2025-03-08 11:39:49,055 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/usr/share/fonts/dejavu-sans-fonts/DejaVuSans-Oblique.ttf', name='DejaVu Sans', style='oblique', variant='normal', weight=400, stretch='normal', size='scalable')) = 1.05
+2025-03-08 11:39:49,056 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/usr/share/fonts/adobe-source-code-pro/SourceCodePro-Black.otf', name='Source Code Pro', style='normal', variant='normal', weight=900, stretch='normal', size='scalable')) = 10.525
+2025-03-08 11:39:49,056 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/usr/share/fonts/adobe-source-code-pro/SourceCodePro-BoldIt.otf', name='Source Code Pro', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2025-03-08 11:39:49,056 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/usr/share/fonts/cantarell/Cantarell-ExtraBold.otf', name='Cantarell', style='normal', variant='normal', weight=800, stretch='normal', size='scalable')) = 10.43
+2025-03-08 11:39:49,056 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/usr/share/fonts/adobe-source-code-pro/SourceCodePro-Medium.otf', name='Source Code Pro', style='normal', variant='normal', weight=500, stretch='normal', size='scalable')) = 10.145
+2025-03-08 11:39:49,056 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/usr/share/fonts/dejavu-sans-fonts/DejaVuSansCondensed-Oblique.ttf', name='DejaVu Sans', style='oblique', variant='normal', weight=400, stretch='condensed', size='scalable')) = 1.25
+2025-03-08 11:39:49,056 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/usr/share/fonts/adobe-source-code-pro/SourceCodePro-BlackIt.otf', name='Source Code Pro', style='italic', variant='normal', weight=900, stretch='normal', size='scalable')) = 11.525
+2025-03-08 11:39:49,056 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/usr/share/fonts/adobe-source-code-pro/SourceCodePro-It.otf', name='Source Code Pro', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2025-03-08 11:39:49,056 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/usr/share/fonts/adobe-source-code-pro/SourceCodePro-Bold.otf', name='Source Code Pro', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-03-08 11:39:49,056 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/usr/share/fonts/dejavu-sans-fonts/DejaVuSans-ExtraLight.ttf', name='DejaVu Sans', style='normal', variant='normal', weight=200, stretch='normal', size='scalable')) = 0.24
+2025-03-08 11:39:49,056 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/usr/share/fonts/adobe-source-code-pro/SourceCodePro-ExtraLightIt.otf', name='Source Code Pro', style='italic', variant='normal', weight=200, stretch='normal', size='scalable')) = 11.24
+2025-03-08 11:39:49,056 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/usr/share/fonts/adobe-source-code-pro/SourceCodePro-SemiboldIt.otf', name='Source Code Pro', style='italic', variant='normal', weight=600, stretch='normal', size='scalable')) = 11.24
+2025-03-08 11:39:49,056 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/usr/share/fonts/adobe-source-code-pro/SourceCodePro-ExtraLight.otf', name='Source Code Pro', style='normal', variant='normal', weight=200, stretch='normal', size='scalable')) = 10.24
+2025-03-08 11:39:49,056 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/usr/share/fonts/dejavu-sans-fonts/DejaVuSansCondensed-BoldOblique.ttf', name='DejaVu Sans', style='oblique', variant='normal', weight=700, stretch='condensed', size='scalable')) = 1.535
+2025-03-08 11:39:49,057 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/usr/share/fonts/adobe-source-code-pro/SourceCodePro-Regular.otf', name='Source Code Pro', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-03-08 11:39:49,057 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/usr/share/fonts/adobe-source-code-pro/SourceCodePro-Semibold.otf', name='Source Code Pro', style='normal', variant='normal', weight=600, stretch='normal', size='scalable')) = 10.24
+2025-03-08 11:39:49,057 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/usr/share/fonts/dejavu-sans-fonts/DejaVuSansCondensed-Bold.ttf', name='DejaVu Sans', style='normal', variant='normal', weight=700, stretch='condensed', size='scalable')) = 0.5349999999999999
+2025-03-08 11:39:49,057 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/usr/share/fonts/cantarell/Cantarell-Light.otf', name='Cantarell', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+2025-03-08 11:39:49,057 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/usr/share/fonts/cantarell/Cantarell-Thin.otf', name='Cantarell', style='normal', variant='normal', weight=100, stretch='normal', size='scalable')) = 10.335
+2025-03-08 11:39:49,057 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/usr/share/fonts/adobe-source-code-pro/SourceCodePro-Light.otf', name='Source Code Pro', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+2025-03-08 11:39:49,057 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/usr/share/fonts/cantarell/Cantarell-Regular.otf', name='Cantarell', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2025-03-08 11:39:49,057 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/usr/share/fonts/adobe-source-code-pro/SourceCodePro-LightIt.otf', name='Source Code Pro', style='italic', variant='normal', weight=300, stretch='normal', size='scalable')) = 11.145
+2025-03-08 11:39:49,057 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/usr/share/fonts/cantarell/Cantarell-Bold.otf', name='Cantarell', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2025-03-08 11:39:49,057 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/usr/share/fonts/dejavu-sans-fonts/DejaVuSans-BoldOblique.ttf', name='DejaVu Sans', style='oblique', variant='normal', weight=700, stretch='normal', size='scalable')) = 1.335
+2025-03-08 11:39:49,057 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: score(FontEntry(fname='/usr/share/fonts/adobe-source-code-pro/SourceCodePro-MediumIt.otf', name='Source Code Pro', style='italic', variant='normal', weight=500, stretch='normal', size='scalable')) = 11.145
+2025-03-08 11:39:49,057 :: DEBUG :: matplotlib.font_manager :: [15] -- findfont: Matching sans\-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/u/mcarollo/.conda/envs/argo/lib/python3.10/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+2025-03-08 11:40:52,661 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 4472.494140625
+2025-03-08 11:40:52,661 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:40:52,661 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 3.4114437103271484
+2025-03-08 11:40:52,661 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:40:52,661 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:40:52,661 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 4475.947265625
+2025-03-08 11:40:52,662 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9992285370826721, percentage l2_reg: 7.085693141561933e-06, percentage smoothness: 0.0007621724507771432, percentage peak_difference: 0.0, percentage parameters_penalty: 2.179785951739177e-06
+2025-03-08 11:40:52,683 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 4604.01171875
+2025-03-08 11:40:52,683 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:40:52,683 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 3.4505345821380615
+2025-03-08 11:40:52,683 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:40:52,684 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:40:52,684 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 4607.50390625
+2025-03-08 11:40:52,684 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9992420673370361, percentage l2_reg: 6.883377409394598e-06, percentage smoothness: 0.0007488945266231894, percentage peak_difference: 0.0, percentage parameters_penalty: 2.1175471829337766e-06
+2025-03-08 11:40:52,707 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 4338.5966796875
+2025-03-08 11:40:52,707 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:40:52,707 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 3.52776837348938
+2025-03-08 11:40:52,707 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:40:52,707 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:40:52,707 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 4342.166015625
+2025-03-08 11:40:52,707 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9991779923439026, percentage l2_reg: 7.304001883312594e-06, percentage smoothness: 0.0008124443702399731, percentage peak_difference: 0.0, percentage parameters_penalty: 2.2469446321338182e-06
+2025-03-08 11:40:52,729 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 4399.833984375
+2025-03-08 11:40:52,729 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:40:52,729 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 3.4150266647338867
+2025-03-08 11:40:52,729 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:40:52,729 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:40:52,729 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 4403.29052734375
+2025-03-08 11:40:52,729 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9992150068283081, percentage l2_reg: 7.202610959211597e-06, percentage smoothness: 0.0007755624246783555, percentage peak_difference: 0.0, percentage parameters_penalty: 2.215753738710191e-06
+2025-03-08 11:40:52,751 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 4084.97998046875
+2025-03-08 11:40:52,751 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:40:52,751 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 3.36974835395813
+2025-03-08 11:40:52,751 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:40:52,751 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:40:52,751 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 4088.39111328125
+2025-03-08 11:40:52,751 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9991656541824341, percentage l2_reg: 7.757375897199381e-06, percentage smoothness: 0.0008242235635407269, percentage peak_difference: 0.0, percentage parameters_penalty: 2.386417236266425e-06
+2025-03-08 11:40:52,772 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 4057.75634765625
+2025-03-08 11:40:52,773 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:40:52,773 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 3.1785995960235596
+2025-03-08 11:40:52,773 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:40:52,773 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:40:52,773 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 4060.9765625
+2025-03-08 11:40:52,773 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9992070198059082, percentage l2_reg: 7.809744602127466e-06, percentage smoothness: 0.0007827180088497698, percentage peak_difference: 0.0, percentage parameters_penalty: 2.402527343292604e-06
+2025-03-08 11:40:52,794 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 4592.8193359375
+2025-03-08 11:40:52,795 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:40:52,795 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 3.6225500106811523
+2025-03-08 11:40:52,795 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:40:52,795 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:40:52,795 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 4596.4833984375
+2025-03-08 11:40:52,795 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9992028474807739, percentage l2_reg: 6.899881100252969e-06, percentage smoothness: 0.000788113393355161, percentage peak_difference: 0.0, percentage parameters_penalty: 2.1226242097327486e-06
+2025-03-08 11:40:52,816 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 3514.92236328125
+2025-03-08 11:40:52,817 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:40:52,817 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 3.4104113578796387
+2025-03-08 11:40:52,817 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:40:52,817 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:40:52,817 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 3518.374267578125
+2025-03-08 11:40:52,817 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9990189075469971, percentage l2_reg: 9.0141602413496e-06, percentage smoothness: 0.000969314540270716, percentage peak_difference: 0.0, percentage parameters_penalty: 2.773044116111123e-06
+2025-03-08 11:40:52,838 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 4811.888671875
+2025-03-08 11:40:52,838 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:40:52,838 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 3.092243194580078
+2025-03-08 11:40:52,838 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:40:52,839 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:40:52,839 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 4815.0224609375
+2025-03-08 11:40:52,839 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9993491768836975, percentage l2_reg: 6.5867166085809e-06, percentage smoothness: 0.0006422074511647224, percentage peak_difference: 0.0, percentage parameters_penalty: 2.026284846579074e-06
+2025-03-08 11:40:52,860 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 4619.6259765625
+2025-03-08 11:40:52,860 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:40:52,860 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 3.27994441986084
+2025-03-08 11:40:52,860 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:40:52,860 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:40:52,861 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 4622.947265625
+2025-03-08 11:40:52,861 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9992815852165222, percentage l2_reg: 6.860382654849673e-06, percentage smoothness: 0.0007094920729286969, percentage peak_difference: 0.0, percentage parameters_penalty: 2.1104733605170622e-06
+2025-03-08 11:40:52,882 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 5421.78759765625
+2025-03-08 11:40:52,882 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:40:52,882 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 3.270092010498047
+2025-03-08 11:40:52,882 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:40:52,882 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:40:52,882 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 5425.09912109375
+2025-03-08 11:40:52,883 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9993895888328552, percentage l2_reg: 5.846010935783852e-06, percentage smoothness: 0.0006027709459885955, percentage peak_difference: 0.0, percentage parameters_penalty: 1.7984200439968845e-06
+2025-03-08 11:40:52,904 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 4435.72900390625
+2025-03-08 11:40:52,904 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:40:52,904 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 3.422579765319824
+2025-03-08 11:40:52,904 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:40:52,904 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:40:52,904 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 4439.19287109375
+2025-03-08 11:40:52,905 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9992197155952454, percentage l2_reg: 7.144359187805094e-06, percentage smoothness: 0.0007709914352744818, percentage peak_difference: 0.0, percentage parameters_penalty: 2.197833509853808e-06
+2025-03-08 11:40:52,926 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 4112.3076171875
+2025-03-08 11:40:52,926 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:40:52,926 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 3.225285530090332
+2025-03-08 11:40:52,926 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:40:52,926 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:40:52,926 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 4115.57421875
+2025-03-08 11:40:52,926 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9992063045501709, percentage l2_reg: 7.706139513175003e-06, percentage smoothness: 0.0007836781442165375, percentage peak_difference: 0.0, percentage parameters_penalty: 2.3706550109636737e-06
+2025-03-08 11:40:52,948 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 3716.100341796875
+2025-03-08 11:40:52,948 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:40:52,948 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 3.113680601119995
+2025-03-08 11:40:52,948 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:40:52,948 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:40:52,948 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 3719.255615234375
+2025-03-08 11:40:52,948 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9991516470909119, percentage l2_reg: 8.527294994564727e-06, percentage smoothness: 0.000837178435176611, percentage peak_difference: 0.0, percentage parameters_penalty: 2.623268528623157e-06
+2025-03-08 11:40:52,966 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: mse: 3723.12255859375
+2025-03-08 11:40:52,966 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: l2_reg: 0.031715188175439835
+2025-03-08 11:40:52,966 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: smoothness: 2.4690678119659424
+2025-03-08 11:40:52,966 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-08 11:40:52,966 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-08 11:40:52,966 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: total: 3725.633056640625
+2025-03-08 11:40:52,967 :: INFO :: evodenss.train.losses :: [15] -- FITNESS LOSS: percentage mse: 0.9993261694908142, percentage l2_reg: 8.512697604601271e-06, percentage smoothness: 0.0006627243710681796, percentage peak_difference: 0.0, percentage parameters_penalty: 2.618778125906829e-06
+2025-03-08 11:40:52,968 :: INFO :: __main__ :: [15] -- Best test accuracy: tensor([64955.8516], device='cuda:0')
+2025-03-08 11:40:53,027 :: INFO :: __main__ :: [15] -- Time taken to perform run: 0d0h4m48s
