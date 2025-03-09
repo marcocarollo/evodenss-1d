@@ -724,3 +724,83 @@ layer13: :fc act:selu out_features:200 bias:True input:12 learning:adadelta batc
 2025-03-08 12:08:01,719 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: percentage mse: 0.9994732141494751, percentage l2_reg: 6.292626039794413e-06, percentage smoothness: 0.0005183372413739562, percentage peak_difference: 0.0, percentage parameters_penalty: 2.2372810235538054e-06
 2025-03-08 12:08:01,721 :: INFO :: __main__ :: [30] -- Best test accuracy: tensor([81815.8438], device='cuda:0')
 2025-03-08 12:08:01,777 :: INFO :: __main__ :: [30] -- Time taken to perform run: 0d0h4m51s
+2025-03-09 13:20:10,483 :: INFO :: __main__ :: [30] -- Loading previous checkpoint
+2025-03-09 13:20:11,660 :: INFO :: __main__ :: [30] -- Dataset partition sizes:
+2025-03-09 13:20:11,660 :: INFO :: __main__ :: [30] -- DatasetType.EVO_TEST size -- 250
+2025-03-09 13:20:11,660 :: INFO :: __main__ :: [30] -- DatasetType.VALIDATION size -- 250
+2025-03-09 13:20:11,660 :: INFO :: __main__ :: [30] -- DatasetType.DOWNSTREAM_TRAIN size -- 1998
+2025-03-09 13:20:11,660 :: INFO :: __main__ :: [30] -- DatasetType.TEST size -- 626
+2025-03-09 13:20:11,660 :: INFO :: __main__ :: [30] -- Starting evolution for run 30
+2025-03-09 13:20:11,661 :: INFO :: __main__ :: [30] -- PERFORMING PREDICTION FOR THE VARIABLE: NITRATE
+2025-03-09 13:20:12,234 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: mse: 10041.1904296875
+2025-03-09 13:20:12,234 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: l2_reg: 0.02744164690375328
+2025-03-09 13:20:12,234 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: smoothness: 2.779400587081909
+2025-03-09 13:20:12,235 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-09 13:20:12,235 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-09 13:20:12,235 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: total: 10044.0068359375
+2025-03-09 13:20:12,253 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: percentage mse: 0.9997196197509766, percentage l2_reg: 2.732141410888289e-06, percentage smoothness: 0.00027672230498865247, percentage peak_difference: 0.0, percentage parameters_penalty: 9.713859299154137e-07
+2025-03-09 13:20:12,278 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: mse: 9858.6962890625
+2025-03-09 13:20:12,278 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: l2_reg: 0.02744164690375328
+2025-03-09 13:20:12,278 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: smoothness: 3.07895565032959
+2025-03-09 13:20:12,278 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-09 13:20:12,278 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-09 13:20:12,278 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: total: 9861.8125
+2025-03-09 13:20:12,279 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: percentage mse: 0.9996840357780457, percentage l2_reg: 2.782617002594634e-06, percentage smoothness: 0.0003122099151369184, percentage peak_difference: 0.0, percentage parameters_penalty: 9.893320793707971e-07
+2025-03-09 13:20:12,301 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: mse: 9951.302734375
+2025-03-09 13:20:12,302 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: l2_reg: 0.02744164690375328
+2025-03-09 13:20:12,302 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: smoothness: 2.9411096572875977
+2025-03-09 13:20:12,302 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-09 13:20:12,302 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-09 13:20:12,302 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: total: 9954.28125
+2025-03-09 13:20:12,302 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: percentage mse: 0.9997007846832275, percentage l2_reg: 2.7567682536755456e-06, percentage smoothness: 0.00029546176665462554, percentage peak_difference: 0.0, percentage parameters_penalty: 9.801417490962194e-07
+2025-03-09 13:20:12,325 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: mse: 10998.423828125
+2025-03-09 13:20:12,326 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: l2_reg: 0.02744164690375328
+2025-03-09 13:20:12,326 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: smoothness: 3.008115768432617
+2025-03-09 13:20:12,326 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-09 13:20:12,326 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-09 13:20:12,326 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: total: 11001.46875
+2025-03-09 13:20:12,326 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: percentage mse: 0.9997232556343079, percentage l2_reg: 2.494362206562073e-06, percentage smoothness: 0.000273428566288203, percentage peak_difference: 0.0, percentage parameters_penalty: 8.868458394317713e-07
+2025-03-09 13:20:12,349 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: mse: 9031.8359375
+2025-03-09 13:20:12,349 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: l2_reg: 0.02744164690375328
+2025-03-09 13:20:12,349 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: smoothness: 2.6892716884613037
+2025-03-09 13:20:12,349 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-09 13:20:12,349 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-09 13:20:12,349 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: total: 9034.5625
+2025-03-09 13:20:12,350 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: percentage mse: 0.9996982216835022, percentage l2_reg: 3.037407395822811e-06, percentage smoothness: 0.0002976648393087089, percentage peak_difference: 0.0, percentage parameters_penalty: 1.0799202527778107e-06
+2025-03-09 13:20:12,373 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: mse: 9982.91796875
+2025-03-09 13:20:12,373 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: l2_reg: 0.02744164690375328
+2025-03-09 13:20:12,373 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: smoothness: 2.5964648723602295
+2025-03-09 13:20:12,373 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-09 13:20:12,373 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-09 13:20:12,373 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: total: 9985.5517578125
+2025-03-09 13:20:12,373 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: percentage mse: 0.9997362494468689, percentage l2_reg: 2.748135329966317e-06, percentage smoothness: 0.0002600221778266132, percentage peak_difference: 0.0, percentage parameters_penalty: 9.770724318514112e-07
+2025-03-09 13:20:12,396 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: mse: 8627.56640625
+2025-03-09 13:20:12,396 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: l2_reg: 0.02744164690375328
+2025-03-09 13:20:12,396 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: smoothness: 2.6506588459014893
+2025-03-09 13:20:12,396 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-09 13:20:12,396 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-09 13:20:12,396 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: total: 8630.25390625
+2025-03-09 13:20:12,397 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: percentage mse: 0.9996885657310486, percentage l2_reg: 3.179703298883396e-06, percentage smoothness: 0.0003071356622967869, percentage peak_difference: 0.0, percentage parameters_penalty: 1.1305121461191447e-06
+2025-03-09 13:20:12,419 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: mse: 9429.28515625
+2025-03-09 13:20:12,420 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: l2_reg: 0.02744164690375328
+2025-03-09 13:20:12,420 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: smoothness: 2.795156717300415
+2025-03-09 13:20:12,420 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-09 13:20:12,420 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-09 13:20:12,420 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: total: 9432.1171875
+2025-03-09 13:20:12,420 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: percentage mse: 0.9996997714042664, percentage l2_reg: 2.909383510996122e-06, percentage smoothness: 0.00029634457314386964, percentage peak_difference: 0.0, percentage parameters_penalty: 1.0344026577513432e-06
+2025-03-09 13:20:12,443 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: mse: 9855.455078125
+2025-03-09 13:20:12,443 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: l2_reg: 0.02744164690375328
+2025-03-09 13:20:12,443 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: smoothness: 2.6178603172302246
+2025-03-09 13:20:12,443 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-09 13:20:12,443 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-09 13:20:12,443 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: total: 9858.1103515625
+2025-03-09 13:20:12,443 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: percentage mse: 0.99973064661026, percentage l2_reg: 2.783662012006971e-06, percentage smoothness: 0.000265553971985355, percentage peak_difference: 0.0, percentage parameters_penalty: 9.897036079564714e-07
+2025-03-09 13:20:12,562 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: mse: 7963.0126953125
+2025-03-09 13:20:12,562 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: l2_reg: 0.02744164690375328
+2025-03-09 13:20:12,562 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: smoothness: 2.251673460006714
+2025-03-09 13:20:12,562 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: peak_difference: 0.0
+2025-03-09 13:20:12,563 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: parameters_penalty: 0.009756606617174169
+2025-03-09 13:20:12,563 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: total: 7965.30126953125
+2025-03-09 13:20:12,563 :: INFO :: evodenss.train.losses :: [30] -- FITNESS LOSS: percentage mse: 0.9997127056121826, percentage l2_reg: 3.4451486499165185e-06, percentage smoothness: 0.0002826852723956108, percentage peak_difference: 0.0, percentage parameters_penalty: 1.224888592332718e-06
+2025-03-09 13:20:12,627 :: INFO :: __main__ :: [30] -- Best test accuracy: tensor([95767.4688], device='cuda:0')
+2025-03-09 13:20:12,632 :: INFO :: __main__ :: [30] -- Time taken to perform run: 0d0h0m2s
