@@ -3784,7 +3784,7 @@
         ],
         "optimiser_name": "adadelta",
         "optimiser_parameters": {},
-        "batch_size": 39,
+        "batch_size": 26,
         "early_stop": null,
         "trained_epochs": 0
     }

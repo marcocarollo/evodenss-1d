@@ -156,7 +156,7 @@ def main(run: int,
     if printing == 0:
         logger.info("Printing straight ahead the best individual in the current run.\nEvolution will not continue.")
         dir_best_individual = os.path.join(get_config().checkpoints_path, f"run_{run}")
-        plot_profiles(dataloader_val, dir_best_individual, variable, gen=0, device=Device.GPU)
+        plot_profiles(dataloader_TEST, dir_best_individual, variable, device=Device.GPU)
         return
 
     

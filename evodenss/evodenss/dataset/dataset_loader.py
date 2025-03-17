@@ -64,7 +64,8 @@ class FloatDataset(Dataset):
             try:
                 self.samples = self.df.iloc[:, index + 1].tolist()  # Select sample
             except Exception as error:
-                print("c'è qualcosa che non quadra")
+                #print("c'è qualcosa che non quadra")
+                pass
         if self.dft is not None:
             self.samplest = self.dft[index, :, :]
 
@@ -291,17 +292,17 @@ class DatasetProcessor:
         if dataset_class == FloatDataset:
 
             unlabelled_data = None
-            train_labelled_data = dataset_class(path_df='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/' + dataset_name + '/float_ds_sf_train.csv',
-                                                tensor_df='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/' + dataset_name + '/n_train_data.pt',
-                                                targets_path='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/' + dataset_name + '/n_train_data.pt')
+            train_labelled_data = dataset_class(path_df='/u/mcarollo/evodenss-1d/evodenss/data/ds/' + dataset_name + '/float_ds_sf_train.csv',
+                                                tensor_df='/u/mcarollo/evodenss-1d/evodenss/data/ds/' + dataset_name + '/n_train_data.pt',
+                                                targets_path='/u/mcarollo/evodenss-1d/evodenss/data/ds/' + dataset_name + '/n_train_data.pt')
             #print(f"length of train_labelled_data: {len(train_labelled_data)}")
-            evaluation_labelled_data = dataset_class(path_df='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/' + dataset_name + '/float_ds_sf_train.csv',
-                                                    tensor_df='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/' + dataset_name + '/n_train_data.pt',    
-                                                targets_path='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/' + dataset_name + '/n_train_data.pt') #qui era val data ma casino
+            evaluation_labelled_data = dataset_class(path_df='/u/mcarollo/evodenss-1d/evodenss/data/ds/' + dataset_name + '/float_ds_sf_train.csv',
+                                                    tensor_df='/u/mcarollo/evodenss-1d/evodenss/data/ds/' + dataset_name + '/n_train_data.pt',    
+                                                targets_path='/u/mcarollo/evodenss-1d/evodenss/data/ds/' + dataset_name + '/n_train_data.pt') #qui era val data ma casino
             #print(f"length of evaluation_labelled_data: {len(evaluation_labelled_data)}")
-            test_data = dataset_class(path_df='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/' + dataset_name + '/float_ds_sf_test.csv',
-                                    tensor_df='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/' + dataset_name + '/n_test_data.pt',     
-                                      targets_path='/u/dssc/mcarol00/main/evodenss-1d/evodenss/data/ds/' + dataset_name + '/n_test_data.pt') #/home/marco/Desktop/units/evodenss-1d/evodenss/data/ds/BBP700/test_data.pt
+            test_data = dataset_class(path_df='/u/mcarollo/evodenss-1d/evodenss/data/ds/' + dataset_name + '/float_ds_sf_test.csv',
+                                    tensor_df='/u/mcarollo/evodenss-1d/evodenss/data/ds/' + dataset_name + '/n_test_data.pt',     
+                                      targets_path='/u/mcarollo/evodenss-1d/evodenss/data/ds/' + dataset_name + '/n_test_data.pt') #/home/marco/Desktop/units/evodenss-1d/evodenss/data/ds/BBP700/test_data.pt
             #print(f"length of test_data: {len(test_data)}")
             #exit()
         else:
