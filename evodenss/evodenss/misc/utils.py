@@ -134,12 +134,27 @@ def plot_profiles(ds: DataLoader, direc: str, variable:str, device: torch.device
         output_test = model(inputs).unsqueeze(1).to(device.value) #forse c'è da fare un unsqueeze
         output_ppcon = model_ppcon(inputs).unsqueeze(1).to(device.value)
         output_variable = output_variable.unsqueeze(1).to(device.value)
+        print(output_variable.shape)
+        exit(0)
 
-        mean = torch.load('/u/mcarollo/plotting/evodenss-1d/evodenss/data/ds/'+variable+'/test_mean.pt').to(device.value)
-        std = torch.load('/u/mcarollo/plotting/evodenss-1d/evodenss/data/ds/'+variable+'/test_std.pt').to(device.value)
+        #print max and min of output_variable
+        print('these are the max and min values of measured CHLA:', output_variable.max(), output_variable.min())
+        print('these are the max and min values of measured CHLA:', output_variable[:,3,:].max(), output_variable[:,3,:].min())
+        
+
+
+        mean = torch.load('/u/mcarollo/evodenss-1d/evodenss/data/ds/'+variable+'/test_mean.pt').to(device.value)
+        std = torch.load('/u/mcarollo/evodenss-1d/evodenss/data/ds/'+variable+'/test_std.pt').to(device.value)
         output_test = output_test * (std+1e-7) + mean
         output_ppcon = output_ppcon * (std+1e-7) + mean
         output_variable = output_variable * (std+1e-7) + mean
+
+        #print max and min from [:,3,:]
+        print('these are the max and min values of generated CHLA:', output_test.max(), output_test.min())
+        print('these are the max and min values of measured CHLA:', output_variable.max(), output_variable.min())
+        print('these are the max and min values of ppcon CHLA:', output_ppcon.max(), output_ppcon.min())
+
+        exit(0)
 
 
         

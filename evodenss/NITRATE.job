@@ -2,11 +2,11 @@
 #SBATCH --job-name=NITRATE                   # Job name
 #SBATCH --output=./logs/NITRATE%j.log        # Standard output and error log
 #SBATCH --ntasks=1                         # Number of tasks (1 process)
-#SBATCH --cpus-per-task=24 # 
-#SBATCH --mem=30G                         # Memory per node
+##SBATCH --cpus-per-task=24 # 
+##SBATCH --mem=30G                         # Memory per node
 #SBATCH --time=01:00:00                    # Time limit (hh:mm:ss)
 #SBATCH --partition=lovelace                    # Partition name 
-#SBATCH --gpus=1             # Number of GPUs
+##SBATCH --gpus=1             # Number of GPUs
 ##SBATCH --exclusive
 
 # Set the environment variables
